@@ -12,6 +12,7 @@ import { QuizAnswers, PlatformId, Industry } from "./quiz-schema";
 import { RecommendationEngineResult } from "./recommendation-engine";
 import { PLATFORMS_DATA } from "./platforms";
 import { getAnswerLabel } from "./recommendation-explanations";
+import { generateCompetitiveIntelligence } from "./competitive-intelligence-engine";
 import {
   getGeminiModel,
   getGeminiGenerateEndpoint,
@@ -93,137 +94,6 @@ export async function generateBusinessSnapshot(params: {
   return baseSnapshot;
 }
 
-/**
- * Builds realistic industry competitor benchmark archetypes with flaws and counter-strategies.
- */
-function buildIndustryCompetitorProfiles(
-  industry: Industry,
-  businessName: string,
-  primaryPlatformName: string,
-  audienceLabel: string
-): CompetitorExample[] {
-  switch (industry) {
-    case "technology":
-      return [
-        {
-          name: "HubSpot & Enterprise Giants",
-          type: "Legacy Corporate Incumbent",
-          channelFocus: "Broad corporate LinkedIn posts & high paid ad budgets ($30k+/mo)",
-          primaryFlaw: "Generic buzzwords, slow reply times in comments, and impersonal corporate broadcasting",
-          ourCounterStrategy: `Pragmatic founder-led teardowns and rapid 1-on-1 engagement directly addressing ${audienceLabel}`,
-        },
-        {
-          name: "Linear & Modern Product Challengers",
-          type: "Design-Centric Category Leader",
-          channelFocus: "Sleek feature teasers and high-polish video clips on X & LinkedIn",
-          primaryFlaw: "Assumes users already understand the tool; lacks beginner-friendly educational workflows",
-          ourCounterStrategy: `Step-by-step problem-solving tutorials proving immediate ROI and practical utility on ${primaryPlatformName}`,
-        },
-      ];
-    case "fashion_beauty":
-      return [
-        {
-          name: "Sephora & Traditional Retail Brands",
-          type: "Mass Retail Incumbent",
-          channelFocus: "Product catalog photo shoots & broad promotional discount campaigns",
-          primaryFlaw: "Feels like impersonal advertising; rarely responds to community comments or skincare questions",
-          ourCounterStrategy: `Authentic behind-the-scenes founder routines, raw product testing, and educational routines addressing ${audienceLabel}`,
-        },
-        {
-          name: "Rhode & Viral DTC Disruptors",
-          type: "High-Budget Viral Challenger",
-          channelFocus: "Massive influencer gifting campaigns and aesthetic moodboard TikToks",
-          primaryFlaw: "Heavily reliant on fleeting viral hype and celebrity PR rather than evergreen search intent",
-          ourCounterStrategy: `Search-optimized problem-solving hooks that capture high-intent buyers looking for lasting quality`,
-        },
-      ];
-    case "food_beverage":
-      return [
-        {
-          name: "Legacy FMCG Brands & Supermarket Giants",
-          type: "Mass-Market Conglomerate",
-          channelFocus: "High-gloss corporate commercials syndicated across Facebook and Instagram",
-          primaryFlaw: "Stiff corporate messaging, zero transparent ingredient dialogue, completely ignored comment sections",
-          ourCounterStrategy: `Raw craft transparency, origin storytelling, and real customer reactions proving genuine flavor and quality`,
-        },
-        {
-          name: "Liquid Death & Oatly (Meme Disruptors)",
-          type: "Provocative Viral Challenger",
-          channelFocus: "High-cost stunt marketing and satirical comedy sketches",
-          primaryFlaw: "Entertaining but often lacks clear product utility or structured conversion mechanisms",
-          ourCounterStrategy: `Balanced entertainment with clear culinary authority and effortless direct ordering calls to action`,
-        },
-      ];
-    case "professional_services":
-      return [
-        {
-          name: "McKinsey, Deloitte & Big 4 Consultancies",
-          type: "Institutional Legacy Incumbent",
-          channelFocus: "Lengthy 40-page PDF whitepapers and dry corporate press announcements on LinkedIn",
-          primaryFlaw: "Dense academic jargon, intimidatingly corporate, inaccessible to modern growing brands",
-          ourCounterStrategy: `Bite-sized visual frameworks, plain-language client teardowns, and actionable decision templates on ${primaryPlatformName}`,
-        },
-        {
-          name: "Large Digital Marketing & Advisory Agencies",
-          type: "High-Volume Agency Model",
-          channelFocus: "Volume-heavy multi-channel posting using large outsourced teams",
-          primaryFlaw: "Requires 40+ hours/week of overhead; shallow generic advice without specialized industry depth",
-          ourCounterStrategy: `Laser-focused high-authority presence with direct conversational DM qualification tailored to ${audienceLabel}`,
-        },
-      ];
-    case "lifestyle":
-      return [
-        {
-          name: "Lululemon & Alo Yoga (Global Category Giants)",
-          type: "Global Lifestyle Conglomerate",
-          channelFocus: "Polished celebrity endorsements and aspirational high-budget Instagram Reels",
-          primaryFlaw: "Intimidatingly staged aesthetic that feels unattainable and disconnected from everyday client reality",
-          ourCounterStrategy: `Honest, relatable transformation stories, realistic routines, and genuine community dialogue`,
-        },
-        {
-          name: "Peloton & Tech-Wellness Challengers",
-          type: "Spec-Heavy Challenger",
-          channelFocus: "Feature-heavy hardware updates and promotional flash sales",
-          primaryFlaw: "Focuses on technical specifications rather than personal emotional and physical transformation",
-          ourCounterStrategy: `Client-centric storytelling celebrating small daily milestones and genuine wellness breakthroughs`,
-        },
-      ];
-    case "education":
-      return [
-        {
-          name: "Coursera, edX & University Extension Programs",
-          type: "Academic Institutional Giant",
-          channelFocus: "Course catalog links and academic accreditation announcements",
-          primaryFlaw: "Low engagement, dry lecture formats, high barrier to immediate application",
-          ourCounterStrategy: `High-retention 60-second micro-breakdowns and direct implementation frameworks on ${primaryPlatformName}`,
-        },
-        {
-          name: "MasterClass & Massive EdTech Players",
-          type: "Cinematic Entertainment Provider",
-          channelFocus: "Celebrity-narrated cinematic trailers with high production value",
-          primaryFlaw: "Passive viewing with low accountability and vague tangible outcomes",
-          ourCounterStrategy: `Action-oriented tutorials with downloadable cheatsheets and direct student support`,
-        },
-      ];
-    default:
-      return [
-        {
-          name: "Established Traditional Industry Competitors",
-          type: "Category Incumbent",
-          channelFocus: "Irregular promotional broadcasting and sporadic product discounts",
-          primaryFlaw: "Zero search optimization, inconsistent posting cadence, and non-existent community replies",
-          ourCounterStrategy: `Predictable, high-value weekly publishing schedule built around high-intent search hooks on ${primaryPlatformName}`,
-        },
-        {
-          name: "High-Spend Paid Traffic Advertisers",
-          type: "Paid-Ad Reliant Rival",
-          channelFocus: "Aggressive sponsored social ads with minimal organic profile investment",
-          primaryFlaw: "Zero organic brand equity; traffic immediately collapses as soon as ad spend stops",
-          ourCounterStrategy: `Compounding organic search authority and high save/bookmark rates that generate free inbound leads permanently`,
-        },
-      ];
-  }
-}
 
 /**
  * Deterministic strategy generator ensuring high quality without external API dependency.
@@ -406,48 +276,12 @@ export function buildDeterministicStrategy(params: {
     },
   ];
 
-  const benchmarkedCompetitors = buildIndustryCompetitorProfiles(
-    quizAnswers.industry,
-    business.businessName,
-    primaryMeta.name,
-    audienceLabel
-  );
-
-  const headToHeadComparison = [
-    {
-      dimension: "Content Approach",
-      competitorsApproach: "Broad, generic promotional broadcast announcing products",
-      yourAdvantage: `Targeted problem-first education tailored directly to ${audienceLabel}`,
-    },
-    {
-      dimension: "Community Engagement",
-      competitorsApproach: "One-way broadcast with < 10% response rate to comments",
-      yourAdvantage: "Direct 1-on-1 interaction & conversational inbound DM qualification",
-    },
-    {
-      dimension: "Organic Algorithmic Fit",
-      competitorsApproach: "Relies on expensive paid ad boosts to force impression volume",
-      yourAdvantage: `Engineered for organic retention, bookmarks & watch time on ${primaryMeta.name}`,
-    },
-    {
-      dimension: "Operational Overhead",
-      competitorsApproach: "Bloated agency retainers ($5k–$15k/mo) & slow multi-tier approvals",
-      yourAdvantage: `Lean, agile batch production strictly calibrated to your ${timeLabel} budget`,
-    },
-  ];
-
-  const competitorBenchmark = {
-    industryLandscape: `Most direct competitors in ${industryLabel} rely on generic promotional broadcasting and broad posts with low comment retention.`,
-    competitorGap: `Competitors are under-utilizing high-retention educational formats and search-optimized hooks on ${primaryMeta.name}.`,
-    whitespaceAdvantage: `By adopting a "${personalityLabel} & authoritative" problem-first approach, ${business.businessName} captures high-intent prospects that competitors overlook.`,
-    keyDifferentiators: [
-      `Content Depth: Actionable problem-solving tutorials rather than generic brand announcements`,
-      `Audience Alignment: Direct focus on ${audienceLabel} friction points with clear takeaways`,
-      `Algorithmic Efficiency: High save/share-to-view ratios instead of relying on vanity follower counts`,
-    ],
-    benchmarkedCompetitors,
-    headToHeadComparison,
-  };
+  const competitorBenchmark = generateCompetitiveIntelligence({
+    business,
+    quizAnswers,
+    scoringResults,
+    snapshot: params.snapshot,
+  });
 
   return {
     strategicSummary,

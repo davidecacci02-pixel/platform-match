@@ -573,28 +573,28 @@ export default function ResultsPage() {
                   <span className="text-xs text-slate-400">• {activeIndustryLabel}</span>
                 </div>
                 <h2 className="text-lg sm:text-2xl font-extrabold text-white tracking-tight mt-0.5">
-                  Industry Competitor Benchmark & Market Whitespace
+                  Competitive Landscape &amp; Strategic Benchmark
                 </h2>
               </div>
             </div>
 
             <span className="self-start sm:self-auto px-3.5 py-1.5 rounded-full text-xs font-bold bg-white/10 text-slate-200 border border-white/15 flex items-center gap-2 backdrop-blur-md shadow-sm">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>Real Competitor Analysis Active</span>
+              <span>Industry-Based Strategic Benchmark</span>
             </span>
           </div>
 
-          {/* REAL COMPETITOR BENCHMARK CARDS */}
+          {/* A. COMPETITIVE LANDSCAPE: ARCHETYPE CARDS */}
           {strategy.competitorBenchmark.benchmarkedCompetitors &&
             strategy.competitorBenchmark.benchmarkedCompetitors.length > 0 && (
               <div className="space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                   <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
                     <Target className="w-4 h-4 text-brand-400" />
-                    <span>Real Competitor Archetypes in Your Industry</span>
+                    <span>Competitive Landscape: Industry Archetypes</span>
                   </h3>
                   <span className="text-[11px] text-slate-400">
-                    Diagnosing rivals&apos; vulnerabilities to position {activeBusinessName} as the clear authority
+                    Diagnosing typical competitor approaches, structural limitations, and differentiation vectors
                   </span>
                 </div>
 
@@ -605,7 +605,7 @@ export default function ResultsPage() {
                       className="bg-slate-950/70 border border-slate-700/80 hover:border-slate-600 rounded-2xl p-5 sm:p-6 space-y-4 flex flex-col justify-between shadow-lg shadow-black/20 backdrop-blur-md transition-all"
                     >
                       <div className="space-y-3">
-                        {/* Competitor Header */}
+                        {/* Archetype Category & Name */}
                         <div className="flex items-start justify-between gap-2 pb-3 border-b border-white/10">
                           <div>
                             <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-300 px-2 py-0.5 rounded bg-amber-500/15 border border-amber-500/30">
@@ -620,32 +620,40 @@ export default function ResultsPage() {
                           </span>
                         </div>
 
-                        {/* Channel Focus */}
-                        <div className="text-xs text-slate-300 bg-white/5 rounded-xl p-3 border border-white/5 flex items-start gap-2">
-                          <span className="text-slate-400 font-semibold flex-shrink-0">Channel Focus:</span>
-                          <span className="text-slate-200">{comp.channelFocus}</span>
+                        {/* Typical Competitor Approach */}
+                        <div className="text-xs text-slate-300 bg-white/5 rounded-xl p-3 border border-white/5 space-y-1">
+                          <span className="text-slate-400 font-semibold block text-[11px] uppercase tracking-wider">Typical Competitor Approach:</span>
+                          <span className="text-slate-200 leading-relaxed block">{comp.behaviorSummary || comp.channelFocus}</span>
                         </div>
 
-                        {/* Competitor Blindspot (Flaw) */}
+                        {/* Content Strategy */}
+                        {comp.contentStrategy && (
+                          <div className="text-xs text-slate-300 bg-white/5 rounded-xl p-3 border border-white/5 space-y-1">
+                            <span className="text-slate-400 font-semibold block text-[11px] uppercase tracking-wider">Content Strategy Pattern:</span>
+                            <span className="text-slate-200 leading-relaxed block">{comp.contentStrategy}</span>
+                          </div>
+                        )}
+
+                        {/* Strategic Weakness or Limitation */}
                         <div className="bg-rose-950/30 border border-rose-500/30 rounded-xl p-3.5 space-y-1">
                           <div className="flex items-center gap-1.5 text-rose-300 font-bold text-xs">
                             <AlertTriangle className="w-3.5 h-3.5" />
-                            <span>Competitor Blindspot & Weakness</span>
+                            <span>Strategic Weakness / Limitation</span>
                           </div>
                           <p className="text-xs text-rose-100/90 leading-relaxed font-normal">
-                            {comp.primaryFlaw}
+                            {comp.limitations || comp.primaryFlaw}
                           </p>
                         </div>
                       </div>
 
-                      {/* Your Counter-Strategy & Edge */}
+                      {/* How Brand Differentiates */}
                       <div className="pt-3 border-t border-white/10 bg-emerald-950/30 border border-emerald-500/30 rounded-xl p-3.5 space-y-1">
                         <div className="flex items-center gap-1.5 text-emerald-300 font-bold text-xs">
                           <Zap className="w-3.5 h-3.5" />
-                          <span>How {activeBusinessName} Out-Maneuvers Them</span>
+                          <span>How {activeBusinessName} Differentiates</span>
                         </div>
                         <p className="text-xs text-emerald-100/90 leading-relaxed font-normal">
-                          {comp.ourCounterStrategy}
+                          {comp.differentiation || comp.ourCounterStrategy}
                         </p>
                       </div>
                     </div>
@@ -654,17 +662,17 @@ export default function ResultsPage() {
               </div>
             )}
 
-          {/* HEAD-TO-HEAD COMPARISON MATRIX */}
+          {/* B. HEAD-TO-HEAD COMPARISON MATRIX */}
           {strategy.competitorBenchmark.headToHeadComparison &&
             strategy.competitorBenchmark.headToHeadComparison.length > 0 && (
               <div className="space-y-4 pt-4 border-t border-white/10">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                   <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
                     <TrendingUp className="w-4 h-4 text-emerald-400" />
-                    <span>Head-to-Head Comparison: Typical Rivals vs. Your Strategy</span>
+                    <span>Head-to-Head Comparison: Competitor Norms vs. Recommended Strategy</span>
                   </h3>
                   <span className="text-[11px] text-slate-400">
-                    Why your organic positioning delivers higher ROI with less friction
+                    Evaluating tactical differences across content, audience engagement, platforms, and conversion
                   </span>
                 </div>
 
@@ -673,9 +681,9 @@ export default function ResultsPage() {
                     <thead>
                       <tr className="border-b border-white/10 bg-white/5 text-[11px] font-bold text-slate-300 uppercase tracking-wider">
                         <th className="py-3 px-4 sm:px-5">Strategic Dimension</th>
-                        <th className="py-3 px-4 sm:px-5 text-rose-300">Typical Industry Competitors</th>
+                        <th className="py-3 px-4 sm:px-5 text-rose-300">Typical Competitor Approach</th>
                         <th className="py-3 px-4 sm:px-5 text-emerald-300 bg-emerald-500/10">
-                          {activeBusinessName} Advantage
+                          Recommended Approach for {activeBusinessName}
                         </th>
                       </tr>
                     </thead>
@@ -705,42 +713,53 @@ export default function ResultsPage() {
               </div>
             )}
 
-          {/* 3 CORE MARKET WHITESPACE PILLARS */}
+          {/* C. THREE SPECIFIC MARKET OPPORTUNITIES */}
           <div className="space-y-4 pt-4 border-t border-white/10">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
-              Strategic Whitespace Opportunities
-            </h3>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
+                Market Opportunities
+              </h3>
+              <span className="text-[11px] text-slate-400">
+                Actionable strategic openings derived from archetype behavior analysis
+              </span>
+            </div>
+            
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 space-y-2">
                 <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-300 px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">
-                  Saturation Analysis
+                  Opportunity 01
                 </span>
-                <h4 className="text-sm font-bold text-white">Competitor Baseline</h4>
+                <h4 className="text-sm font-bold text-white">1. Competitor Pattern</h4>
                 <p className="text-xs text-slate-300 leading-relaxed font-normal">
-                  {strategy.competitorBenchmark.industryLandscape}
+                  {strategy.competitorBenchmark.marketOpportunities?.pattern || strategy.competitorBenchmark.industryLandscape}
                 </p>
               </div>
 
               <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 space-y-2">
                 <span className="text-[10px] font-extrabold uppercase tracking-wider text-sky-300 px-2 py-0.5 rounded bg-sky-500/10 border border-sky-500/20">
-                  Unserved Audience Demand
+                  Opportunity 02
                 </span>
-                <h4 className="text-sm font-bold text-white">The Market Gap</h4>
+                <h4 className="text-sm font-bold text-white">2. Potential Market Gap</h4>
                 <p className="text-xs text-slate-300 leading-relaxed font-normal">
-                  {strategy.competitorBenchmark.competitorGap}
+                  {strategy.competitorBenchmark.marketOpportunities?.marketGap || strategy.competitorBenchmark.competitorGap}
                 </p>
               </div>
 
               <div className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 space-y-2">
                 <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-300 px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
-                  Winning Formula
+                  Opportunity 03
                 </span>
-                <h4 className="text-sm font-bold text-white">Your Unfair Advantage</h4>
+                <h4 className="text-sm font-bold text-white">3. Your Brand Opportunity</h4>
                 <p className="text-xs text-slate-300 leading-relaxed font-normal">
-                  {strategy.competitorBenchmark.whitespaceAdvantage}
+                  {strategy.competitorBenchmark.marketOpportunities?.brandOpportunity || strategy.competitorBenchmark.whitespaceAdvantage}
                 </p>
               </div>
             </div>
+
+            {/* Discreet Benchmark Attribution Note */}
+            <p className="text-[11px] text-slate-500 text-center pt-2">
+              Strategic benchmark derived deterministically from industry archetypes, target audience behaviors, and operational time limits.
+            </p>
           </div>
         </section>
       )}

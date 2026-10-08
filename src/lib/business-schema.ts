@@ -130,6 +130,10 @@ export const CompetitorExampleSchema = z.object({
   channelFocus: z.string(),
   primaryFlaw: z.string(),
   ourCounterStrategy: z.string(),
+  behaviorSummary: z.string().optional(),
+  contentStrategy: z.string().optional(),
+  limitations: z.string().optional(),
+  differentiation: z.string().optional(),
 });
 export type CompetitorExample = z.infer<typeof CompetitorExampleSchema>;
 
@@ -147,6 +151,13 @@ export const CompetitorBenchmarkSchema = z.object({
         yourAdvantage: z.string(),
       })
     )
+    .optional(),
+  marketOpportunities: z
+    .object({
+      pattern: z.string(),
+      marketGap: z.string(),
+      brandOpportunity: z.string(),
+    })
     .optional(),
 });
 export type CompetitorBenchmark = z.infer<typeof CompetitorBenchmarkSchema>;
