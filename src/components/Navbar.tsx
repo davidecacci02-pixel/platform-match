@@ -43,15 +43,6 @@ export function Navbar() {
           >
             Scoring Matrix
           </Link>
-          <Link
-            href="/#pricing"
-            className="hidden sm:inline-flex text-xs font-semibold text-brand-300 hover:text-white transition-colors items-center gap-1.5"
-          >
-            <span>Pricing</span>
-            <span className="px-1.5 py-0.5 rounded bg-brand-500/20 text-[10px] font-bold text-brand-300 border border-brand-500/30">
-              2 Offers
-            </span>
-          </Link>
 
           <Link
             href="/quiz"

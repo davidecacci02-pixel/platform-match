@@ -21,7 +21,6 @@ import {
 import { SocialIcon } from "@/components/SocialIcon";
 import { ALL_PLATFORM_IDS, PLATFORMS_DATA } from "@/lib/platforms";
 import { SCORING_WEIGHTS } from "@/lib/scoring-matrix";
-import { PricingSection } from "@/components/PricingSection";
 
 export default function LandingPage() {
   return (
@@ -505,9 +504,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
-      {/* Pricing & Offers Section */}
-      <PricingSection />
 
       {/* Final Aurora Banner CTA */}
       <section className="py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">

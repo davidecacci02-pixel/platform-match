@@ -64,11 +64,6 @@ export function Footer() {
                   Platform Comparison Matrix
                 </Link>
               </li>
-              <li>
-                <Link href="/#pricing" className="text-brand-400 hover:text-brand-300 font-semibold transition-colors">
-                  Strategy Plans & Pricing
-                </Link>
-              </li>
             </ul>
           </div>
         </div>
