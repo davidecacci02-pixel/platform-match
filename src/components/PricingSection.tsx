@@ -32,145 +32,154 @@ export function PricingSection() {
 
   const pricingData = {
     blueprint: {
-      name: "Growth Blueprint",
-      subtitle: "The essential algorithmic roadmap to validate your channels and eliminate wasted production hours.",
-      tag: "Essential Strategy",
-      price: billingCycle === "onetime" ? "€49" : "€29",
+      name: "Starter Blueprint",
+      subtitle: "The essential algorithmic roadmap to validate your primary channel and eliminate wasted hours.",
+      tag: "Essential Clarity",
+      price: billingCycle === "onetime" ? "$29.99" : "$14.99",
       billingPeriod: billingCycle === "onetime" ? "one-time payment" : "per month",
-      savingsNote: billingCycle === "onetime" ? "Lifetime access & free matrix updates" : "Cancel anytime with 1 click",
+      savingsNote: billingCycle === "onetime" ? "Pay once • Lifetime single-brand report" : "Cancel anytime with 1 click",
+      badgeText: "Entry Pass",
+      idealFor: "Solo founders, creators & freelancers wanting single-channel focus",
       features: [
         {
-          title: "Complete 6-Platform Algorithmic Fit Audit",
-          desc: "Multi-dimensional scoring across Audience, Goal, Vertical, Content, Voice & Time.",
+          title: "Complete 6-Platform Compatibility Audit",
+          desc: "Full mathematical scoring across Audience, Goal, Vertical, Format, Voice & Time.",
           included: true,
         },
         {
-          title: "Tailored 30-Day Execution Calendar",
-          desc: "3 custom content pillars with sustainable weekly publishing cadences.",
+          title: "Tailored 30-Day Content Execution Roadmap",
+          desc: "3 custom content pillars with sustainable weekly publishing limits (<3 hrs/week).",
           included: true,
         },
         {
-          title: "Industry Competitor Vulnerability Benchmark",
-          desc: "Identifies saturation points and competitor blindspots you can exploit organically.",
+          title: "Single Primary Channel Deep Focus",
+          desc: "Concentrate 80% of your energy on your single highest-affinity network to build momentum.",
           included: true,
         },
         {
-          title: "Multi-Format Repurposing Matrix",
-          desc: "Exact formulas to turn 1 core content format into 5 high-leverage channel assets.",
+          title: "Basic Competitor Saturation Benchmark",
+          desc: "Identifies top 3 saturation mistakes rivals in your industry are currently making.",
           included: true,
         },
         {
-          title: "Capacity-Calibrated Posting Limits",
-          desc: "Posting frequency guaranteed to remain under 3–5 hours weekly without burnout.",
+          title: "Multi-Format Repurposing Formulas",
+          desc: "Proven frameworks to turn 1 core content piece into 3 secondary format variations.",
           included: true,
         },
         {
-          title: "Interactive AI Strategy Consultant",
-          desc: "Unlimited self-serve chat for real-time hooks, angles, and content ideation.",
+          title: "Executive PDF & Markdown Dossier",
+          desc: "Downloadable presentation-ready report to reference or share with your team.",
           included: true,
         },
         {
-          title: "Executive Strategy PDF & Markdown Export",
-          desc: "Downloadable presentation-ready report to share with stakeholders.",
-          included: true,
-        },
-        {
-          title: "Standard Email Support",
-          desc: "Direct support from our strategy team within 48 business hours.",
-          included: true,
-        },
-        {
-          title: "1-on-1 Strategy Deep Dive (45 min)",
-          desc: "Private consultation with a Senior Growth Architect.",
+          title: "Multi-Channel Master-Satellite Synergy",
+          desc: "Dual-platform syndication strategy to multiply organic reach 3x with zero extra filming.",
           included: false,
         },
         {
-          title: "Plug-and-Play Notion & Figma Hub",
-          desc: "Pre-built production sprint boards and script writing templates.",
+          title: "Full-Funnel Lead Conversion Engine",
+          desc: "Bio optimization frameworks, lead magnet blueprints, and inbound DM sales scripts.",
           included: false,
         },
         {
-          title: "Priority VIP Private WhatsApp / Slack",
-          desc: "Under 12-hour turnaround for post reviews and priority advisory.",
+          title: "Plug-and-Play Notion Content OS & Figma Hub",
+          desc: "Ready-to-duplicate production sprint boards, script formulas, and visual asset trackers.",
+          included: false,
+        },
+        {
+          title: "Bespoke AI Brand Voice Prompt Suite",
+          desc: "Pre-calibrated prompts fine-tuned for your exact industry vocabulary and hook angles.",
+          included: false,
+        },
+        {
+          title: "Lifetime Algorithmic Recalibrations",
+          desc: "Free report recalibrations whenever social network algorithms update their ranking factors.",
           included: false,
         },
       ],
-      ctaText: "Get Instant Blueprint",
-      ctaSub: "Instant report & immediate access",
+      ctaText: "Get Starter Blueprint ($29.99)",
+      ctaSub: "Instant access • Pay once, own forever",
     },
     advisory: {
-      name: "Full Architecture & Advisory",
-      subtitle: "End-to-end bespoke social architecture, plug-and-play production workspaces, and private 1-on-1 expert advisory.",
-      tag: "Most Popular • Maximum ROI",
-      price: billingCycle === "onetime" ? "€149" : "€79",
+      name: "Pro Growth Suite",
+      subtitle: "Complete multi-channel syndication, conversion funnel frameworks, and plug-and-play production systems.",
+      tag: "Best Value • Only +$20",
+      price: billingCycle === "onetime" ? "$49.99" : "$24.99",
       billingPeriod: billingCycle === "onetime" ? "one-time payment" : "per month",
-      savingsNote: billingCycle === "onetime" ? "Lifetime pro access + 1-on-1 review" : "Continuous advisory & weekly reviews",
+      savingsNote: billingCycle === "onetime" ? "Pay once • Full revenue & conversion architecture" : "Continuous updates & AI prompts",
+      badgeText: "Most Popular • 84% Choose This",
+      idealFor: "Growing brands, e-commerce, B2B firms & teams wanting paying customers",
       features: [
         {
-          title: "Everything in Growth Blueprint",
-          desc: "All 6 platform audits, 30-day calendar, repurposing matrix & AI consultant.",
+          title: "Everything in Starter Blueprint",
+          desc: "All 6 platform audits, 30-day calendar, repurposing matrix & executive export.",
           included: true,
           highlight: true,
         },
         {
-          title: "1-on-1 Strategy Deep Dive (45 min)",
-          desc: "Private video consultation with a Senior Growth Architect to review your positioning and conversion offer.",
+          title: "Multi-Channel Primary + Secondary Synergy",
+          desc: "Master-satellite content syndication (e.g. IG + TikTok or LinkedIn + YouTube) multiplying organic reach 3x.",
           included: true,
           highlight: true,
-        },
-        {
-          title: "Plug-and-Play Notion & Figma Production Hub",
-          desc: "Ready-to-use production sprint templates, video script formats, and creative asset trackers.",
-          included: true,
         },
         {
           title: "Full-Funnel Lead Conversion Architecture",
-          desc: "Engineered specifically to convert profile visitors into paying inbound customers.",
-          included: true,
-        },
-        {
-          title: "Multi-Channel Primary + Synergy Integration",
-          desc: "Master-satellite content syndication workflow multiplying organic reach up to 3x.",
-          included: true,
-        },
-        {
-          title: "Custom Brand Voice AI Prompt Suite",
-          desc: "Pre-calibrated prompts fine-tuned for your exact industry vocabulary and tone.",
-          included: true,
-        },
-        {
-          title: "Priority VIP Advisory Channel (WhatsApp & Slack)",
-          desc: "Direct channel with our strategy team with guaranteed <12 hour feedback turnaround.",
+          desc: "High-converting bio rewrites, lead magnet blueprints, and qualifying DM scripts to turn viewers into revenue.",
           included: true,
           highlight: true,
         },
         {
+          title: "Plug-and-Play Notion Content OS & Figma Hub",
+          desc: "Complete ready-to-duplicate Kanban sprint boards, video scripting frameworks, and asset design templates.",
+          included: true,
+          highlight: true,
+        },
+        {
+          title: "Deep Competitor Blindspot Teardown",
+          desc: "Detailed 5-rival saturation breakdown spotlighting overlooked keywords & content gaps you can dominate.",
+          included: true,
+        },
+        {
+          title: "Bespoke AI Brand Voice Prompt Suite",
+          desc: "Fine-tuned Gemini prompt library calibrated to your tone of voice for viral hooks and conversion angles.",
+          included: true,
+        },
+        {
+          title: "Lifetime Algorithmic Recalibrations",
+          desc: "Free automated updates whenever Instagram, LinkedIn, YouTube or TikTok change their algorithms.",
+          included: true,
+        },
+        {
           title: "100% Risk-Free 14-Day Money-Back Guarantee",
-          desc: "If you don't find total strategic clarity for your brand, we refund you completely.",
+          desc: "If you don't find total strategic clarity and actionable commercial value, we refund you completely.",
           included: true,
         },
       ],
-      ctaText: "Claim Full Architecture & Advisory",
-      ctaSub: "Includes private 45-min strategist session",
+      ctaText: "Claim Pro Growth Suite ($49.99)",
+      ctaSub: "Includes Notion OS, Funnel Blueprints & Synergy Framework",
     },
   };
 
   const faqs = [
     {
-      q: "How does the 1-on-1 strategy deep dive session work?",
-      a: "After you complete the assessment or reserve your advisory tier, our Senior Growth Architect reviews your diagnostic data, competitive landscape, and brand positioning. We then host a private 45-minute video call to refine your channel priority, script your first content batch, and structure your conversion funnel.",
+      q: "What is the main difference between Starter ($29.99) and Pro Suite ($49.99)?",
+      a: "The Starter Blueprint ($29.99) tells you *where to focus and what to post* for a single primary channel with a 30-day calendar. The Pro Growth Suite ($49.99) is a full commercial engine: it adds dual-channel synergy (e.g. LinkedIn + YouTube), complete funnel architecture (bio rewrites, DM conversion scripts, lead magnet structures), and our plug-and-play Notion & Figma production workspaces for only $20 more.",
     },
     {
-      q: "What if my team has very limited hours to produce content?",
-      a: "That's exactly why Platform Match was created. Our scoring matrix explicitly clamps and calibrates your publishing schedule to under 3–5 hours per week. Instead of burning 15+ hours spreading yourself thin, we focus 70% of your energy on your single highest-affinity channel.",
+      q: "Why is the Pro Suite only $20 more?",
+      a: "We believe every serious brand deserves a production system and conversion funnel, not just vanity metrics. We priced the Pro tier as an obvious no-brainer upsell so you get the complete end-to-end growth toolkit without enterprise agency retainers.",
     },
     {
-      q: "Can I take the diagnostic quiz for free before deciding?",
-      a: "Yes, 100%! The 6-question quiz and baseline platform ranking are completely free and ungated with zero credit card required. You can review your top match and then upgrade to a full tactical blueprint or hands-on advisory whenever you're ready.",
+      q: "Can I try the diagnostic quiz for free first?",
+      a: "Yes, 100%! The 6-question quiz and baseline platform ranking are completely free and ungated with zero credit card required. You can check your top platform match and then choose the blueprint or suite that fits your ambitions.",
     },
     {
-      q: "What is the difference between One-Time Payment and Monthly?",
-      a: "One-Time Payment grants you permanent lifetime access to the complete strategic roadmap, downloadable guides, and initial consultation with zero recurring fees. The Monthly option is designed for scaling brands that want continuous monthly strategy reviews, fresh quarterly competitor audits, and ongoing WhatsApp/Slack advisory.",
+      q: "What format do I receive after purchase?",
+      a: "You get instant, immediate access to your tailored executive report, interactive strategy dashboard, one-click Notion template duplication link, Figma design kit, and downloadable PDF/Markdown dossiers.",
+    },
+    {
+      q: "What is your refund policy?",
+      a: "We offer a 100% Risk-Free 14-Day Money-Back Guarantee on the Pro Suite. If you review the materials and don't feel they give you total strategic clarity, simply message us within 14 days for a full, prompt refund.",
     },
   ];
 
@@ -312,7 +321,7 @@ export function PricingSection() {
           <div className="pt-8 mt-6 border-t border-white/10 space-y-3">
             <button
               type="button"
-              onClick={() => setActivePlanModal("Growth Blueprint")}
+              onClick={() => setActivePlanModal(pricingData.blueprint.name)}
               className="w-full py-4 px-6 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-sm transition-all flex items-center justify-center gap-2 group-hover:border-white/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
             >
               <span>{pricingData.blueprint.ctaText}</span>
@@ -401,7 +410,7 @@ export function PricingSection() {
           <div className="pt-8 mt-6 border-t border-brand-500/30 space-y-3">
             <button
               type="button"
-              onClick={() => setActivePlanModal("Full Architecture & Advisory")}
+              onClick={() => setActivePlanModal(pricingData.advisory.name)}
               className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-brand-500 via-indigo-600 to-purple-600 hover:from-brand-400 hover:via-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm transition-all shadow-xl shadow-brand-500/30 hover:shadow-brand-500/50 hover:scale-[1.02] active:scale-[0.99] flex items-center justify-center gap-2 border border-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
             >
               <Sparkles className="w-4 h-4 text-brand-200" />
@@ -435,10 +444,10 @@ export function PricingSection() {
 
         <div className="space-y-1 p-2">
           <div className="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center mx-auto mb-2 border border-cyan-500/30">
-            <Users className="w-4 h-4" />
+            <Layers className="w-4 h-4" />
           </div>
-          <span className="text-xs font-bold text-white block">1-on-1 Advisory</span>
-          <p className="text-[11px] text-slate-400">Direct human strategist session</p>
+          <span className="text-xs font-bold text-white block">Notion & Figma OS</span>
+          <p className="text-[11px] text-slate-400">Ready-to-duplicate production hub</p>
         </div>
 
         <div className="space-y-1 p-2">
