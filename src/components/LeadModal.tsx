@@ -10,6 +10,7 @@ interface LeadModalProps {
   onClose: () => void;
   primaryPlatform?: PlatformId;
   answers?: QuizAnswers;
+  selectedPlan?: string;
 }
 
 export function LeadModal({
@@ -17,17 +18,31 @@ export function LeadModal({
   onClose,
   primaryPlatform,
   answers,
+  selectedPlan,
 }: LeadModalProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
-  const [challenge, setChallenge] = useState("");
+  const [challenge, setChallenge] = useState(
+    selectedPlan ? `Interested in ${selectedPlan} plan. We want to align our channels and accelerate organic growth.` : ""
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successResult, setSuccessResult] = useState<{
     mode: "database" | "demo";
     message: string;
   } | null>(null);
+
+  // Sync challenge when plan changes
+  useEffect(() => {
+    if (selectedPlan && isOpen) {
+      setChallenge((prev) =>
+        prev
+          ? prev
+          : `Interested in ${selectedPlan} plan. We want to align our channels and accelerate organic growth.`
+      );
+    }
+  }, [selectedPlan, isOpen]);
 
   // Close on Escape key
   useEffect(() => {
@@ -176,14 +191,19 @@ export function LeadModal({
             <div className="mb-6 space-y-2">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 border border-brand-200/60 text-brand-700 text-xs font-semibold rounded-full">
                 <Sparkles className="w-3.5 h-3.5" />
-                Tailored 30-Day Agency Execution
+                {selectedPlan ? `Inquiry for ${selectedPlan}` : "Tailored 30-Day Agency Execution"}
               </div>
               <h2 id="lead-modal-title" className="text-2xl font-bold text-slate-900 tracking-tight">
-                Build My Social Strategy
+                {selectedPlan ? `Get ${selectedPlan}` : "Build My Social Strategy"}
               </h2>
               <p className="text-slate-600 text-sm leading-relaxed">
-                Receive an agency-crafted 30-day tactical roadmap for{" "}
-                <span className="font-semibold text-brand-600">{company || platformName}</span>. We never spam or sell your details.
+                {selectedPlan
+                  ? `Request direct setup and strategy materials for ${selectedPlan}. Zero commitment, our strategy lead will respond with custom details.`
+                  : `Receive an agency-crafted 30-day tactical roadmap for `}
+                {!selectedPlan && (
+                  <span className="font-semibold text-brand-600">{company || platformName}</span>
+                )}
+                {!selectedPlan && ". We never spam or sell your details."}
               </p>
             </div>
 

@@ -1,4 +1,3 @@
-import { createHash } from "crypto";
 import {
   BusinessDiscovery,
   MarketingAssessmentExtension,
@@ -26,7 +25,13 @@ const CACHE_TTL_MS = 1000 * 60 * 60 * 2; // 2 hours
 
 function computeCacheKey(prefix: string, data: unknown): string {
   const serialized = JSON.stringify(data);
-  return `${prefix}:${createHash("sha256").update(serialized).digest("hex")}`;
+  let hash = 0;
+  for (let i = 0; i < serialized.length; i++) {
+    const char = serialized.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return `${prefix}:${hash}`;
 }
 
 /**

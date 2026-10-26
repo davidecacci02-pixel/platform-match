@@ -21,14 +21,15 @@ import {
 import { SocialIcon } from "@/components/SocialIcon";
 import { ALL_PLATFORM_IDS, PLATFORMS_DATA } from "@/lib/platforms";
 import { SCORING_WEIGHTS } from "@/lib/scoring-matrix";
+import { PricingSection } from "@/components/PricingSection";
 
 export default function LandingPage() {
   return (
     <div className="flex-1 flex flex-col bg-[#070B14] text-white selection:bg-brand-500 selection:text-white relative overflow-hidden">
-      {/* Aurora Ambient Background Orbs */}
-      <div className="absolute top-0 left-1/4 -translate-x-1/2 w-[700px] h-[500px] bg-gradient-to-tr from-brand-600/25 via-indigo-600/20 to-purple-700/20 blur-[130px] rounded-full -z-10 pointer-events-none" />
-      <div className="absolute top-48 right-0 w-[550px] h-[450px] bg-gradient-to-br from-cyan-500/20 via-blue-600/15 to-transparent blur-[140px] rounded-full -z-10 pointer-events-none" />
-      <div className="absolute top-[900px] left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-gradient-to-r from-purple-900/20 via-brand-900/20 to-pink-900/15 blur-[150px] rounded-full -z-10 pointer-events-none" />
+      {/* Aurora Ambient Background Orbs - Optimized with hardware acceleration */}
+      <div className="absolute top-0 left-1/4 -translate-x-1/2 w-[700px] h-[500px] bg-gradient-to-tr from-brand-600/20 via-indigo-600/15 to-purple-700/15 blur-[100px] transform-gpu will-change-transform rounded-full -z-10 pointer-events-none" />
+      <div className="absolute top-48 right-0 w-[550px] h-[450px] bg-gradient-to-br from-cyan-500/15 via-blue-600/10 to-transparent blur-[100px] transform-gpu will-change-transform rounded-full -z-10 pointer-events-none" />
+      <div className="absolute top-[900px] left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-gradient-to-r from-purple-900/15 via-brand-900/15 to-pink-900/10 blur-[120px] transform-gpu will-change-transform rounded-full -z-10 pointer-events-none" />
 
       {/* Hero Section */}
       <section className="relative pt-12 pb-16 md:pt-20 md:pb-24 overflow-hidden">
@@ -504,6 +505,9 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing & Offers Section */}
+      <PricingSection />
 
       {/* Final Aurora Banner CTA */}
       <section className="py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
