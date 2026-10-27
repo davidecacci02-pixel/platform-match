@@ -30,15 +30,22 @@ const config: Config = {
           900: "#4c1d95",
           950: "#2e1065",
         },
+        surface: {
+          950: "#06090E",
+          900: "#080B11",
+          850: "#0D121F",
+          800: "#13192B",
+          700: "#1E263D",
+        },
       },
       fontFamily: {
         sans: [
+          "var(--font-inter)",
           "Inter",
           "-apple-system",
           "BlinkMacSystemFont",
           "Segoe UI",
           "Roboto",
-          "Helvetica Neue",
           "sans-serif",
         ],
       },

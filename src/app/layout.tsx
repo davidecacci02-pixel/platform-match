@@ -1,23 +1,31 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Platform Match | Social Media Channel Scoring for Modern Brands",
+  title: "Pace Marketing Lab | Digital Marketing Agency & Platform Match",
   description:
-    "Discover which social platforms are best suited for your brand through an interactive 6-question quiz, transparent weighted scoring, ranked recommendations, and actionable 30-day content strategies.",
+    "Student-led Digital Marketing Lab at Pace University in NYC. Helping small businesses and nonprofits grow through research-backed social media strategy, content creation, SEO, digital advertising, and our proprietary Platform Match engine.",
   keywords: [
+    "digital marketing agency",
+    "pace university",
+    "lubin school of business",
     "social media strategy",
     "platform match",
-    "b2b marketing",
-    "instagram marketing",
-    "tiktok marketing",
-    "linkedin strategy",
-    "youtube strategy",
-    "content strategy",
+    "small business marketing",
+    "content creation",
+    "seo optimization",
+    "digital advertising",
   ],
-  authors: [{ name: "Digital Growth Studio" }],
+  authors: [{ name: "Pace University Digital Marketing Lab" }],
 };
 
 export default function RootLayout({
@@ -26,8 +34,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className="min-h-screen flex flex-col bg-slate-50/40 text-slate-900 bg-subtle-mesh">
+    <html lang="en" className={`scroll-smooth ${inter.variable}`}>
+      <body className="min-h-screen flex flex-col bg-[#080B11] text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white">
         <Navbar />
         <main className="flex-1 flex flex-col">{children}</main>
         <Footer />

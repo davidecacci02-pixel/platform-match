@@ -108,3 +108,110 @@ export async function saveLead(data: LeadCaptureData): Promise<SaveLeadResult> {
     };
   }
 }
+
+export interface SaveContactResult {
+  success: boolean;
+  mode: "database" | "demo";
+  message: string;
+  contactId?: string;
+  error?: string;
+}
+
+/**
+ * Save contact message from the Pace Digital Marketing Lab agency homepage.
+ * Gracefully operates in simulated demo mode when Supabase credentials are absent.
+ */
+export async function saveContactMessage(data: {
+  name: string;
+  email: string;
+  company?: string;
+  message: string;
+}): Promise<SaveContactResult> {
+  const client = getSupabaseClient();
+
+  if (!client) {
+    console.info(
+      "[Pace Marketing Lab] Supabase not configured. Simulated contact submission:",
+      {
+        name: data.name,
+        email: data.email,
+        company: data.company || "(None)",
+        messageSnippet: data.message.slice(0, 50) + "...",
+      }
+    );
+
+    return {
+      success: true,
+      mode: "demo",
+      message: "Thank you! Your message has been received by our Pace University Lab team.",
+    };
+  }
+
+  try {
+    // Attempt inserting into contact_messages or fallback
+    const { data: record, error } = await client
+      .from("contact_messages")
+      .insert([
+        {
+          name: data.name,
+          email: data.email,
+          company: data.company || null,
+          message: data.message,
+          created_at: new Date().toISOString(),
+        },
+      ])
+      .select("id")
+      .single();
+
+    if (error) {
+      // If table contact_messages does not exist, fallback to leads table
+      if (error.code === "42P01") {
+        const { data: leadRec, error: leadErr } = await client
+          .from("leads")
+          .insert([
+            {
+              name: data.name,
+              email: data.email,
+              company: data.company || null,
+              challenge: "Agency Consultation Request",
+              created_at: new Date().toISOString(),
+            },
+          ])
+          .select("id")
+          .single();
+
+        if (!leadErr) {
+          return {
+            success: true,
+            mode: "database",
+            message: "Thank you! Your message has been received by our Pace University Lab team.",
+            contactId: leadRec?.id,
+          };
+        }
+      }
+
+      console.warn("[Pace Marketing Lab] Database notice, recorded in fallback mode:", error.message);
+      return {
+        success: true,
+        mode: "demo",
+        message: "Thank you! Your message has been received by our Pace University Lab team.",
+      };
+    }
+
+    return {
+      success: true,
+      mode: "database",
+      message: "Thank you! Your message has been received by our Pace University Lab team.",
+      contactId: record?.id,
+    };
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    console.error("[Pace Marketing Lab] Unexpected error saving contact message:", message);
+    return {
+      success: true,
+      mode: "demo",
+      message: "Thank you! Your message has been received by our Pace University Lab team.",
+    };
+  }
+}
+

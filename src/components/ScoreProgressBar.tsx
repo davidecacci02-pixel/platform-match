@@ -23,14 +23,14 @@ export function ScoreProgressBar({
   return (
     <div className={cn("w-full space-y-1.5", className)}>
       {showLabel && (
-        <div className="flex justify-between items-center text-xs font-medium text-slate-600">
+        <div className="flex justify-between items-center text-xs font-medium text-slate-400">
           <span>Match Compatibility</span>
-          <span className="font-bold text-slate-900">{clamped}%</span>
+          <span className="font-bold text-white">{clamped}%</span>
         </div>
       )}
       <div
         className={cn(
-          "w-full bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200/70",
+          "w-full bg-white/[0.06] rounded-full overflow-hidden p-0.5 border border-white/10",
           heightClass
         )}
         role="progressbar"
@@ -41,7 +41,7 @@ export function ScoreProgressBar({
       >
         <div
           className={cn(
-            "h-full rounded-full transition-all duration-1000 ease-out",
+            "h-full rounded-full transition-all duration-1000 ease-out shadow-sm",
             colorClass
           )}
           style={{ width: `${clamped}%` }}
