@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Sparkles,
   ArrowRight,
@@ -18,6 +19,12 @@ import {
   ChevronRight,
   Eye,
   ArrowLeft,
+  Check,
+  X,
+  Play,
+  Heart,
+  Share2,
+  Users,
 } from "lucide-react";
 import { SocialIcon } from "@/components/SocialIcon";
 import { ALL_PLATFORM_IDS, PLATFORMS_DATA } from "@/lib/platforms";
@@ -25,326 +32,484 @@ import { SCORING_WEIGHTS } from "@/lib/scoring-matrix";
 
 export default function PlatformMatchLandingPage() {
   return (
-    <div className="flex-1 flex flex-col bg-[#080B11] text-white selection:bg-brand-500 selection:text-white relative overflow-hidden">
-      {/* Subtle Ambient Background Orbs */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-brand-600/15 via-indigo-600/10 to-transparent blur-[120px] rounded-full -z-10 pointer-events-none" />
-      <div className="absolute top-64 right-10 w-[450px] h-[350px] bg-gradient-to-br from-cyan-500/10 to-transparent blur-[100px] rounded-full -z-10 pointer-events-none" />
+    <div className="flex-1 flex flex-col bg-[#FAF9F6] text-slate-900 selection:bg-[#002D72] selection:text-white relative overflow-hidden">
+      {/* Linktree-Style Organic Ambient Orbs */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-gradient-to-b from-[#002D72]/[0.06] via-[#FFB81C]/[0.08] to-transparent blur-[140px] rounded-full -z-10 pointer-events-none" />
+      <div className="absolute top-96 right-[-100px] w-[500px] h-[400px] bg-gradient-to-br from-emerald-400/[0.07] to-transparent blur-[120px] rounded-full -z-10 pointer-events-none" />
+      <div className="absolute top-[1200px] left-[-100px] w-[600px] h-[500px] bg-gradient-to-tr from-[#002D72]/[0.05] via-[#FFB81C]/[0.06] to-transparent blur-[140px] rounded-full -z-10 pointer-events-none" />
 
       {/* Top Breadcrumb Bar */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 w-full">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-xs font-medium text-slate-400 hover:text-white transition-colors px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.06]"
+          className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-[#002D72] transition-colors px-4 py-2 rounded-full bg-white border border-slate-200/90 shadow-sm hover:shadow hover:scale-[1.01]"
         >
-          <ArrowLeft className="w-3.5 h-3.5" />
+          <ArrowLeft className="w-3.5 h-3.5 text-[#002D72]" />
           <span>Back to Digital Marketing Lab (Agency Home)</span>
         </Link>
       </div>
 
-      {/* Hero Section */}
-      <section className="relative pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
-          {/* Top Live Badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-medium text-slate-300 shadow-sm hover:border-brand-500/30 transition-colors">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="flex items-center gap-1.5 text-slate-200">
-              <Sparkles className="w-3.5 h-3.5 text-brand-400" />
-              Platform Match 2.0 • AI Strategic Engine
-            </span>
-            <span className="text-white/20">|</span>
-            <span className="text-brand-300 font-semibold">100% Free & Ungated</span>
-          </div>
-
-          {/* Master Headline */}
-          <div className="space-y-5 max-w-4xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08]">
-              Stop Posting in the Void.{" "}
-              <span className="block mt-1 bg-gradient-to-r from-brand-400 via-indigo-300 to-cyan-300 bg-clip-text text-transparent">
-                Find Your True Social Fit.
-              </span>
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed font-normal">
-              Stop burning 15+ hours weekly creating content for platforms where your buyers never convert.
-              Discover transparent mathematical compatibility scoring, uncover competitor blindspots, and unlock an actionable 30-day growth roadmap.
-            </p>
-          </div>
-
-          {/* Primary Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-            <Link
-              href="/quiz"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-white hover:bg-slate-100 text-slate-950 text-base font-bold rounded-2xl shadow-lg shadow-white/10 hover:scale-[1.02] active:scale-[0.99] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white border border-white/20"
-            >
-              <Sparkles className="w-5 h-5 text-brand-600" />
-              <span>Start Free AI Consultation</span>
-              <ArrowRight className="w-5 h-5 text-slate-950" />
-            </Link>
-
-            <Link
-              href="#platforms"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 text-slate-300 hover:text-white text-sm font-semibold transition-all"
-            >
-              <Eye className="w-4 h-4 text-slate-400" />
-              <span>Preview 6 Networks</span>
-            </Link>
-          </div>
-
-          {/* Trust Pills */}
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-5 sm:gap-8 text-xs text-slate-400 font-medium">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Deterministic Multi-Factor Scoring</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Industry Competitor Benchmarking</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Interactive AI Consultant Chat</span>
-            </div>
-          </div>
-
-          {/* HERO VISUAL SHOWCASE: 3D Floating Glass Report Mockup */}
-          <div className="pt-8 pb-4 max-w-4xl mx-auto relative">
-            {/* Ambient Backlight under mockup */}
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-600/20 via-indigo-500/10 to-transparent blur-3xl rounded-3xl -z-10" />
-
-            {/* Main Mockup Window */}
-            <div className="bg-[#0D121F]/90 border border-white/10 rounded-2xl shadow-2xl shadow-black/80 overflow-hidden text-left transition-all hover:border-white/20">
-              {/* Studio Browser Bar */}
-              <div className="px-5 py-3.5 bg-[#080B11]/90 border-b border-white/[0.08] flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                </div>
-                <div className="px-3.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[11px] font-mono text-slate-400 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  <span>platform-match.app/results/demo-report</span>
-                </div>
-                <span className="text-[11px] font-bold text-brand-400 uppercase tracking-wider hidden sm:inline">
-                  Interactive Preview
+      {/* =====================================================================
+          HERO SECTION: Linktree-Style Headline + 3D Floating Phone Mockup
+          ===================================================================== */}
+      <section className="relative pt-10 pb-16 md:pt-16 md:pb-24 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            
+            {/* Left Column: Bold Copy & Linktree Pills */}
+            <div className="lg:col-span-7 space-y-7 text-center lg:text-left">
+              {/* Live Badge */}
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-800">
+                <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="flex items-center gap-1.5 text-slate-900">
+                  <Sparkles className="w-3.5 h-3.5 text-[#002D72]" />
+                  <span>Platform Match 2.0</span>
                 </span>
+                <span className="text-slate-300">•</span>
+                <span className="text-[#002D72]">Pace Lubin Research Engine</span>
+                <span className="text-slate-300">•</span>
+                <span className="text-[#966300] bg-[#FFB81C]/25 px-2 py-0.5 rounded-full">100% Free</span>
               </div>
 
-              {/* Mockup Content Grid */}
-              <div className="p-6 sm:p-8 space-y-6">
-                {/* Simulated Business Header */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-white/[0.08]">
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-brand-400 bg-brand-500/10 px-2.5 py-1 rounded-md border border-brand-500/20">
-                      Discovery Complete
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white mt-1.5">
-                      Strategic Social Distribution Report
-                    </h3>
-                  </div>
-                  <span className="self-start sm:self-auto text-xs font-medium px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>6/6 Networks Ranked</span>
+              {/* Master Headline */}
+              <div className="space-y-4">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-950 tracking-tight leading-[1.08]">
+                  Stop Posting in the Void.{" "}
+                  <span className="block mt-1 text-[#002D72] underline decoration-[#FFB81C] decoration-[6px] underline-offset-8">
+                    Find Your True Social Fit.
                   </span>
+                </h1>
+                <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                  Stop burning 15+ hours every week creating content for platforms where your ideal buyers never convert.
+                  Our proprietary algorithm analyzes your audience, goals, and team capacity to reveal your highest-ROI channels and a realistic 30-day playbook.
+                </p>
+              </div>
+
+              {/* Primary Action Buttons (Linktree Tactile Pill Buttons) */}
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                <Link
+                  href="/quiz"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#002D72] hover:bg-[#001C48] text-white text-base font-black rounded-full shadow-xl shadow-[#002D72]/20 hover:scale-[1.03] active:scale-[0.98] transition-all border border-[#002D72]"
+                >
+                  <Sparkles className="w-5 h-5 text-[#FFB81C]" />
+                  <span>Start 3-Minute Quiz</span>
+                  <ArrowRight className="w-5 h-5 text-white" />
+                </Link>
+
+                <a
+                  href="#how-it-works"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 text-sm font-bold shadow-sm transition-all hover:scale-[1.02]"
+                >
+                  <Eye className="w-4 h-4 text-[#002D72]" />
+                  <span>See How It Works</span>
+                </a>
+              </div>
+
+              {/* Trust Micro-Badges */}
+              <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-600 font-bold">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <span>Deterministic 6-Factor Model</span>
                 </div>
-
-                {/* Simulated Platform Match Rows */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* #1 Primary Engine Preview */}
-                  <div className="bg-[#13192B]/90 p-5 rounded-xl border border-brand-500/40 shadow-lg shadow-brand-500/5 space-y-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-xl bg-[#E1306C] text-white flex items-center justify-center font-bold shadow-md shadow-[#E1306C]/30">
-                          <SocialIcon platform="instagram" size={18} className="text-white" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-white text-sm">Instagram</h4>
-                          <span className="text-[11px] text-brand-300 font-semibold">#1 Primary Growth Engine</span>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <span className="text-2xl font-black text-white">96%</span>
-                        <span className="block text-[10px] text-emerald-400 font-bold uppercase">Optimal Match</span>
-                      </div>
-                    </div>
-                    {/* Progress Bar */}
-                    <div className="w-full bg-white/[0.06] h-2 rounded-full overflow-hidden p-0.5 border border-white/5">
-                      <div className="bg-gradient-to-r from-brand-500 to-emerald-400 h-full rounded-full w-[96%]" />
-                    </div>
-                    <p className="text-xs text-slate-400 leading-relaxed">
-                      Algorithmic priority matches your visual short-form content. 70% of weekly effort allocated here.
-                    </p>
-                  </div>
-
-                  {/* #2 Secondary Synergy Engine Preview */}
-                  <div className="bg-[#13192B]/90 p-5 rounded-xl border border-white/[0.08] hover:border-white/20 transition-all space-y-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-xl bg-black text-white flex items-center justify-center font-bold border border-white/20 shadow-md">
-                          <SocialIcon platform="tiktok" size={18} className="text-white" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-white text-sm">TikTok</h4>
-                          <span className="text-[11px] text-cyan-400 font-semibold">#2 Secondary Synergy</span>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <span className="text-2xl font-black text-white">89%</span>
-                        <span className="block text-[10px] text-cyan-400 font-bold uppercase">High Reach</span>
-                      </div>
-                    </div>
-                    {/* Progress Bar */}
-                    <div className="w-full bg-white/[0.06] h-2 rounded-full overflow-hidden p-0.5 border border-white/5">
-                      <div className="bg-gradient-to-r from-cyan-500 to-indigo-500 h-full rounded-full w-[89%]" />
-                    </div>
-                    <p className="text-xs text-slate-400 leading-relaxed">
-                      Repurpose Instagram Reels with zero filming overhead to tap non-follower algorithmic reach.
-                    </p>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <span>Competitor Gap Diagnosis</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <span>Interactive AI Chat Follow-up</span>
                 </div>
               </div>
             </div>
 
-            {/* Floating Glass Pill 1 (Competitor Intelligence) */}
-            <div className="hidden lg:flex items-center gap-3 p-3.5 pr-5 rounded-xl bg-[#0D121F]/95 border border-white/15 shadow-xl shadow-black/50 backdrop-blur-md absolute -bottom-5 -left-8 animate-float-slow">
-              <div className="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-300 flex items-center justify-center flex-shrink-0 border border-amber-500/25">
-                <Swords className="w-4 h-4" />
+            {/* Right Column: 3D FLOATING DEVICE MOCKUP (Linktree Signature Visual) */}
+            <div className="lg:col-span-5 relative flex items-center justify-center pt-6 lg:pt-0">
+              {/* Backlight Ambient Glow */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#002D72]/15 via-[#FFB81C]/20 to-emerald-400/10 blur-3xl rounded-[3rem] -z-10" />
+
+              {/* 3D Tilted Perspective Phone Mockup */}
+              <div
+                className="w-full max-w-[340px] sm:max-w-[360px] bg-slate-950 rounded-[3rem] p-3.5 shadow-2xl border-4 border-slate-800 ring-1 ring-slate-900/40 transition-transform duration-700 ease-out hover:rotate-0 hover:scale-105"
+                style={{
+                  transform: "perspective(1200px) rotateY(-6deg) rotateX(4deg) rotate(-2deg)",
+                }}
+              >
+                {/* Dynamic Island / Notch */}
+                <div className="w-28 h-4 bg-black rounded-full mx-auto mb-3 flex items-center justify-center">
+                  <span className="w-2 h-2 rounded-full bg-slate-900 mr-2" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/80" />
+                </div>
+
+                {/* Simulated Phone Screen Canvas (Clean Linktree Profile) */}
+                <div className="bg-[#F8F9FA] rounded-[2.5rem] p-5 space-y-4 text-center border border-slate-200/80 overflow-hidden shadow-inner">
+                  
+                  {/* Profile Header */}
+                  <div className="space-y-2 pt-1">
+                    <div className="relative w-16 h-16 rounded-full mx-auto overflow-hidden border-2 border-[#002D72] shadow-md">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src="/images/davide-cacciuottolo.jpg"
+                        alt="Davide Cacciuottolo - Platform Match"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <div className="flex items-center justify-center gap-1.5">
+                        <h3 className="font-black text-slate-950 text-sm">Pace Marketing Lab</h3>
+                        <span className="w-4 h-4 rounded-full bg-[#002D72] text-white flex items-center justify-center text-[9px] font-black">
+                          ✓
+                        </span>
+                      </div>
+                      <p className="text-[11px] font-bold text-slate-500 mt-0.5">
+                        @platform_match • Lubin School of Business
+                      </p>
+                    </div>
+                    <p className="text-[11px] text-slate-600 font-medium px-2 leading-relaxed">
+                      AI Social Recommendation Engine &amp; 30-Day Growth Diagnostic for Founders.
+                    </p>
+                  </div>
+
+                  {/* Simulated Linktree-Style Pill Links Stack */}
+                  <div className="space-y-2.5 pt-1 text-left">
+                    
+                    {/* Link 1: Instagram (Primary Engine 96%) */}
+                    <div className="p-3 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:shadow-md transition-all group">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white flex items-center justify-center shadow-sm">
+                          <SocialIcon platform="instagram" size={16} className="text-white" />
+                        </div>
+                        <div>
+                          <div className="font-extrabold text-xs text-slate-900 group-hover:text-[#002D72] transition-colors">
+                            Instagram Reels
+                          </div>
+                          <span className="text-[10px] font-bold text-emerald-600">
+                            #1 Primary Growth Engine
+                          </span>
+                        </div>
+                      </div>
+                      <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-black text-xs border border-emerald-200">
+                        96%
+                      </span>
+                    </div>
+
+                    {/* Link 2: TikTok (Synergy 89%) */}
+                    <div className="p-3 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:shadow-md transition-all group">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-xl bg-black text-white flex items-center justify-center shadow-sm">
+                          <SocialIcon platform="tiktok" size={16} className="text-white" />
+                        </div>
+                        <div>
+                          <div className="font-extrabold text-xs text-slate-900 group-hover:text-[#002D72] transition-colors">
+                            TikTok Syndication
+                          </div>
+                          <span className="text-[10px] font-bold text-sky-600">
+                            #2 Secondary Reach Engine
+                          </span>
+                        </div>
+                      </div>
+                      <span className="px-2 py-0.5 rounded-full bg-sky-50 text-sky-700 font-black text-xs border border-sky-200">
+                        89%
+                      </span>
+                    </div>
+
+                    {/* Link 3: LinkedIn (B2B Intent 84%) */}
+                    <div className="p-3 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:shadow-md transition-all group">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-xl bg-[#0A66C2] text-white flex items-center justify-center shadow-sm">
+                          <SocialIcon platform="linkedin" size={16} className="text-white" />
+                        </div>
+                        <div>
+                          <div className="font-extrabold text-xs text-slate-900 group-hover:text-[#002D72] transition-colors">
+                            LinkedIn B2B
+                          </div>
+                          <span className="text-[10px] font-bold text-indigo-600">
+                            Professional Authority
+                          </span>
+                        </div>
+                      </div>
+                      <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-black text-xs border border-indigo-200">
+                        84%
+                      </span>
+                    </div>
+
+                    {/* Link 4: Unlock 30-Day Growth Roadmap CTA */}
+                    <Link
+                      href="/quiz"
+                      className="block p-3 rounded-2xl bg-[#FFB81C] hover:bg-[#E5A417] text-[#001C48] shadow-md transition-all text-center font-black text-xs uppercase tracking-wider"
+                    >
+                      🚀 Take The 3-Min Quiz →
+                    </Link>
+                  </div>
+
+                  <div className="pt-2 border-t border-slate-200 text-[10px] text-slate-500 font-bold flex items-center justify-center gap-2">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>6/6 Networks Evaluated Deterministically</span>
+                  </div>
+                </div>
               </div>
-              <div className="text-left text-xs">
-                <span className="font-bold text-amber-300 block uppercase tracking-wider text-[10px]">
-                  Competitor Intelligence
-                </span>
-                <span className="text-white font-medium">Rivals Over-Rely on Paid Ads • Organic Gap Open</span>
+
+              {/* Floating 3D Pill Top-Left: Competitor Intel */}
+              <div className="hidden sm:flex items-center gap-2.5 p-3 pr-4 rounded-full bg-white/95 border border-slate-200 shadow-xl backdrop-blur-md absolute -top-4 -left-6 animate-float-slow text-xs">
+                <div className="w-7 h-7 rounded-full bg-[#FFB81C]/25 text-[#966300] flex items-center justify-center flex-shrink-0 font-black">
+                  <Swords className="w-3.5 h-3.5" />
+                </div>
+                <div className="text-left">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 block">
+                    Competitor Intel
+                  </span>
+                  <span className="font-bold text-slate-900">Uncover Organic Gaps</span>
+                </div>
+              </div>
+
+              {/* Floating 3D Pill Bottom-Right: 30-Day Roadmap */}
+              <div className="hidden sm:flex items-center gap-2.5 p-3 pr-4 rounded-full bg-white/95 border border-slate-200 shadow-xl backdrop-blur-md absolute -bottom-4 -right-6 animate-float-reverse text-xs">
+                <div className="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0 font-black">
+                  <Calendar className="w-3.5 h-3.5" />
+                </div>
+                <div className="text-left">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 block">
+                    30-Day Roadmap
+                  </span>
+                  <span className="font-bold text-slate-900">Weekly Schedule &amp; Hooks</span>
+                </div>
               </div>
             </div>
 
-            {/* Floating Glass Pill 2 (Growth Roadmap) */}
-            <div className="hidden lg:flex items-center gap-3 p-3.5 pr-5 rounded-xl bg-[#0D121F]/95 border border-white/15 shadow-xl shadow-black/50 backdrop-blur-md absolute -bottom-5 -right-8 animate-float-reverse">
-              <div className="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-300 flex items-center justify-center flex-shrink-0 border border-emerald-500/25">
-                <Calendar className="w-4 h-4" />
-              </div>
-              <div className="text-left text-xs">
-                <span className="font-bold text-emerald-300 block uppercase tracking-wider text-[10px]">
-                  30-Day Growth Roadmap
-                </span>
-                <span className="text-white font-medium">Calibrated to Under 3 Hours / Week</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Real Metric Highlights Banner */}
-      <section className="py-10 border-y border-white/[0.08] bg-white/[0.015]">
+      {/* =====================================================================
+          BENCHMARK NUMBERS BANNER (Linktree Style Pill Metrics)
+          ===================================================================== */}
+      <section className="py-12 bg-white border-y border-slate-200 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
             <div className="space-y-1">
-              <div className="text-3xl sm:text-4xl font-extrabold text-white">
+              <div className="text-3xl sm:text-4xl font-black text-[#002D72]">
                 6 Networks
               </div>
-              <p className="text-xs text-slate-400 font-medium">Evaluated Across Every Metric</p>
+              <p className="text-xs text-slate-600 font-bold uppercase tracking-wider">
+                Cross-Examined Simultaneously
+              </p>
             </div>
             <div className="space-y-1">
-              <div className="text-3xl sm:text-4xl font-extrabold text-white">
+              <div className="text-3xl sm:text-4xl font-black text-slate-900">
                 6 Dimensions
               </div>
-              <p className="text-xs text-slate-400 font-medium">Weighted Algorithmic Compatibility</p>
+              <p className="text-xs text-slate-600 font-bold uppercase tracking-wider">
+                Deterministic Weighting Matrix
+              </p>
             </div>
             <div className="space-y-1">
-              <div className="text-3xl sm:text-4xl font-extrabold text-emerald-400">
+              <div className="text-3xl sm:text-4xl font-black text-emerald-600">
                 100% Free
               </div>
-              <p className="text-xs text-slate-400 font-medium">Deterministic & Zero Gating</p>
+              <p className="text-xs text-slate-600 font-bold uppercase tracking-wider">
+                Zero Gating &amp; Instant Output
+              </p>
             </div>
             <div className="space-y-1">
-              <div className="text-3xl sm:text-4xl font-extrabold text-brand-300">
+              <div className="text-3xl sm:text-4xl font-black text-[#966300]">
                 &lt; 3 Minutes
               </div>
-              <p className="text-xs text-slate-400 font-medium">Instant Full Strategic Roadmap</p>
+              <p className="text-xs text-slate-600 font-bold uppercase tracking-wider">
+                From Questions to Full Strategy
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3 Core Value Pillars */}
-      <section className="py-20 relative">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-400 bg-brand-500/10 px-3 py-1 rounded-full border border-brand-500/20">
-              Strategic Competitive Edge
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Why Strategic Channel Fit Matters
-            </h2>
-            <p className="text-slate-400 text-sm leading-relaxed">
-              Most brands fail on social by spreading themselves thin across 5 platforms with zero algorithmic resonance.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Card 1 */}
-            <div className="bg-[#0D121F]/70 border border-white/[0.08] hover:border-cyan-500/40 rounded-2xl p-7 space-y-4 shadow-xl shadow-black/20 transition-all group hover:-translate-y-1">
-              <div className="w-11 h-11 rounded-xl bg-cyan-500/15 text-cyan-300 flex items-center justify-center border border-cyan-500/20 group-hover:scale-105 transition-transform">
-                <Target className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">
-                Zero Wasted Production Hours
-              </h3>
-              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
-                Filming TikTok clips for a B2B legal boutique or drafting long articles on Pinterest wastes bandwidth with zero commercial ROI. Target the specific algorithms where your prospects have active buying intent.
-              </p>
-              <div className="pt-2 text-xs font-medium text-cyan-400 flex items-center gap-1.5">
-                <span>Save 10+ hours/week</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </div>
-            </div>
-
-            {/* Card 2 */}
-            <div className="bg-[#0D121F]/70 border border-white/[0.08] hover:border-brand-500/40 rounded-2xl p-7 space-y-4 shadow-xl shadow-black/20 transition-all group hover:-translate-y-1">
-              <div className="w-11 h-11 rounded-xl bg-brand-500/15 text-brand-300 flex items-center justify-center border border-brand-500/20 group-hover:scale-105 transition-transform">
-                <Sliders className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-white group-hover:text-brand-300 transition-colors">
-                Deterministic 6-Factor Matrix
-              </h3>
-              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
-                No black-box hallucinations. Our matrix cross-examines Audience Overlap (30%), Marketing Goal (25%), Industry Fit (15%), Content Strengths (15%), Brand Voice (10%), and Team Capacity (5%).
-              </p>
-              <div className="pt-2 text-xs font-medium text-brand-400 flex items-center gap-1.5">
-                <span>Transparent mathematical logic</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </div>
-            </div>
-
-            {/* Card 3 */}
-            <div className="bg-[#0D121F]/70 border border-white/[0.08] hover:border-amber-500/40 rounded-2xl p-7 space-y-4 shadow-xl shadow-black/20 transition-all group hover:-translate-y-1">
-              <div className="w-11 h-11 rounded-xl bg-amber-500/15 text-amber-300 flex items-center justify-center border border-amber-500/20 group-hover:scale-105 transition-transform">
-                <TrendingUp className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-white group-hover:text-amber-300 transition-colors">
-                Actionable 30-Day Growth Plan
-              </h3>
-              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
-                Receive an immediate execution plan with primary & secondary synergy, 3 tailored content pillars, weekly posting cadences, and realistic success KPIs calibrated to your team&apos;s available hours.
-              </p>
-              <div className="pt-2 text-xs font-medium text-amber-400 flex items-center gap-1.5">
-                <span>Step-by-step roadmap</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Supported Platforms Preview Grid */}
-      <section id="platforms" className="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-          <span className="text-xs font-bold uppercase tracking-widest text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">
-            Algorithmic Intelligence
+      {/* =====================================================================
+          HOW IT WORKS (Linktree Stepper in Bento Grid)
+          ===================================================================== */}
+      <section id="how-it-works" className="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full space-y-16">
+        <div className="text-center max-w-2xl mx-auto space-y-3">
+          <span className="text-xs font-black uppercase tracking-widest text-[#002D72] bg-[#002D72]/10 px-3.5 py-1.5 rounded-full border border-[#002D72]/20">
+            Methodology &amp; Architecture
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
+            How Platform Match Operates
+          </h2>
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            Most businesses pick platforms based on whatever app is currently hyped. We replace guesswork with empirical channel-market fit.
+          </p>
+        </div>
+
+        {/* 3 Step Bento Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+          
+          {/* Step 1 */}
+          <div className="bg-white rounded-[2.2rem] border border-slate-200/90 shadow-md hover:shadow-2xl transition-all duration-300 p-8 space-y-5 flex flex-col justify-between group hover:-translate-y-1.5">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="w-10 h-10 rounded-2xl bg-[#002D72] text-white font-black text-sm flex items-center justify-center shadow-md">
+                  01
+                </span>
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  2 Minutes
+                </span>
+              </div>
+              <h3 className="text-xl font-black text-slate-950 group-hover:text-[#002D72] transition-colors">
+                Share Business Constraints
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Answer 6 clear multiple-choice questions regarding your core target audience, monthly marketing goal, industry vertical, content superpowers, and realistic weekly time budget.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-bold text-[#002D72]">
+              <span>6 focused questions</span>
+              <ChevronRight className="w-4 h-4" />
+            </div>
+          </div>
+
+          {/* Step 2 */}
+          <div className="bg-white rounded-[2.2rem] border border-slate-200/90 shadow-md hover:shadow-2xl transition-all duration-300 p-8 space-y-5 flex flex-col justify-between group hover:-translate-y-1.5">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="w-10 h-10 rounded-2xl bg-[#FFB81C] text-[#001C48] font-black text-sm flex items-center justify-center shadow-md">
+                  02
+                </span>
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  Real-time
+                </span>
+              </div>
+              <h3 className="text-xl font-black text-slate-950 group-hover:text-[#002D72] transition-colors">
+                Algorithmic Cross-Scoring
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Our engine compares your profile against the active algorithmic mechanics of Instagram, TikTok, LinkedIn, YouTube, Facebook, and Pinterest to calculate accurate compatibility percentages.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-bold text-[#966300]">
+              <span>Deterministic mathematical weights</span>
+              <ChevronRight className="w-4 h-4" />
+            </div>
+          </div>
+
+          {/* Step 3 */}
+          <div className="bg-white rounded-[2.2rem] border border-slate-200/90 shadow-md hover:shadow-2xl transition-all duration-300 p-8 space-y-5 flex flex-col justify-between group hover:-translate-y-1.5">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="w-10 h-10 rounded-2xl bg-emerald-600 text-white font-black text-sm flex items-center justify-center shadow-md">
+                  03
+                </span>
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  Execution
+                </span>
+              </div>
+              <h3 className="text-xl font-black text-slate-950 group-hover:text-[#002D72] transition-colors">
+                Receive 30-Day Growth Plan
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Walk away with your #1 Primary Channel, #2 Syndication Channel, tailored content pillars, proven video hook concepts, and competitor landscape intelligence ready to execute on Monday.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-bold text-emerald-700">
+              <span>Actionable roadmap in hand</span>
+              <ChevronRight className="w-4 h-4" />
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* =====================================================================
+          FEATURE SPOTLIGHT: Real Human Lab Research (With Photo)
+          ===================================================================== */}
+      <section className="py-16 bg-[#F3F4F6] border-y border-slate-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-[2.5rem] border border-slate-200 shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-center">
+            
+            {/* Left Photo Showcase */}
+            <div className="lg:col-span-5 relative h-72 sm:h-96 lg:h-full min-h-[340px] overflow-hidden bg-slate-100">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/pace-hero-collab.jpg"
+                alt="Pace University Digital Marketing & Strategy Lab"
+                className="w-full h-full object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent flex items-end p-6">
+                <div className="text-white space-y-1">
+                  <span className="inline-block px-3 py-1 rounded-full bg-[#FFB81C] text-[#001C48] font-black text-[10px] uppercase tracking-wider">
+                    Lubin School of Business NYC
+                  </span>
+                  <p className="text-sm font-bold">
+                    Pace Marketing Lab Research Headquarters
+                  </p>
+                  <p className="text-xs text-slate-300">
+                    One Pace Plaza, Financial District, Manhattan
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Copy & Research Values */}
+            <div className="lg:col-span-7 p-8 sm:p-12 space-y-6">
+              <div className="space-y-2">
+                <span className="text-xs font-black uppercase tracking-widest text-[#002D72] bg-[#002D72]/10 px-3 py-1 rounded-full border border-[#002D72]/20">
+                  Academic Rigor &bull; Real-World Testing
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-black text-slate-950">
+                  Built by Student Researchers, Grounded in Real Market Data
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Unlike generic AI tools that hallucinate advice without context, Platform Match was engineered at Pace University&apos;s Lubin School of Business to solve the real bottleneck facing emerging brands: wasted marketing production time.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-slate-200/90 space-y-1.5">
+                  <div className="flex items-center gap-2 text-[#002D72] font-black text-xs">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    <span>Empirical Testing</span>
+                  </div>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Evaluated across actual small business social campaigns in New York City.
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-slate-200/90 space-y-1.5">
+                  <div className="flex items-center gap-2 text-[#002D72] font-black text-xs">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    <span>Anti-Burnout Cadence</span>
+                  </div>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Recommendations are hard-capped to match your team&apos;s genuine bandwidth.
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <Link
+                  href="/quiz"
+                  className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#002D72] hover:bg-[#001C48] text-white text-xs sm:text-sm font-black shadow-md transition-all hover:scale-[1.02]"
+                >
+                  <Sparkles className="w-4 h-4 text-[#FFB81C]" />
+                  <span>Run Free Diagnostic Now</span>
+                  <ArrowRight className="w-4 h-4 text-white" />
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          THE 6 EVALUATED PLATFORMS (Linktree-Style Visual Showcase)
+          ===================================================================== */}
+      <section className="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
+          <span className="text-xs font-black uppercase tracking-widest text-sky-800 bg-sky-100 px-3 py-1 rounded-full border border-sky-200">
+            Network Coverage
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
             The 6 Evaluated Platforms
           </h2>
-          <p className="text-slate-400 text-sm">
-            Each network operates on distinct algorithmic distributions, audience demographics, and conversion triggers.
+          <p className="text-slate-600 text-sm">
+            Each platform operates under distinct algorithmic distribution patterns and audience buyer states.
           </p>
         </div>
 
@@ -354,11 +519,11 @@ export default function PlatformMatchLandingPage() {
             return (
               <div
                 key={id}
-                className="bg-[#0D121F]/80 rounded-2xl p-6 border border-white/[0.08] hover:border-white/20 shadow-xl shadow-black/20 transition-all flex flex-col justify-between group hover:-translate-y-1 relative overflow-hidden"
+                className="bg-white rounded-[2rem] p-7 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 relative overflow-hidden"
               >
-                {/* Subtle top line */}
+                {/* Top Colored Brand Strip */}
                 <div
-                  className="absolute inset-x-0 top-0 h-0.5 opacity-60 group-hover:opacity-100 transition-opacity"
+                  className="absolute inset-x-0 top-0 h-1.5 opacity-80 group-hover:opacity-100 transition-opacity"
                   style={{ backgroundColor: data.brandColor }}
                 />
 
@@ -366,55 +531,56 @@ export default function PlatformMatchLandingPage() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div
-                        className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md text-white group-hover:scale-105 transition-transform"
+                        className="w-11 h-11 rounded-2xl flex items-center justify-center shadow-md text-white group-hover:scale-105 transition-transform"
                         style={{ backgroundColor: data.brandColor }}
                       >
-                        <SocialIcon platform={id} size={20} className="text-white" />
+                        <SocialIcon platform={id} size={22} className="text-white" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-white text-base group-hover:text-brand-300 transition-colors">
+                        <h3 className="font-black text-slate-950 text-base group-hover:text-[#002D72] transition-colors">
                           {data.name}
                         </h3>
-                        <span className="text-xs text-slate-400 font-medium">
+                        <span className="text-xs text-slate-500 font-bold">
                           {data.primaryDemographics.split("(")[0]}
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-400 leading-relaxed font-normal">
+                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
                     {data.tagline}
                   </p>
 
-                  <div className="space-y-2.5 pt-3 border-t border-white/[0.08] text-xs">
+                  <div className="space-y-2 pt-3 border-t border-slate-100 text-xs">
                     <div>
-                      <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider">
-                        Core Formats
+                      <span className="text-slate-400 block text-[10px] font-bold uppercase tracking-wider">
+                        Key Formats
                       </span>
-                      <div className="flex flex-wrap gap-1.5 mt-1.5">
+                      <div className="flex flex-wrap gap-1.5 mt-1">
                         {data.coreFormats.slice(0, 2).map((fmt) => (
                           <span
                             key={fmt}
-                            className="px-2.5 py-0.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-slate-300 text-[11px] font-medium"
+                            className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[10px] font-bold border border-slate-200"
                           >
                             {fmt}
                           </span>
                         ))}
                       </div>
                     </div>
+
                     <div>
-                      <span className="text-slate-500 block text-[10px] font-bold uppercase tracking-wider">
-                        Best For
+                      <span className="text-slate-400 block text-[10px] font-bold uppercase tracking-wider">
+                        Ideal For
                       </span>
-                      <p className="text-slate-300 text-[11px] font-medium line-clamp-1 mt-0.5">
+                      <p className="text-slate-800 text-xs font-semibold line-clamp-1 mt-0.5">
                         {data.bestFor}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-white/[0.08] flex items-center justify-between text-xs font-semibold text-brand-400 group-hover:text-brand-300 transition-colors">
-                  <span>Analyze fit in quiz</span>
+                <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#002D72] group-hover:text-[#001C48]">
+                  <span>Analyze in Quiz</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
@@ -425,117 +591,128 @@ export default function PlatformMatchLandingPage() {
         <div className="mt-12 text-center">
           <Link
             href="/quiz"
-            className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white hover:bg-slate-100 text-slate-950 text-sm font-bold rounded-xl shadow-lg shadow-white/5 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white border border-white/20"
+            className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-[#002D72] hover:bg-[#001C48] text-white text-sm font-black rounded-full shadow-lg shadow-[#002D72]/15 transition-all hover:scale-105 active:scale-95"
           >
-            <Sparkles className="w-4 h-4 text-brand-600" />
-            <span>Discover Your Strongest Match</span>
-            <ArrowRight className="w-4 h-4 text-slate-950" />
+            <Sparkles className="w-4 h-4 text-[#FFB81C]" />
+            <span>Discover Your Highest Match</span>
+            <ArrowRight className="w-4 h-4 text-white" />
           </Link>
         </div>
       </section>
 
-      {/* Methodology Section */}
-      <section id="methodology" className="py-20 border-t border-white/[0.08] bg-white/[0.01]">
+      {/* =====================================================================
+          SCORING MATRIX TRANSPARENCY (Deterministic Weights)
+          ===================================================================== */}
+      <section className="py-20 border-t border-slate-200 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="text-center space-y-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
-              Scientific Transparency
+            <span className="text-xs font-black uppercase tracking-widest text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200">
+              Deterministic Weights
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Our 6-Factor Algorithmic Scoring Matrix
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
+              Our 6-Factor Scoring Formula
             </h2>
-            <p className="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto leading-relaxed">
-              We never use pseudo-random scores. Every recommendation is computed using an agency-tested weighted matrix combining platform audience data with your operational capacity.
+            <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
+              We never return arbitrary scores. Every match percentage is computed using our agency-tested weighting matrix combining platform demographics with your team&apos;s realistic execution capacity.
             </p>
           </div>
 
-          <div className="bg-[#0D121F]/80 rounded-2xl p-6 sm:p-8 border border-white/[0.08] shadow-2xl space-y-6">
+          <div className="bg-[#FAF9F6] rounded-[2.5rem] p-6 sm:p-10 border border-slate-200 shadow-md space-y-6">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] space-y-1">
-                <div className="text-2xl font-extrabold text-cyan-400">
+              
+              <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+                <div className="text-3xl font-black text-[#002D72]">
                   {SCORING_WEIGHTS.audience * 100}%
                 </div>
-                <div className="text-xs font-bold text-white">Target Audience</div>
-                <div className="text-[11px] text-slate-400 font-normal">Age, profession & intent density</div>
+                <div className="text-xs font-bold text-slate-900">Target Audience</div>
+                <div className="text-[11px] text-slate-500 font-medium">Age, role & buyer mindset</div>
               </div>
 
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] space-y-1">
-                <div className="text-2xl font-extrabold text-indigo-400">
+              <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+                <div className="text-3xl font-black text-[#0A4694]">
                   {SCORING_WEIGHTS.goal * 100}%
                 </div>
-                <div className="text-xs font-bold text-white">Core Goal</div>
-                <div className="text-[11px] text-slate-400 font-normal">Sales, leads, reach or community</div>
+                <div className="text-xs font-bold text-slate-900">Core Goal</div>
+                <div className="text-[11px] text-slate-500 font-medium">Leads, sales, reach or community</div>
               </div>
 
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] space-y-1">
-                <div className="text-2xl font-extrabold text-sky-400">
+              <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+                <div className="text-3xl font-black text-[#966300]">
                   {SCORING_WEIGHTS.industry * 100}%
                 </div>
-                <div className="text-xs font-bold text-white">Industry Vertical</div>
-                <div className="text-[11px] text-slate-400 font-normal">B2B, tech, fashion, food, services</div>
+                <div className="text-xs font-bold text-slate-900">Industry Vertical</div>
+                <div className="text-[11px] text-slate-500 font-medium">B2B, tech, local, e-commerce</div>
               </div>
 
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] space-y-1">
-                <div className="text-2xl font-extrabold text-purple-400">
+              <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+                <div className="text-3xl font-black text-purple-700">
                   {SCORING_WEIGHTS.content * 100}%
                 </div>
-                <div className="text-xs font-bold text-white">Content Strengths</div>
-                <div className="text-[11px] text-slate-400 font-normal">Short video, long video, copy, photos</div>
+                <div className="text-xs font-bold text-slate-900">Content Strengths</div>
+                <div className="text-[11px] text-slate-500 font-medium">Short video, copy, photo carousels</div>
               </div>
 
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] space-y-1">
-                <div className="text-2xl font-extrabold text-rose-400">
+              <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+                <div className="text-3xl font-black text-rose-600">
                   {SCORING_WEIGHTS.personality * 100}%
                 </div>
-                <div className="text-xs font-bold text-white">Brand Voice</div>
-                <div className="text-[11px] text-slate-400 font-normal">Fun, educational, premium, corporate</div>
+                <div className="text-xs font-bold text-slate-900">Brand Voice</div>
+                <div className="text-[11px] text-slate-500 font-medium">Fun, educational, polished, corporate</div>
               </div>
 
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] space-y-1">
-                <div className="text-2xl font-extrabold text-emerald-400">
+              <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+                <div className="text-3xl font-black text-emerald-600">
                   {SCORING_WEIGHTS.time * 100}%
                 </div>
-                <div className="text-xs font-bold text-white">Available Bandwidth</div>
-                <div className="text-[11px] text-slate-400 font-normal">Sustainable weekly production limit</div>
+                <div className="text-xs font-bold text-slate-900">Team Capacity</div>
+                <div className="text-[11px] text-slate-500 font-medium">Sustainable weekly hours limit</div>
               </div>
             </div>
 
-            <div className="p-4 bg-white/[0.02] rounded-xl border border-white/[0.08] text-xs text-slate-300 space-y-1.5">
-              <div className="font-bold text-white flex items-center gap-1.5">
-                <BarChart2 className="w-4 h-4 text-brand-400" />
-                Deterministic Tie-Breaking Logic:
+            <div className="p-4 bg-white rounded-2xl border border-slate-200 text-xs text-slate-700 space-y-1">
+              <div className="font-bold text-[#002D72] flex items-center gap-1.5">
+                <BarChart2 className="w-4 h-4 text-[#002D72]" />
+                Tie-Breaking Protocol:
               </div>
-              <p className="leading-relaxed text-slate-400">
-                When two platforms tie in overall weighted score, our algorithm prioritizes{" "}
-                <span className="font-medium text-cyan-300">Goal Fit</span> first, followed by{" "}
-                <span className="font-medium text-indigo-300">Audience Fit</span>, and finally a predefined
-                sustainable priority hierarchy.
+              <p className="leading-relaxed text-slate-600">
+                If two networks tie in overall weighted points, our algorithm prioritizes{" "}
+                <strong className="text-slate-900">Goal Alignment</strong> first, followed by{" "}
+                <strong className="text-slate-900">Audience Density</strong>, ensuring you never invest in a channel where prospects aren&apos;t actively making decisions.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Final Aurora Banner CTA */}
+      {/* =====================================================================
+          FINAL LINKTREE CALL-TO-ACTION CARD
+          ===================================================================== */}
       <section className="py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-        <div className="p-8 sm:p-14 rounded-3xl bg-[#0D121F]/90 text-white shadow-2xl border border-brand-500/30 space-y-6 relative overflow-hidden">
-          {/* Subtle decorative glow line */}
-          <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-cyan-400 via-brand-400 to-pink-400" />
+        <div className="p-10 sm:p-16 rounded-[3rem] bg-[#002D72] text-white shadow-2xl space-y-7 relative overflow-hidden">
+          {/* Linktree Top Accent Strip */}
+          <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-[#FFB81C] via-white to-[#FFB81C]" />
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-            Ready to find where your brand truly belongs?
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-white border border-white/20 text-xs font-bold uppercase tracking-wider">
+            <Sparkles className="w-3.5 h-3.5 text-[#FFB81C]" />
+            <span>Fast, Free, &amp; Ungated</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight max-w-2xl mx-auto">
+            Ready to find where your brand truly converts?
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            Answer 6 simple multiple-choice questions to receive your compatibility report, competitor benchmark, and actionable 30-day roadmap in 120 seconds.
+          
+          <p className="text-slate-200 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">
+            Answer 6 simple multiple-choice questions to receive your compatibility report, competitor benchmark, and actionable 30-day roadmap in 180 seconds.
           </p>
-          <div className="pt-2">
+
+          <div className="pt-3">
             <Link
               href="/quiz"
-              className="inline-flex items-center gap-2.5 px-9 py-4 bg-white text-slate-950 hover:bg-slate-100 text-base font-bold rounded-2xl shadow-xl transition-all hover:scale-105 active:scale-100"
+              className="inline-flex items-center gap-3 px-10 py-4 bg-[#FFB81C] hover:bg-[#E5A417] text-[#001C48] text-base font-black rounded-full shadow-xl transition-all hover:scale-105 active:scale-95"
             >
-              <Sparkles className="w-5 h-5 text-brand-600" />
-              <span>Start the 2-Minute Quiz</span>
-              <ArrowRight className="w-5 h-5 text-slate-950" />
+              <Sparkles className="w-5 h-5 text-[#001C48]" />
+              <span>Start 3-Minute Quiz</span>
+              <ArrowRight className="w-5 h-5 text-[#001C48]" />
             </Link>
           </div>
         </div>

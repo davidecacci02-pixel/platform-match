@@ -107,7 +107,7 @@ export function Navbar() {
           {/* CTA & Mobile Toggle */}
           <div className="flex items-center gap-3">
             <Link
-              href="/platform-match"
+              href="/quiz"
               className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-[#FFB81C] hover:bg-[#E5A417] text-[#001C48] text-xs sm:text-sm font-extrabold rounded-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#002D72] border border-[#E5A417]"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#001C48]" />
@@ -175,6 +175,16 @@ export function Navbar() {
             >
               Contact
             </Link>
+            <div className="pt-2">
+              <Link
+                href="/quiz"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#FFB81C] text-[#001C48] font-black text-xs shadow-sm"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-[#001C48]" />
+                <span>Try Platform Match (3-Min Quiz)</span>
+              </Link>
+            </div>
           </div>
         </div>
       )}

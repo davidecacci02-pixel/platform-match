@@ -32,86 +32,86 @@ export default function AgencyHomePage() {
     {
       id: "social-media",
       icon: Share2,
-      title: "Social Media Strategy",
-      tagline: "Channel Selection & Editorial Cadence",
+      title: "Social Media Audit & Strategy",
+      tagline: "Channel Selection & Posting Schedule",
       description:
-        "We build organic social media roadmaps that eliminate wasted production hours. By diagnosing your audience demographics and buying intent, we pinpoint the exact channels where your message will resonate and convert.",
+        "We audit your current social channels and target audience demographics. Our student consultants help you prioritize the top 1-2 platforms where your customers actually spend time, eliminating wasted posting hours.",
       deliverables: [
-        "Channel-specific distribution strategy",
-        "Weekly editorial cadence & batching schedules",
-        "Audience persona & tone of voice guidelines",
+        "Social footprint & competitor audit",
+        "Realistic weekly posting calendar",
+        "Target audience profile & content themes",
       ],
       badge: "Organic Reach",
     },
     {
       id: "content-creation",
       icon: Video,
-      title: "Content Creation",
-      tagline: "Video Reels, Visuals & High-Impact Copy",
+      title: "Short-Form Video & Visual Content",
+      tagline: "Reels, TikTok Concepts & Carousels",
       description:
-        "High-converting short-form video concepts, carousels, and visual storytelling tailored to social algorithms. Our student creators craft authentic, scroll-stopping hooks that build trust without feeling like corporate advertisements.",
+        "Relatable, engaging short-form video ideas, hooks, and clean visual carousels created with student energy. We focus on authentic storytelling that builds trust with neighborhood customers without high production budgets.",
       deliverables: [
-        "Short-form video scripts & hook frameworks",
-        "Educational carousel design templates",
-        "Repurposing blueprints across secondary networks",
+        "Hook scripts for Instagram Reels & TikTok",
+        "Clean Canva-ready visual templates",
+        "Repurposing guidelines for multiple channels",
       ],
       badge: "Creative Lab",
     },
     {
       id: "seo-ai-search",
       icon: Search,
-      title: "SEO & AI Search Optimization",
-      tagline: "Google, Bing & Generative Engine Discovery",
+      title: "Google Business Profile & Local Search",
+      tagline: "Local Storefront Discovery on Google Maps",
       description:
-        "Optimize your digital footprint for the modern search landscape—including Google Search and Generative AI engines like ChatGPT and Perplexity. We help local businesses and niche brands get found when customers seek answers.",
+        "Help local customers find and trust your business when searching nearby. We set up, optimize, and organize your Google Business Profile, photos, service categories, and local neighborhood search keywords.",
       deliverables: [
-        "Local SEO & Google Business Profile tuning",
-        "Search Intent & Keyword Strategy Map",
-        "AI engine visibility & structured brand data",
+        "Google Business Profile audit & optimization",
+        "Local keyword & category targeting checklist",
+        "Customer review response guidelines",
       ],
-      badge: "Search & AI",
+      badge: "Local Search",
     },
     {
       id: "digital-advertising",
       icon: MousePointerClick,
-      title: "Digital Advertising (PPC)",
-      tagline: "Targeted Ads on Meta, Google & LinkedIn",
+      title: "Social Media Advertising Setup",
+      tagline: "Budget-Conscious Meta & LinkedIn Ads",
       description:
-        "Data-driven ad campaigns structured specifically for small business budgets. We focus on high-intent lead generation, hyper-targeted local geographies, and zero-wasted ad spend through meticulous split testing.",
+        "Simple, targeted paid campaigns tailored for small business budgets ($5–$20/day). We configure local geographic radiuses, write clear promotional copy, and help you generate genuine customer inquiries.",
       deliverables: [
-        "Hyper-targeted audience segment design",
-        "Ad creative copy & visual variations",
-        "Budget pacing & conversion tracking setup",
+        "Local geographic & interest audience setup",
+        "Promotional ad copy & image variations",
+        "Budget pacing & conversion tracking guidance",
       ],
       badge: "Paid Growth",
     },
     {
       id: "marketing-analytics",
       icon: BarChart3,
-      title: "Marketing Analytics",
-      tagline: "Real KPIs, Funnel Tracking & Honest Dashboards",
+      title: "Marketing Analytics & Reporting",
+      tagline: "Clear Monthly Traffic & Growth Reports",
       description:
-        "Transform raw web traffic and social impressions into actionable business intelligence. We audit Google Analytics 4, define meaningful North Star metrics, and cut through vanity metrics to measure real revenue drivers.",
+        "Understand what is actually working without drowning in complex data. We set up Google Analytics 4 and deliver a straightforward, 1-page monthly summary report in plain English.",
       deliverables: [
-        "Executive KPI dashboards in plain English",
-        "Customer journey & drop-off analysis",
-        "Actionable monthly performance recommendations",
+        "Google Analytics 4 setup & tracking verification",
+        "1-page executive monthly performance summary",
+        "Actionable next-month recommendations",
       ],
       badge: "Analytics",
     },
     {
       id: "platform-match-service",
       icon: Compass,
-      title: "Platform Match (Proprietary Tool)",
+      title: "Platform Match (Lab Tool)",
       tagline: "Interactive 3-Minute Strategic Channel Fit",
       description:
-        "Our lab's flagship decision tool. Rather than guessing where to post, businesses complete a 3-minute diagnostic and receive an algorithmic compatibility score across 6 major networks, competitor intelligence, and a 30-day playbook.",
+        "Our lab's signature diagnostic tool. Complete a 3-minute assessment to discover your top-ranked social platform fit, competitor benchmarks, and an actionable 30-day posting roadmap.",
       deliverables: [
         "Multi-dimensional compatibility scores",
-        "Archetype competitor landscape benchmark",
-        "Custom 30-day roadmap with weekly cadence",
+        "Competitor category benchmarks",
+        "Customized 30-day posting roadmap",
       ],
-      badge: "Flagship Lab Tool",
+      badge: "Signature Tool",
       isFlagship: true,
     },
   ];
@@ -164,7 +164,7 @@ export default function AgencyHomePage() {
             </Link>
 
             <Link
-              href="/platform-match"
+              href="/quiz"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-[#FFB81C] hover:bg-[#E5A417] border border-[#E5A417] text-[#001C48] text-base font-black shadow-md hover:shadow-lg transition-all hover:scale-[1.02]"
             >
               <Sparkles className="w-4 h-4 text-[#001C48]" />
@@ -320,7 +320,7 @@ export default function AgencyHomePage() {
               Meet Our Team &amp; Researchers
             </h2>
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              Esplora le card dei membri del lab oppure <strong className="text-slate-900 font-bold">aggiungi manualmente la tua foto</strong> per generare la tua card personalizzata con i tuoi link in stile Linktree!
+              Explore our lab member profiles or <strong className="text-slate-900 font-bold">manually upload your photo</strong> to generate your own customized Linktree-style card with personal links!
             </p>
           </div>
 
