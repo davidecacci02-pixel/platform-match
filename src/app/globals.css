@@ -4,17 +4,20 @@
 
 @layer base {
   :root {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --pace-blue: #002D72;
+    --pace-navy: #001C48;
+    --pace-gold: #FFB81C;
   }
 
   body {
-    @apply bg-[#080B11] text-slate-100 antialiased font-sans selection:bg-brand-500 selection:text-white min-h-screen flex flex-col;
+    @apply bg-white text-slate-900 antialiased font-sans selection:bg-[#002D72] selection:text-white min-h-screen flex flex-col;
   }
 
   /* Accessible visible focus states */
   *:focus-visible {
-    @apply outline-none ring-2 ring-brand-500/80 ring-offset-2 ring-offset-[#080B11];
+    @apply outline-none ring-2 ring-[#002D72] ring-offset-2 ring-offset-white;
   }
 }
 
