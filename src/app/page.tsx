@@ -164,7 +164,8 @@ export default function AgencyHomePage() {
             </Link>
 
             <Link
-              href="/quiz"
+              href="/platform-match"
+              prefetch={true}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-[#FFB81C] hover:bg-[#E5A417] border border-[#E5A417] text-[#001C48] text-base font-black shadow-md hover:shadow-lg transition-all hover:scale-[1.02]"
             >
               <Sparkles className="w-4 h-4 text-[#001C48]" />

@@ -42,6 +42,7 @@ export default function PlatformMatchLandingPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 w-full">
         <Link
           href="/"
+          prefetch={true}
           className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-[#002D72] transition-colors px-4 py-2 rounded-full bg-white border border-slate-200/90 shadow-sm hover:shadow hover:scale-[1.01]"
         >
           <ArrowLeft className="w-3.5 h-3.5 text-[#002D72]" />

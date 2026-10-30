@@ -2,10 +2,19 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { GraduationCap, Sparkles, ArrowRight, Menu, X, Compass, Users } from "lucide-react";
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Funnel logic:
+  // - On standard agency pages (/), "Try Platform Match" routes to /platform-match (presentation page).
+  // - On /platform-match, clicking "Try Platform Match" routes to /quiz (launches the diagnostic engine).
+  const isPlatformMatchPage = pathname === "/platform-match";
+  const ctaHref = isPlatformMatchPage ? "/quiz" : "/platform-match";
+  const ctaLabel = "Try Platform Match";
 
   return (
     <header className="sticky top-0 z-40 w-full transition-all shadow-sm">
@@ -107,11 +116,12 @@ export function Navbar() {
           {/* CTA & Mobile Toggle */}
           <div className="flex items-center gap-3">
             <Link
-              href="/quiz"
+              href={ctaHref}
+              prefetch={true}
               className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-[#FFB81C] hover:bg-[#E5A417] text-[#001C48] text-xs sm:text-sm font-extrabold rounded-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#002D72] border border-[#E5A417]"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#001C48]" />
-              <span>Try Platform Match</span>
+              <span>{ctaLabel}</span>
               <ArrowRight className="w-3.5 h-3.5 hidden sm:inline text-[#001C48]" />
             </Link>
 
@@ -177,12 +187,12 @@ export function Navbar() {
             </Link>
             <div className="pt-2">
               <Link
-                href="/quiz"
+                href={ctaHref}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#FFB81C] text-[#001C48] font-black text-xs shadow-sm"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#001C48]" />
-                <span>Try Platform Match (3-Min Quiz)</span>
+                <span>{ctaLabel}</span>
               </Link>
             </div>
           </div>
