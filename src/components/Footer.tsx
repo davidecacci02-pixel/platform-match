@@ -112,6 +112,11 @@ export function Footer() {
                   Platform Match Overview
                 </Link>
               </li>
+              <li>
+                <Link href="/best-social-media-platforms-for-business" className="text-slate-300 hover:text-[#FFB81C] transition-colors font-semibold">
+                  Best Platforms Guide (Article)
+                </Link>
+              </li>
             </ul>
           </div>
 

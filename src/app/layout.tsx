@@ -11,6 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://platform-match.vercel.app"),
   title: "Pace Marketing Lab | Digital Marketing Agency & Platform Match",
   description:
     "Student-led Digital Marketing Lab at Pace University in NYC. Helping small businesses and nonprofits grow through research-backed social media strategy, content creation, SEO, digital advertising, and our proprietary Platform Match engine.",

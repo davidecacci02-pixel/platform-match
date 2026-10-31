@@ -111,6 +111,12 @@ export function Navbar() {
             >
               Contact
             </Link>
+            <Link
+              href="/best-social-media-platforms-for-business"
+              className="text-xs font-semibold text-slate-700 hover:text-[#002D72] transition-colors"
+            >
+              Articles
+            </Link>
           </nav>
 
           {/* CTA & Mobile Toggle */}
@@ -184,6 +190,13 @@ export function Navbar() {
               className="text-slate-700 hover:text-[#002D72] transition-colors py-1"
             >
               Contact
+            </Link>
+            <Link
+              href="/best-social-media-platforms-for-business"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-slate-700 hover:text-[#002D72] transition-colors py-1"
+            >
+              Articles
             </Link>
             <div className="pt-2">
               <Link
