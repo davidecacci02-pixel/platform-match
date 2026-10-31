@@ -53,32 +53,32 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link href="/#services" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                <Link href="/about#services" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
                   Social Media Strategy
                 </Link>
               </li>
               <li>
-                <Link href="/#services" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                <Link href="/about#services" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
                   Content Creation &amp; Video Reels
                 </Link>
               </li>
               <li>
-                <Link href="/#services" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                <Link href="/about#services" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
                   SEO &amp; AI Search Optimization
                 </Link>
               </li>
               <li>
-                <Link href="/#services" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                <Link href="/about#services" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
                   Digital Advertising (PPC)
                 </Link>
               </li>
               <li>
-                <Link href="/#services" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                <Link href="/about#services" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
                   Marketing Analytics &amp; GA4
                 </Link>
               </li>
               <li>
-                <Link href="/platform-match" className="text-[#FFB81C] hover:underline font-semibold transition-colors">
+                <Link href="/" className="text-[#FFB81C] hover:underline font-semibold transition-colors">
                   Platform Match (Lab Engine)
                 </Link>
               </li>
@@ -128,23 +128,23 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link href="/#about" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                <Link href="/about#about" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
                   About Our Mission
                 </Link>
               </li>
               <li>
-                <Link href="/#team" className="text-white hover:text-[#FFB81C] transition-colors font-semibold flex items-center gap-1.5">
+                <Link href="/about#team" className="text-white hover:text-[#FFB81C] transition-colors font-semibold flex items-center gap-1.5">
                   <Users className="w-3.5 h-3.5 text-[#FFB81C]" />
                   <span>Meet Our Team</span>
                 </Link>
               </li>
               <li>
-                <Link href="/#why-us" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                <Link href="/about#why-us" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
                   Why Work With Us
                 </Link>
               </li>
               <li>
-                <Link href="/#contact" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                <Link href="/about#contact" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
                   Request Free Consultation
                 </Link>
               </li>

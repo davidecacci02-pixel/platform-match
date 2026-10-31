@@ -9,11 +9,7 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // Funnel logic:
-  // - On standard agency pages (/), "Try Platform Match" routes to /platform-match (presentation page).
-  // - On /platform-match, clicking "Try Platform Match" routes to /quiz (launches the diagnostic engine).
-  const isPlatformMatchPage = pathname === "/platform-match";
-  const ctaHref = isPlatformMatchPage ? "/quiz" : "/platform-match";
+  const ctaHref = "/quiz";
   const ctaLabel = "Try Platform Match";
 
   return (
@@ -72,48 +68,57 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation links */}
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-6">
             <Link
-              href="/#services"
+              href="/"
+              className={`text-xs font-bold transition-colors px-2.5 py-1.5 rounded-lg ${
+                pathname === "/" || pathname === "/platform-match"
+                  ? "bg-[#002D72]/10 text-[#002D72]"
+                  : "text-slate-700 hover:text-[#002D72]"
+              }`}
+            >
+              Platform Match
+            </Link>
+            <Link
+              href="/about"
+              className={`text-xs font-semibold transition-colors ${
+                pathname === "/about" ? "text-[#002D72] font-bold" : "text-slate-700 hover:text-[#002D72]"
+              }`}
+            >
+              About Us
+            </Link>
+            <Link
+              href="/about#services"
               className="text-xs font-semibold text-slate-700 hover:text-[#002D72] transition-colors"
             >
               Services
             </Link>
             <Link
-              href="/#about"
-              className="text-xs font-semibold text-slate-700 hover:text-[#002D72] transition-colors"
-            >
-              About Lab
-            </Link>
-            <Link
-              href="/#team"
+              href="/about#team"
               className="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 hover:text-[#002D72] transition-colors"
             >
               <Users className="w-3.5 h-3.5 text-[#002D72]" />
               <span>Our Team</span>
             </Link>
             <Link
-              href="/#why-us"
+              href="/about#why-us"
               className="text-xs font-semibold text-slate-700 hover:text-[#002D72] transition-colors"
             >
               Why Pace
             </Link>
             <Link
-              href="/platform-match"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-[#002D72]/5 hover:bg-[#002D72]/10 text-[#002D72] border border-[#002D72]/20 transition-all hover:scale-[1.02]"
-            >
-              <Compass className="w-3.5 h-3.5 text-[#002D72]" />
-              <span>Platform Match</span>
-            </Link>
-            <Link
-              href="/#contact"
+              href="/about#contact"
               className="text-xs font-semibold text-slate-700 hover:text-[#002D72] transition-colors"
             >
               Contact
             </Link>
             <Link
               href="/best-social-media-platforms-for-business"
-              className="text-xs font-semibold text-slate-700 hover:text-[#002D72] transition-colors"
+              className={`text-xs font-semibold transition-colors ${
+                pathname === "/best-social-media-platforms-for-business"
+                  ? "text-[#002D72] font-bold"
+                  : "text-slate-700 hover:text-[#002D72]"
+              }`}
             >
               Articles
             </Link>
@@ -122,12 +127,12 @@ export function Navbar() {
           {/* CTA & Mobile Toggle */}
           <div className="flex items-center gap-3">
             <Link
-              href={ctaHref}
+              href="/quiz"
               prefetch={true}
               className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-[#FFB81C] hover:bg-[#E5A417] text-[#001C48] text-xs sm:text-sm font-extrabold rounded-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#002D72] border border-[#E5A417]"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#001C48]" />
-              <span>{ctaLabel}</span>
+              <span>Try Platform Match</span>
               <ArrowRight className="w-3.5 h-3.5 hidden sm:inline text-[#001C48]" />
             </Link>
 
@@ -148,21 +153,29 @@ export function Navbar() {
         <div className="lg:hidden bg-white border-b border-slate-200 px-4 py-5 space-y-4 shadow-xl animate-fade-in">
           <div className="flex flex-col space-y-3 text-sm font-medium">
             <Link
-              href="/#services"
+              href="/"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="inline-flex items-center gap-2 text-[#002D72] font-bold py-1"
+            >
+              <Compass className="w-4 h-4 text-[#002D72]" />
+              <span>Platform Match (Home)</span>
+            </Link>
+            <Link
+              href="/about"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-slate-700 hover:text-[#002D72] transition-colors py-1"
+            >
+              About Us (Agency &amp; Research)
+            </Link>
+            <Link
+              href="/about#services"
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-slate-700 hover:text-[#002D72] transition-colors py-1"
             >
               Services
             </Link>
             <Link
-              href="/#about"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-slate-700 hover:text-[#002D72] transition-colors py-1"
-            >
-              About Lab
-            </Link>
-            <Link
-              href="/#team"
+              href="/about#team"
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-slate-700 hover:text-[#002D72] transition-colors py-1 font-semibold flex items-center gap-2"
             >
@@ -170,42 +183,34 @@ export function Navbar() {
               <span>Our Team &amp; Researchers</span>
             </Link>
             <Link
-              href="/#why-us"
+              href="/about#why-us"
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-slate-700 hover:text-[#002D72] transition-colors py-1"
             >
               Why Work With Us
             </Link>
             <Link
-              href="/platform-match"
+              href="/best-social-media-platforms-for-business"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="inline-flex items-center gap-2 text-[#002D72] font-bold py-1"
+              className="text-slate-700 hover:text-[#002D72] transition-colors py-1"
             >
-              <Compass className="w-4 h-4 text-[#002D72]" />
-              <span>Platform Match (Diagnostic Tool)</span>
+              Articles &amp; 2026 Guide
             </Link>
             <Link
-              href="/#contact"
+              href="/about#contact"
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-slate-700 hover:text-[#002D72] transition-colors py-1"
             >
               Contact
             </Link>
-            <Link
-              href="/best-social-media-platforms-for-business"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-slate-700 hover:text-[#002D72] transition-colors py-1"
-            >
-              Articles
-            </Link>
             <div className="pt-2">
               <Link
-                href={ctaHref}
+                href="/quiz"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#FFB81C] text-[#001C48] font-black text-xs shadow-sm"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#001C48]" />
-                <span>{ctaLabel}</span>
+                <span>Try Platform Match (3-Min Quiz)</span>
               </Link>
             </div>
           </div>

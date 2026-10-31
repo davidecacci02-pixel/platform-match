@@ -38,15 +38,24 @@ export default function PlatformMatchLandingPage() {
       <div className="absolute top-96 right-[-100px] w-[500px] h-[400px] bg-gradient-to-br from-emerald-400/[0.07] to-transparent blur-[120px] rounded-full -z-10 pointer-events-none" />
       <div className="absolute top-[1200px] left-[-100px] w-[600px] h-[500px] bg-gradient-to-tr from-[#002D72]/[0.05] via-[#FFB81C]/[0.06] to-transparent blur-[140px] rounded-full -z-10 pointer-events-none" />
 
-      {/* Top Breadcrumb Bar */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 w-full">
+      {/* Top Bar with Quick Navigation to Agency About & Article Guide */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 w-full flex flex-wrap items-center justify-between gap-3">
         <Link
-          href="/"
+          href="/about"
           prefetch={true}
-          className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-[#002D72] transition-colors px-4 py-2 rounded-full bg-white border border-slate-200/90 shadow-sm hover:shadow hover:scale-[1.01]"
+          className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-[#002D72] transition-colors px-4 py-2 rounded-full bg-white border border-slate-200/90 shadow-sm hover:shadow hover:scale-[1.01]"
         >
-          <ArrowLeft className="w-3.5 h-3.5 text-[#002D72]" />
-          <span>Back to Digital Marketing Lab (Agency Home)</span>
+          <Users className="w-3.5 h-3.5 text-[#002D72]" />
+          <span>About Pace Marketing Lab &amp; Agency Services →</span>
+        </Link>
+
+        <Link
+          href="/best-social-media-platforms-for-business"
+          prefetch={true}
+          className="inline-flex items-center gap-2 text-xs font-bold text-[#002D72] hover:text-[#001C48] transition-colors px-4 py-2 rounded-full bg-[#FFB81C]/20 border border-[#FFB81C]/40 shadow-sm hover:shadow hover:scale-[1.01]"
+        >
+          <Sparkles className="w-3.5 h-3.5 text-[#001C48]" />
+          <span>Read our platform selection guide →</span>
         </Link>
       </div>
 

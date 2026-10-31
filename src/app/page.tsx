@@ -4,608 +4,727 @@ import Image from "next/image";
 import {
   Sparkles,
   ArrowRight,
+  Clock,
   Compass,
   CheckCircle2,
+  Sliders,
   TrendingUp,
+  Target,
   Zap,
-  BarChart3,
-  GraduationCap,
-  Users,
-  Lightbulb,
-  Search,
-  Video,
-  MousePointerClick,
-  Share2,
-  Building2,
-  HeartHandshake,
+  BarChart2,
+  Swords,
+  Calendar,
+  Layers,
   ShieldCheck,
   ChevronRight,
-  Plus,
+  Eye,
+  ArrowLeft,
+  Check,
+  X,
+  Play,
+  Heart,
+  Share2,
+  Users,
 } from "lucide-react";
-import { AgencyContactForm } from "@/components/AgencyContactForm";
-import { TeamCardStudio } from "@/components/TeamCardStudio";
 import { SocialIcon } from "@/components/SocialIcon";
 import { ALL_PLATFORM_IDS, PLATFORMS_DATA } from "@/lib/platforms";
+import { SCORING_WEIGHTS } from "@/lib/scoring-matrix";
 
-export default function AgencyHomePage() {
-  const services = [
-    {
-      id: "social-media",
-      icon: Share2,
-      title: "Social Media Audit & Strategy",
-      tagline: "Channel Selection & Posting Schedule",
-      description:
-        "We audit your current social channels and target audience demographics. Our student consultants help you prioritize the top 1-2 platforms where your customers actually spend time, eliminating wasted posting hours.",
-      deliverables: [
-        "Social footprint & competitor audit",
-        "Realistic weekly posting calendar",
-        "Target audience profile & content themes",
-      ],
-      badge: "Organic Reach",
-    },
-    {
-      id: "content-creation",
-      icon: Video,
-      title: "Short-Form Video & Visual Content",
-      tagline: "Reels, TikTok Concepts & Carousels",
-      description:
-        "Relatable, engaging short-form video ideas, hooks, and clean visual carousels created with student energy. We focus on authentic storytelling that builds trust with neighborhood customers without high production budgets.",
-      deliverables: [
-        "Hook scripts for Instagram Reels & TikTok",
-        "Clean Canva-ready visual templates",
-        "Repurposing guidelines for multiple channels",
-      ],
-      badge: "Creative Lab",
-    },
-    {
-      id: "seo-ai-search",
-      icon: Search,
-      title: "Google Business Profile & Local Search",
-      tagline: "Local Storefront Discovery on Google Maps",
-      description:
-        "Help local customers find and trust your business when searching nearby. We set up, optimize, and organize your Google Business Profile, photos, service categories, and local neighborhood search keywords.",
-      deliverables: [
-        "Google Business Profile audit & optimization",
-        "Local keyword & category targeting checklist",
-        "Customer review response guidelines",
-      ],
-      badge: "Local Search",
-    },
-    {
-      id: "digital-advertising",
-      icon: MousePointerClick,
-      title: "Social Media Advertising Setup",
-      tagline: "Budget-Conscious Meta & LinkedIn Ads",
-      description:
-        "Simple, targeted paid campaigns tailored for small business budgets ($5–$20/day). We configure local geographic radiuses, write clear promotional copy, and help you generate genuine customer inquiries.",
-      deliverables: [
-        "Local geographic & interest audience setup",
-        "Promotional ad copy & image variations",
-        "Budget pacing & conversion tracking guidance",
-      ],
-      badge: "Paid Growth",
-    },
-    {
-      id: "marketing-analytics",
-      icon: BarChart3,
-      title: "Marketing Analytics & Reporting",
-      tagline: "Clear Monthly Traffic & Growth Reports",
-      description:
-        "Understand what is actually working without drowning in complex data. We set up Google Analytics 4 and deliver a straightforward, 1-page monthly summary report in plain English.",
-      deliverables: [
-        "Google Analytics 4 setup & tracking verification",
-        "1-page executive monthly performance summary",
-        "Actionable next-month recommendations",
-      ],
-      badge: "Analytics",
-    },
-    {
-      id: "platform-match-service",
-      icon: Compass,
-      title: "Platform Match (Lab Tool)",
-      tagline: "Interactive 3-Minute Strategic Channel Fit",
-      description:
-        "Our lab's signature diagnostic tool. Complete a 3-minute assessment to discover your top-ranked social platform fit, competitor benchmarks, and an actionable 30-day posting roadmap.",
-      deliverables: [
-        "Multi-dimensional compatibility scores",
-        "Competitor category benchmarks",
-        "Customized 30-day posting roadmap",
-      ],
-      badge: "Signature Tool",
-      isFlagship: true,
-    },
-  ];
-
+export default function PlatformMatchLandingPage() {
   return (
-    <div className="flex-1 flex flex-col bg-[#FAF9F6] text-slate-900 selection:bg-[#002D72] selection:text-white">
-      {/* =========================================================================
-          1. HERO SECTION (Linktree-Inspired Modern University Aesthetics)
-          ========================================================================= */}
-      <section className="relative pt-12 pb-20 md:pt-20 md:pb-28 border-b border-slate-200/80 overflow-hidden bg-white">
-        {/* Subtle decorative glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-gradient-to-b from-[#002D72]/8 via-[#FFB81C]/10 to-transparent blur-3xl rounded-full -z-10 pointer-events-none" />
+    <div className="flex-1 flex flex-col bg-[#FAF9F6] text-slate-900 selection:bg-[#002D72] selection:text-white relative overflow-hidden">
+      {/* Linktree-Style Organic Ambient Orbs */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-gradient-to-b from-[#002D72]/[0.06] via-[#FFB81C]/[0.08] to-transparent blur-[140px] rounded-full -z-10 pointer-events-none" />
+      <div className="absolute top-96 right-[-100px] w-[500px] h-[400px] bg-gradient-to-br from-emerald-400/[0.07] to-transparent blur-[120px] rounded-full -z-10 pointer-events-none" />
+      <div className="absolute top-[1200px] left-[-100px] w-[600px] h-[500px] bg-gradient-to-tr from-[#002D72]/[0.05] via-[#FFB81C]/[0.06] to-transparent blur-[140px] rounded-full -z-10 pointer-events-none" />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          {/* Linktree-Style Pill Institutional Badge */}
-          <div className="flex justify-center">
-            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200 shadow-sm text-xs font-extrabold text-slate-800 transition-all hover:scale-[1.02]">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#FFB81C] animate-pulse" />
-              <span className="text-[#002D72] uppercase tracking-wider">Pace University</span>
-              <span className="text-slate-300">•</span>
-              <span className="text-slate-700">Lubin School of Business</span>
-              <span className="text-slate-300">•</span>
-              <span className="text-[#002D72]">Digital Marketing Lab</span>
+      {/* Top Bar with Quick Navigation to Agency About & Article Guide */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 w-full flex flex-wrap items-center justify-between gap-3">
+        <Link
+          href="/about"
+          prefetch={true}
+          className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-[#002D72] transition-colors px-4 py-2 rounded-full bg-white border border-slate-200/90 shadow-sm hover:shadow hover:scale-[1.01]"
+        >
+          <Users className="w-3.5 h-3.5 text-[#002D72]" />
+          <span>About Pace Marketing Lab &amp; Agency Services →</span>
+        </Link>
+
+        <Link
+          href="/best-social-media-platforms-for-business"
+          prefetch={true}
+          className="inline-flex items-center gap-2 text-xs font-bold text-[#002D72] hover:text-[#001C48] transition-colors px-4 py-2 rounded-full bg-[#FFB81C]/20 border border-[#FFB81C]/40 shadow-sm hover:shadow hover:scale-[1.01]"
+        >
+          <Sparkles className="w-3.5 h-3.5 text-[#001C48]" />
+          <span>Read our platform selection guide →</span>
+        </Link>
+      </div>
+
+      {/* =====================================================================
+          HERO SECTION: Linktree-Style Headline + 3D Floating Phone Mockup
+          ===================================================================== */}
+      <section className="relative pt-10 pb-16 md:pt-16 md:pb-24 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            
+            {/* Left Column: Bold Copy & Linktree Pills */}
+            <div className="lg:col-span-7 space-y-7 text-center lg:text-left">
+              {/* Live Badge */}
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-800">
+                <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="flex items-center gap-1.5 text-slate-900">
+                  <Sparkles className="w-3.5 h-3.5 text-[#002D72]" />
+                  <span>Platform Match 2.0</span>
+                </span>
+                <span className="text-slate-300">•</span>
+                <span className="text-[#002D72]">Pace Lubin Research Engine</span>
+                <span className="text-slate-300">•</span>
+                <span className="text-[#966300] bg-[#FFB81C]/25 px-2 py-0.5 rounded-full">100% Free</span>
+              </div>
+
+              {/* Master Headline */}
+              <div className="space-y-4">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-950 tracking-tight leading-[1.08]">
+                  Stop Posting in the Void.{" "}
+                  <span className="block mt-1 text-[#002D72] underline decoration-[#FFB81C] decoration-[6px] underline-offset-8">
+                    Find Your True Social Fit.
+                  </span>
+                </h1>
+                <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                  Stop burning 15+ hours every week creating content for platforms where your ideal buyers never convert.
+                  Our proprietary algorithm analyzes your audience, goals, and team capacity to reveal your highest-ROI channels and a realistic 30-day playbook.
+                </p>
+              </div>
+
+              {/* Primary Action Buttons (Linktree Tactile Pill Buttons) */}
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                <Link
+                  href="/quiz"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#002D72] hover:bg-[#001C48] text-white text-base font-black rounded-full shadow-xl shadow-[#002D72]/20 hover:scale-[1.03] active:scale-[0.98] transition-all border border-[#002D72]"
+                >
+                  <Sparkles className="w-5 h-5 text-[#FFB81C]" />
+                  <span>Start 3-Minute Quiz</span>
+                  <ArrowRight className="w-5 h-5 text-white" />
+                </Link>
+
+                <a
+                  href="#how-it-works"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 text-sm font-bold shadow-sm transition-all hover:scale-[1.02]"
+                >
+                  <Eye className="w-4 h-4 text-[#002D72]" />
+                  <span>See How It Works</span>
+                </a>
+              </div>
+
+              {/* Trust Micro-Badges */}
+              <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-600 font-bold">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <span>Deterministic 6-Factor Model</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <span>Competitor Gap Diagnosis</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <span>Interactive AI Chat Follow-up</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: 3D FLOATING DEVICE MOCKUP (Linktree Signature Visual) */}
+            <div className="lg:col-span-5 relative flex items-center justify-center pt-6 lg:pt-0">
+              {/* Backlight Ambient Glow */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#002D72]/15 via-[#FFB81C]/20 to-emerald-400/10 blur-3xl rounded-[3rem] -z-10" />
+
+              {/* 3D Tilted Perspective Phone Mockup */}
+              <div
+                className="w-full max-w-[340px] sm:max-w-[360px] bg-slate-950 rounded-[3rem] p-3.5 shadow-2xl border-4 border-slate-800 ring-1 ring-slate-900/40 transition-transform duration-700 ease-out hover:rotate-0 hover:scale-105"
+                style={{
+                  transform: "perspective(1200px) rotateY(-6deg) rotateX(4deg) rotate(-2deg)",
+                }}
+              >
+                {/* Dynamic Island / Notch */}
+                <div className="w-28 h-4 bg-black rounded-full mx-auto mb-3 flex items-center justify-center">
+                  <span className="w-2 h-2 rounded-full bg-slate-900 mr-2" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/80" />
+                </div>
+
+                {/* Simulated Phone Screen Canvas (Clean Linktree Profile) */}
+                <div className="bg-[#F8F9FA] rounded-[2.5rem] p-5 space-y-4 text-center border border-slate-200/80 overflow-hidden shadow-inner">
+                  
+                  {/* Profile Header */}
+                  <div className="space-y-2 pt-1">
+                    <div className="relative w-16 h-16 rounded-full mx-auto overflow-hidden border-2 border-[#002D72] shadow-md">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src="/images/davide-cacciuottolo.jpg"
+                        alt="Davide Cacciuottolo - Platform Match"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <div className="flex items-center justify-center gap-1.5">
+                        <h3 className="font-black text-slate-950 text-sm">Pace Marketing Lab</h3>
+                        <span className="w-4 h-4 rounded-full bg-[#002D72] text-white flex items-center justify-center text-[9px] font-black">
+                          ✓
+                        </span>
+                      </div>
+                      <p className="text-[11px] font-bold text-slate-500 mt-0.5">
+                        @platform_match • Lubin School of Business
+                      </p>
+                    </div>
+                    <p className="text-[11px] text-slate-600 font-medium px-2 leading-relaxed">
+                      AI Social Recommendation Engine &amp; 30-Day Growth Diagnostic for Founders.
+                    </p>
+                  </div>
+
+                  {/* Simulated Linktree-Style Pill Links Stack */}
+                  <div className="space-y-2.5 pt-1 text-left">
+                    
+                    {/* Link 1: Instagram (Primary Engine 96%) */}
+                    <div className="p-3 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:shadow-md transition-all group">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white flex items-center justify-center shadow-sm">
+                          <SocialIcon platform="instagram" size={16} className="text-white" />
+                        </div>
+                        <div>
+                          <div className="font-extrabold text-xs text-slate-900 group-hover:text-[#002D72] transition-colors">
+                            Instagram Reels
+                          </div>
+                          <span className="text-[10px] font-bold text-emerald-600">
+                            #1 Primary Growth Engine
+                          </span>
+                        </div>
+                      </div>
+                      <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-black text-xs border border-emerald-200">
+                        96%
+                      </span>
+                    </div>
+
+                    {/* Link 2: TikTok (Synergy 89%) */}
+                    <div className="p-3 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:shadow-md transition-all group">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-xl bg-black text-white flex items-center justify-center shadow-sm">
+                          <SocialIcon platform="tiktok" size={16} className="text-white" />
+                        </div>
+                        <div>
+                          <div className="font-extrabold text-xs text-slate-900 group-hover:text-[#002D72] transition-colors">
+                            TikTok Syndication
+                          </div>
+                          <span className="text-[10px] font-bold text-sky-600">
+                            #2 Secondary Reach Engine
+                          </span>
+                        </div>
+                      </div>
+                      <span className="px-2 py-0.5 rounded-full bg-sky-50 text-sky-700 font-black text-xs border border-sky-200">
+                        89%
+                      </span>
+                    </div>
+
+                    {/* Link 3: LinkedIn (B2B Intent 84%) */}
+                    <div className="p-3 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:shadow-md transition-all group">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-xl bg-[#0A66C2] text-white flex items-center justify-center shadow-sm">
+                          <SocialIcon platform="linkedin" size={16} className="text-white" />
+                        </div>
+                        <div>
+                          <div className="font-extrabold text-xs text-slate-900 group-hover:text-[#002D72] transition-colors">
+                            LinkedIn B2B
+                          </div>
+                          <span className="text-[10px] font-bold text-indigo-600">
+                            Professional Authority
+                          </span>
+                        </div>
+                      </div>
+                      <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 font-black text-xs border border-indigo-200">
+                        84%
+                      </span>
+                    </div>
+
+                    {/* Link 4: Unlock 30-Day Growth Roadmap CTA */}
+                    <Link
+                      href="/quiz"
+                      className="block p-3 rounded-2xl bg-[#FFB81C] hover:bg-[#E5A417] text-[#001C48] shadow-md transition-all text-center font-black text-xs uppercase tracking-wider"
+                    >
+                      🚀 Take The 3-Min Quiz →
+                    </Link>
+                  </div>
+
+                  <div className="pt-2 border-t border-slate-200 text-[10px] text-slate-500 font-bold flex items-center justify-center gap-2">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>6/6 Networks Evaluated Deterministically</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating 3D Pill Top-Left: Competitor Intel */}
+              <div className="hidden sm:flex items-center gap-2.5 p-3 pr-4 rounded-full bg-white/95 border border-slate-200 shadow-xl backdrop-blur-md absolute -top-4 -left-6 animate-float-slow text-xs">
+                <div className="w-7 h-7 rounded-full bg-[#FFB81C]/25 text-[#966300] flex items-center justify-center flex-shrink-0 font-black">
+                  <Swords className="w-3.5 h-3.5" />
+                </div>
+                <div className="text-left">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 block">
+                    Competitor Intel
+                  </span>
+                  <span className="font-bold text-slate-900">Uncover Organic Gaps</span>
+                </div>
+              </div>
+
+              {/* Floating 3D Pill Bottom-Right: 30-Day Roadmap */}
+              <div className="hidden sm:flex items-center gap-2.5 p-3 pr-4 rounded-full bg-white/95 border border-slate-200 shadow-xl backdrop-blur-md absolute -bottom-4 -right-6 animate-float-reverse text-xs">
+                <div className="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0 font-black">
+                  <Calendar className="w-3.5 h-3.5" />
+                </div>
+                <div className="text-left">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 block">
+                    30-Day Roadmap
+                  </span>
+                  <span className="font-bold text-slate-900">Weekly Schedule &amp; Hooks</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          BENCHMARK NUMBERS BANNER (Linktree Style Pill Metrics)
+          ===================================================================== */}
+      <section className="py-12 bg-white border-y border-slate-200 shadow-sm">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+            <div className="space-y-1">
+              <div className="text-3xl sm:text-4xl font-black text-[#002D72]">
+                6 Networks
+              </div>
+              <p className="text-xs text-slate-600 font-bold uppercase tracking-wider">
+                Cross-Examined Simultaneously
+              </p>
+            </div>
+            <div className="space-y-1">
+              <div className="text-3xl sm:text-4xl font-black text-slate-900">
+                6 Dimensions
+              </div>
+              <p className="text-xs text-slate-600 font-bold uppercase tracking-wider">
+                Deterministic Weighting Matrix
+              </p>
+            </div>
+            <div className="space-y-1">
+              <div className="text-3xl sm:text-4xl font-black text-emerald-600">
+                100% Free
+              </div>
+              <p className="text-xs text-slate-600 font-bold uppercase tracking-wider">
+                Zero Gating &amp; Instant Output
+              </p>
+            </div>
+            <div className="space-y-1">
+              <div className="text-3xl sm:text-4xl font-black text-[#966300]">
+                &lt; 3 Minutes
+              </div>
+              <p className="text-xs text-slate-600 font-bold uppercase tracking-wider">
+                From Questions to Full Strategy
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          HOW IT WORKS (Linktree Stepper in Bento Grid)
+          ===================================================================== */}
+      <section id="how-it-works" className="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full space-y-16">
+        <div className="text-center max-w-2xl mx-auto space-y-3">
+          <span className="text-xs font-black uppercase tracking-widest text-[#002D72] bg-[#002D72]/10 px-3.5 py-1.5 rounded-full border border-[#002D72]/20">
+            Methodology &amp; Architecture
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
+            How Platform Match Operates
+          </h2>
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            Most businesses pick platforms based on whatever app is currently hyped. We replace guesswork with empirical channel-market fit.
+          </p>
+        </div>
+
+        {/* 3 Step Bento Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+          
+          {/* Step 1 */}
+          <div className="bg-white rounded-[2.2rem] border border-slate-200/90 shadow-md hover:shadow-2xl transition-all duration-300 p-8 space-y-5 flex flex-col justify-between group hover:-translate-y-1.5">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="w-10 h-10 rounded-2xl bg-[#002D72] text-white font-black text-sm flex items-center justify-center shadow-md">
+                  01
+                </span>
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  2 Minutes
+                </span>
+              </div>
+              <h3 className="text-xl font-black text-slate-950 group-hover:text-[#002D72] transition-colors">
+                Share Business Constraints
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Answer 6 clear multiple-choice questions regarding your core target audience, monthly marketing goal, industry vertical, content superpowers, and realistic weekly time budget.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-bold text-[#002D72]">
+              <span>6 focused questions</span>
+              <ChevronRight className="w-4 h-4" />
             </div>
           </div>
 
-          {/* Master Headline & Subhead */}
-          <div className="space-y-6 max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-slate-950 tracking-tight leading-[1.06] font-sans">
-              Helping Small Businesses{" "}
-              <span className="block mt-1 text-[#002D72]">
-                Grow in the Digital World
-              </span>
-            </h1>
-            <p className="text-base sm:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
-              A student-led digital marketing and research lab at Pace University in Downtown Manhattan.
-              We bridge academic data science, modern AI tools, and creative digital storytelling to build
-              predictable, high-converting growth for local businesses.
-            </p>
+          {/* Step 2 */}
+          <div className="bg-white rounded-[2.2rem] border border-slate-200/90 shadow-md hover:shadow-2xl transition-all duration-300 p-8 space-y-5 flex flex-col justify-between group hover:-translate-y-1.5">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="w-10 h-10 rounded-2xl bg-[#FFB81C] text-[#001C48] font-black text-sm flex items-center justify-center shadow-md">
+                  02
+                </span>
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  Real-time
+                </span>
+              </div>
+              <h3 className="text-xl font-black text-slate-950 group-hover:text-[#002D72] transition-colors">
+                Algorithmic Cross-Scoring
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Our engine compares your profile against the active algorithmic mechanics of Instagram, TikTok, LinkedIn, YouTube, Facebook, and Pinterest to calculate accurate compatibility percentages.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-bold text-[#966300]">
+              <span>Deterministic mathematical weights</span>
+              <ChevronRight className="w-4 h-4" />
+            </div>
           </div>
 
-          {/* Linktree-Style Rounded-Full Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-            <Link
-              href="#services"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-9 py-4 bg-[#002D72] hover:bg-[#001C48] text-white text-base font-extrabold rounded-full shadow-lg shadow-[#002D72]/20 hover:scale-[1.02] active:scale-[0.99] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#002D72]"
-            >
-              <span>Explore Lab Services</span>
-              <ArrowRight className="w-4 h-4 text-white" />
-            </Link>
-
-            <Link
-              href="/platform-match"
-              prefetch={true}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-[#FFB81C] hover:bg-[#E5A417] border border-[#E5A417] text-[#001C48] text-base font-black shadow-md hover:shadow-lg transition-all hover:scale-[1.02]"
-            >
-              <Sparkles className="w-4 h-4 text-[#001C48]" />
-              <span>Try Platform Match Engine</span>
-            </Link>
-
-            <Link
-              href="#team"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold border border-slate-200 transition-all hover:scale-[1.02]"
-            >
-              <Users className="w-4 h-4 text-[#002D72]" />
-              <span>Meet the Team &amp; Create Card</span>
-            </Link>
+          {/* Step 3 */}
+          <div className="bg-white rounded-[2.2rem] border border-slate-200/90 shadow-md hover:shadow-2xl transition-all duration-300 p-8 space-y-5 flex flex-col justify-between group hover:-translate-y-1.5">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="w-10 h-10 rounded-2xl bg-emerald-600 text-white font-black text-sm flex items-center justify-center shadow-md">
+                  03
+                </span>
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  Execution
+                </span>
+              </div>
+              <h3 className="text-xl font-black text-slate-950 group-hover:text-[#002D72] transition-colors">
+                Receive 30-Day Growth Plan
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Walk away with your #1 Primary Channel, #2 Syndication Channel, tailored content pillars, proven video hook concepts, and competitor landscape intelligence ready to execute on Monday.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-bold text-emerald-700">
+              <span>Actionable roadmap in hand</span>
+              <ChevronRight className="w-4 h-4" />
+            </div>
           </div>
 
-          {/* High-Impact Hero Showcase: Pace Students Collaborating */}
-          <div className="relative pt-6 max-w-5xl mx-auto">
-            <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white bg-slate-900 group">
-              <Image
+        </div>
+      </section>
+
+      {/* =====================================================================
+          FEATURE SPOTLIGHT: Real Human Lab Research (With Photo)
+          ===================================================================== */}
+      <section className="py-16 bg-[#F3F4F6] border-y border-slate-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-[2.5rem] border border-slate-200 shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-center">
+            
+            {/* Left Photo Showcase */}
+            <div className="lg:col-span-5 relative h-72 sm:h-96 lg:h-full min-h-[340px] overflow-hidden bg-slate-100">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/images/pace-hero-collab.jpg"
-                alt="Pace University Digital Marketing Lab students collaborating on marketing research in Downtown Manhattan"
-                width={1920}
-                height={1080}
-                priority
-                className="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-700"
+                alt="Pace University Digital Marketing & Strategy Lab"
+                className="w-full h-full object-cover object-center"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent flex items-end p-6">
+                <div className="text-white space-y-1">
+                  <span className="inline-block px-3 py-1 rounded-full bg-[#FFB81C] text-[#001C48] font-black text-[10px] uppercase tracking-wider">
+                    Lubin School of Business NYC
+                  </span>
+                  <p className="text-sm font-bold">
+                    Pace Marketing Lab Research Headquarters
+                  </p>
+                  <p className="text-xs text-slate-300">
+                    One Pace Plaza, Financial District, Manhattan
+                  </p>
+                </div>
+              </div>
+            </div>
 
-              {/* Gradient Vignette Overlay for readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#001C48]/95 via-[#001C48]/30 to-transparent" />
+            {/* Right Copy & Research Values */}
+            <div className="lg:col-span-7 p-8 sm:p-12 space-y-6">
+              <div className="space-y-2">
+                <span className="text-xs font-black uppercase tracking-widest text-[#002D72] bg-[#002D72]/10 px-3 py-1 rounded-full border border-[#002D72]/20">
+                  Academic Rigor &bull; Real-World Testing
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-black text-slate-950">
+                  Built by Student Researchers, Grounded in Real Market Data
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Unlike generic AI tools that hallucinate advice without context, Platform Match was engineered at Pace University&apos;s Lubin School of Business to solve the real bottleneck facing emerging brands: wasted marketing production time.
+                </p>
+              </div>
 
-              {/* Floating Overlay Information Badges */}
-              <div className="absolute bottom-5 left-5 right-5 sm:bottom-8 sm:left-8 sm:right-8 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 text-white">
-                <div className="space-y-2 max-w-md">
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-[11px] font-extrabold text-[#FFB81C] border border-white/30">
-                    <GraduationCap className="w-4 h-4 text-[#FFB81C]" />
-                    <span>One Pace Plaza • Downtown Manhattan, NYC</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-slate-200/90 space-y-1.5">
+                  <div className="flex items-center gap-2 text-[#002D72] font-black text-xs">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    <span>Empirical Testing</span>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-white leading-tight">
-                    Pace University Digital Marketing Lab
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-200 line-clamp-2">
-                    Lubin School of Business students analyzing real small business social footprints and building custom conversion roadmaps.
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Evaluated across actual small business social campaigns in New York City.
                   </p>
                 </div>
 
-                <div className="hidden md:flex items-center gap-3">
-                  <div className="px-5 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-right">
-                    <span className="block text-xs font-black text-[#FFB81C] uppercase tracking-wider">
-                      Empirical Framework
-                    </span>
-                    <span className="text-xs text-slate-100 font-semibold">
-                      Data Science + Creative Strategy
-                    </span>
+                <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-slate-200/90 space-y-1.5">
+                  <div className="flex items-center gap-2 text-[#002D72] font-black text-xs">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    <span>Anti-Burnout Cadence</span>
                   </div>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Recommendations are hard-capped to match your team&apos;s genuine bandwidth.
+                  </p>
                 </div>
               </div>
-            </div>
 
-            {/* Linktree-Style Trust Strip */}
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-bold text-slate-700">
-              <div className="flex items-center gap-3 p-4 rounded-full bg-white border border-slate-200 shadow-sm">
-                <CheckCircle2 className="w-4 h-4 text-[#002D72] flex-shrink-0" />
-                <span>Research-Backed Empirical Frameworks</span>
-              </div>
-              <div className="flex items-center gap-3 p-4 rounded-full bg-white border border-slate-200 shadow-sm">
-                <CheckCircle2 className="w-4 h-4 text-[#002D72] flex-shrink-0" />
-                <span>Tailored for Small Businesses &amp; Nonprofits</span>
-              </div>
-              <div className="flex items-center gap-3 p-4 rounded-full bg-white border border-slate-200 shadow-sm">
-                <CheckCircle2 className="w-4 h-4 text-[#002D72] flex-shrink-0" />
-                <span>Student Energy, Faculty-Mentored Rigor</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          2. ABOUT US SECTION (Academic Heritage & 4 Linktree Bento Pillars)
-          ========================================================================= */}
-      <section id="about" className="py-24 bg-[#FAF9F6] border-b border-slate-200/80 relative">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          <div className="max-w-3xl mx-auto text-center space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#002D72]/10 border border-[#002D72]/20 text-[#002D72] text-xs font-bold uppercase tracking-wider">
-              <Building2 className="w-3.5 h-3.5" />
-              <span>Our Academic Heritage</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight font-sans">
-              Bridging Academic Rigor with Real-World Growth
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              Based at Pace University’s Lubin School of Business in Downtown Manhattan, our student-led Digital
-              Marketing Lab was created with a clear mission: <strong className="text-slate-900 font-semibold">to empower local small businesses and non-profit organizations with creative, data-backed marketing strategies</strong> that rival high-priced Madison Avenue agencies.
-            </p>
-          </div>
-
-          {/* 4 About Pillars with Linktree-Style Bento Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white border border-slate-200 rounded-[2rem] p-7 space-y-3.5 shadow-sm hover:shadow-xl hover:border-[#002D72]/40 transition-all">
-              <div className="w-12 h-12 rounded-full bg-[#002D72] text-[#FFB81C] flex items-center justify-center font-bold shadow-md shadow-[#002D72]/10">
-                <Lightbulb className="w-6 h-6" />
-              </div>
-              <h3 className="font-extrabold text-slate-900 text-base">Student-Driven Perspectives</h3>
-              <p className="text-slate-600 text-xs leading-relaxed">
-                As digital natives, our student team lives on modern platforms. We understand short-form video hooks, algorithmic shifts, and cultural trends intuitively.
-              </p>
-            </div>
-
-            <div className="bg-white border border-slate-200 rounded-[2rem] p-7 space-y-3.5 shadow-sm hover:shadow-xl hover:border-[#002D72]/40 transition-all">
-              <div className="w-12 h-12 rounded-full bg-[#002D72] text-[#FFB81C] flex items-center justify-center font-bold shadow-md shadow-[#002D72]/10">
-                <GraduationCap className="w-6 h-6" />
-              </div>
-              <h3 className="font-extrabold text-slate-900 text-base">Academic Rigor &amp; Oversight</h3>
-              <p className="text-slate-600 text-xs leading-relaxed">
-                Every strategy is grounded in consumer psychology, empirical market research, and guided by experienced marketing faculty at Pace University.
-              </p>
-            </div>
-
-            <div className="bg-white border border-slate-200 rounded-[2rem] p-7 space-y-3.5 shadow-sm hover:shadow-xl hover:border-[#002D72]/40 transition-all">
-              <div className="w-12 h-12 rounded-full bg-[#002D72] text-[#FFB81C] flex items-center justify-center font-bold shadow-md shadow-[#002D72]/10">
-                <HeartHandshake className="w-6 h-6" />
-              </div>
-              <h3 className="font-extrabold text-slate-900 text-base">Small Business Focus</h3>
-              <p className="text-slate-600 text-xs leading-relaxed">
-                We design realistic, low-overhead plans for lean teams that have tight budgets and limited weekly hours—no bloated retainers or vanity promises.
-              </p>
-            </div>
-
-            <div className="bg-white border border-slate-200 rounded-[2rem] p-7 space-y-3.5 shadow-sm hover:shadow-xl hover:border-[#002D72]/40 transition-all">
-              <div className="w-12 h-12 rounded-full bg-[#002D72] text-[#FFB81C] flex items-center justify-center font-bold shadow-md shadow-[#002D72]/10">
-                <Zap className="w-6 h-6" />
-              </div>
-              <h3 className="font-extrabold text-slate-900 text-base">Modern AI &amp; Software Tools</h3>
-              <p className="text-slate-600 text-xs leading-relaxed">
-                We combine industry-leading platforms (Google Analytics, Meta Ads, SEMrush) with proprietary software developed in our lab, like Platform Match.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          3. MEET OUR TEAM & INTERACTIVE CARD STUDIO (User requested manual upload & cards)
-          ========================================================================= */}
-      <section id="team" className="py-24 bg-white border-b border-slate-200/80 relative">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          <div className="max-w-3xl mx-auto text-center space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FFB81C]/20 border border-[#FFB81C]/40 text-[#855B00] text-xs font-bold uppercase tracking-wider">
-              <Users className="w-3.5 h-3.5 text-[#002D72]" />
-              <span>Linktree-Style Team Studio</span>
-            </div>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-slate-950 tracking-tight font-sans">
-              Meet Our Team &amp; Researchers
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              Explore our lab member profiles or <strong className="text-slate-900 font-bold">manually upload your photo</strong> to generate your own customized Linktree-style card with personal links!
-            </p>
-          </div>
-
-          {/* Interactive Team Studio with Manual Upload and Live Card Creator */}
-          <TeamCardStudio />
-        </div>
-      </section>
-
-      {/* =========================================================================
-          4. CORE LAB SERVICES (Linktree-Inspired Bento Cards)
-          ========================================================================= */}
-      <section id="services" className="py-24 bg-[#FAF9F6] border-b border-slate-200/80">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#002D72] bg-[#002D72]/10 px-4 py-1.5 rounded-full border border-[#002D72]/20">
-              Lab Capabilities
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight font-sans">
-              Our Marketing Services
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              Practical, high-leverage marketing capabilities designed to help small businesses attract customers, generate leads, and build lasting community.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-            {services.map((svc) => {
-              const Icon = svc.icon;
-              return (
-                <div
-                  key={svc.id}
-                  className={`bg-white rounded-[2.2rem] p-8 border ${
-                    svc.isFlagship
-                      ? "border-[#002D72] shadow-xl ring-2 ring-[#002D72]/10"
-                      : "border-slate-200 shadow-sm hover:border-[#002D72]/40"
-                  } transition-all duration-300 flex flex-col justify-between group hover:-translate-y-2 relative overflow-hidden`}
+              <div className="pt-2">
+                <Link
+                  href="/quiz"
+                  className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#002D72] hover:bg-[#001C48] text-white text-xs sm:text-sm font-black shadow-md transition-all hover:scale-[1.02]"
                 >
-                  {svc.isFlagship && (
-                    <div className="absolute top-0 right-0">
-                      <span className="inline-flex items-center gap-1 px-4 py-1.5 rounded-bl-2xl bg-[#002D72] text-[#FFB81C] font-extrabold text-[10px] tracking-wider uppercase shadow-sm">
-                        <Sparkles className="w-3 h-3" />
-                        Flagship Lab Tool
-                      </span>
-                    </div>
-                  )}
+                  <Sparkles className="w-4 h-4 text-[#FFB81C]" />
+                  <span>Run Free Diagnostic Now</span>
+                  <ArrowRight className="w-4 h-4 text-white" />
+                </Link>
+              </div>
+            </div>
 
-                  <div className="space-y-5">
-                    <div className="w-14 h-14 rounded-full bg-[#002D72]/10 text-[#002D72] border border-[#002D72]/20 flex items-center justify-center group-hover:bg-[#002D72] group-hover:text-white transition-all shadow-sm">
-                      <Icon className="w-7 h-7" />
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          THE 6 EVALUATED PLATFORMS (Linktree-Style Visual Showcase)
+          ===================================================================== */}
+      <section className="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
+          <span className="text-xs font-black uppercase tracking-widest text-sky-800 bg-sky-100 px-3 py-1 rounded-full border border-sky-200">
+            Network Coverage
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
+            The 6 Evaluated Platforms
+          </h2>
+          <p className="text-slate-600 text-sm">
+            Each platform operates under distinct algorithmic distribution patterns and audience buyer states.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {ALL_PLATFORM_IDS.map((id) => {
+            const data = PLATFORMS_DATA[id];
+            return (
+              <div
+                key={id}
+                className="bg-white rounded-[2rem] p-7 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 relative overflow-hidden"
+              >
+                {/* Top Colored Brand Strip */}
+                <div
+                  className="absolute inset-x-0 top-0 h-1.5 opacity-80 group-hover:opacity-100 transition-opacity"
+                  style={{ backgroundColor: data.brandColor }}
+                />
+
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div
+                        className="w-11 h-11 rounded-2xl flex items-center justify-center shadow-md text-white group-hover:scale-105 transition-transform"
+                        style={{ backgroundColor: data.brandColor }}
+                      >
+                        <SocialIcon platform={id} size={22} className="text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-black text-slate-950 text-base group-hover:text-[#002D72] transition-colors">
+                          {data.name}
+                        </h3>
+                        <span className="text-xs text-slate-500 font-bold">
+                          {data.primaryDemographics.split("(")[0]}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                    {data.tagline}
+                  </p>
+
+                  <div className="space-y-2 pt-3 border-t border-slate-100 text-xs">
+                    <div>
+                      <span className="text-slate-400 block text-[10px] font-bold uppercase tracking-wider">
+                        Key Formats
+                      </span>
+                      <div className="flex flex-wrap gap-1.5 mt-1">
+                        {data.coreFormats.slice(0, 2).map((fmt) => (
+                          <span
+                            key={fmt}
+                            className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[10px] font-bold border border-slate-200"
+                          >
+                            {fmt}
+                          </span>
+                        ))}
+                      </div>
                     </div>
 
                     <div>
-                      <h3 className="text-xl font-black text-slate-950 group-hover:text-[#002D72] transition-colors">
-                        {svc.title}
-                      </h3>
-                      <span className="text-xs text-slate-500 font-bold block mt-1">
-                        {svc.tagline}
+                      <span className="text-slate-400 block text-[10px] font-bold uppercase tracking-wider">
+                        Ideal For
                       </span>
-                    </div>
-
-                    <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                      {svc.description}
-                    </p>
-
-                    <div className="pt-4 border-t border-slate-100 space-y-2.5">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
-                        Key Deliverables
-                      </span>
-                      <ul className="space-y-2 text-xs text-slate-700">
-                        {svc.deliverables.map((item, idx) => (
-                          <li key={idx} className="flex items-start gap-2.5">
-                            <CheckCircle2 className="w-4 h-4 text-[#002D72] flex-shrink-0 mt-0.5" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      <p className="text-slate-800 text-xs font-semibold line-clamp-1 mt-0.5">
+                        {data.bestFor}
+                      </p>
                     </div>
                   </div>
-
-                  <div className="pt-6 mt-6 border-t border-slate-100">
-                    {svc.isFlagship ? (
-                      <Link
-                        href="/platform-match"
-                        className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full bg-[#002D72] hover:bg-[#001C48] text-white text-xs font-bold transition-all shadow-sm hover:scale-[1.02]"
-                      >
-                        <span>Launch Platform Match Engine</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                    ) : (
-                      <Link
-                        href="#contact"
-                        className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors"
-                      >
-                        <span>Inquire about this service</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                    )}
-                  </div>
                 </div>
-              );
-            })}
-          </div>
+
+                <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#002D72] group-hover:text-[#001C48]">
+                  <span>Analyze in Quiz</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-12 text-center">
+          <Link
+            href="/quiz"
+            className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-[#002D72] hover:bg-[#001C48] text-white text-sm font-black rounded-full shadow-lg shadow-[#002D72]/15 transition-all hover:scale-105 active:scale-95"
+          >
+            <Sparkles className="w-4 h-4 text-[#FFB81C]" />
+            <span>Discover Your Highest Match</span>
+            <ArrowRight className="w-4 h-4 text-white" />
+          </Link>
         </div>
       </section>
 
-      {/* =========================================================================
-          5. PLATFORM MATCH FEATURE SPOTLIGHT
-          ========================================================================= */}
-      <section id="platform-match-feature" className="py-24 bg-white border-b border-slate-200/80 relative">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
-          {/* Feature Header */}
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 pb-6 border-b border-slate-200">
-            <div className="space-y-3 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FFB81C]/20 border border-[#FFB81C]/40 text-[#855B00] text-xs font-bold">
-                <Sparkles className="w-3.5 h-3.5 text-[#002D72]" />
-                <span>Proprietary Lab Technology</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight font-sans">
-                Meet Platform Match
-              </h2>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                Most small businesses waste 15+ hours weekly posting on social media networks where their buyers never convert.
-                Developed by our Pace marketing researchers, <strong className="text-slate-900 font-semibold">Platform Match</strong> uses a 6-dimension mathematical scoring algorithm to evaluate where your brand will achieve the highest organic return.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link
-                href="/platform-match"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#002D72] hover:bg-[#001C48] text-white font-extrabold text-sm rounded-full shadow-lg shadow-[#002D72]/20 transition-all hover:scale-[1.02]"
-              >
-                <Sparkles className="w-4 h-4 text-[#FFB81C]" />
-                <span>Find Your Platform Match</span>
-                <ArrowRight className="w-4 h-4 text-white" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Feature Preview Card with Linktree Bento Layout */}
-          <div className="bg-[#FAF9F6] rounded-[2.5rem] p-7 sm:p-12 border border-slate-200 shadow-lg space-y-8">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Pillar 1 */}
-              <div className="p-7 rounded-[2rem] bg-white border border-slate-200 shadow-sm space-y-3">
-                <div className="w-12 h-12 rounded-full bg-[#002D72] text-[#FFB81C] flex items-center justify-center font-bold">
-                  <Compass className="w-6 h-6" />
-                </div>
-                <h3 className="font-extrabold text-slate-900 text-base">Interactive 3-Minute Quiz</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Answer 6 focused discovery questions about your audience, growth goals, content style, brand voice, and weekly capacity.
-                </p>
-              </div>
-
-              {/* Pillar 2 */}
-              <div className="p-7 rounded-[2rem] bg-white border border-slate-200 shadow-sm space-y-3">
-                <div className="w-12 h-12 rounded-full bg-[#002D72] text-[#FFB81C] flex items-center justify-center font-bold">
-                  <BarChart3 className="w-6 h-6" />
-                </div>
-                <h3 className="font-extrabold text-slate-900 text-base">Weighted Compatibility Matrix</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Ranks Instagram, TikTok, LinkedIn, YouTube, Facebook, and Pinterest using a transparent mathematical weighting system.
-                </p>
-              </div>
-
-              {/* Pillar 3 */}
-              <div className="p-7 rounded-[2rem] bg-white border border-slate-200 shadow-sm space-y-3">
-                <div className="w-12 h-12 rounded-full bg-[#002D72] text-[#FFB81C] flex items-center justify-center font-bold">
-                  <TrendingUp className="w-6 h-6" />
-                </div>
-                <h3 className="font-extrabold text-slate-900 text-base">30-Day Growth Roadmap</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Receive actionable posting cadences, 3 tailored content pillars, competitor landscape intelligence, and practical KPI benchmarks.
-                </p>
-              </div>
-            </div>
-
-            {/* Quick 6 Platforms Pill List */}
-            <div className="pt-6 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <span className="text-xs font-bold text-slate-600 uppercase tracking-wider">
-                Evaluates 6 major distribution graphs:
-              </span>
-              <div className="flex flex-wrap items-center gap-2.5">
-                {ALL_PLATFORM_IDS.map((id) => (
-                  <div
-                    key={id}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 text-xs font-bold text-slate-800 shadow-sm"
-                  >
-                    <SocialIcon platform={id} size={15} />
-                    <span>{PLATFORMS_DATA[id].name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          6. WHY WORK WITH US SECTION
-          ========================================================================= */}
-      <section id="why-us" className="py-24 bg-[#FAF9F6] border-b border-slate-200/80">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#002D72] bg-[#002D72]/10 px-4 py-1.5 rounded-full border border-[#002D72]/20">
-              The Pace Advantage
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight font-sans">
-              Why Work With Our Student Lab
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              We offer small businesses a collaborative, energetic partnership that combines student innovation with faculty-mentored academic rigor.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-            <div className="bg-white rounded-[2.2rem] p-8 border border-slate-200 space-y-3.5 shadow-sm hover:shadow-xl transition-all">
-              <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-full bg-[#002D72] text-[#FFB81C] flex items-center justify-center font-bold">
-                  <Users className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-black text-slate-950">Student-Driven Perspectives</h3>
-              </div>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                We bring boundless energy, an innate understanding of viral mechanics, and fresh eyes unencumbered by outdated agency formulas. We treat your business like our premier portfolio showcase.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-[2.2rem] p-8 border border-slate-200 space-y-3.5 shadow-sm hover:shadow-xl transition-all">
-              <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-full bg-[#002D72] text-[#FFB81C] flex items-center justify-center font-bold">
-                  <GraduationCap className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-black text-slate-950">Research-Based Marketing Science</h3>
-              </div>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                Backed by university research databases, peer-reviewed marketing frameworks, and Lubin School of Business faculty oversight. No random guesswork—every recommendation is rooted in verified behavioral data.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-[2.2rem] p-8 border border-slate-200 space-y-3.5 shadow-sm hover:shadow-xl transition-all">
-              <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-full bg-[#002D72] text-[#FFB81C] flex items-center justify-center font-bold">
-                  <Lightbulb className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-black text-slate-950">Creativity Without Agency Overhead</h3>
-              </div>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                Traditional marketing agencies bill $10,000/month retainers for generic slide decks. As an academic lab, our incentive is measurable client impact, real case studies, and hands-on portfolio execution.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-[2.2rem] p-8 border border-slate-200 space-y-3.5 shadow-sm hover:shadow-xl transition-all">
-              <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-full bg-[#002D72] text-[#FFB81C] flex items-center justify-center font-bold">
-                  <HeartHandshake className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-black text-slate-950">Personalized, Hands-On Collaboration</h3>
-              </div>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                You won&apos;t be handed off to an anonymous junior account manager. You collaborate directly with motivated students and project leads dedicated to understanding your authentic story and core goals.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          7. CONTACT SECTION
-          ========================================================================= */}
-      <section id="contact" className="py-24 bg-white relative">
+      {/* =====================================================================
+          SCORING MATRIX TRANSPARENCY (Deterministic Weights)
+          ===================================================================== */}
+      <section className="py-20 border-t border-slate-200 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="text-center space-y-3 max-w-2xl mx-auto">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#002D72] bg-[#002D72]/10 px-4 py-1.5 rounded-full border border-[#002D72]/20">
-              Start The Conversation
+          <div className="text-center space-y-3">
+            <span className="text-xs font-black uppercase tracking-widest text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200">
+              Deterministic Weights
             </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight font-sans">
-              Ready to Accelerate Your Brand?
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
+              Our 6-Factor Scoring Formula
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              Send our student lab a message below. We will review your current presence, outline initial strategic insights, and schedule an introductory consultation.
+            <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
+              We never return arbitrary scores. Every match percentage is computed using our agency-tested weighting matrix combining platform demographics with your team&apos;s realistic execution capacity.
             </p>
           </div>
 
-          {/* Interactive Working Contact Form */}
-          <AgencyContactForm />
+          <div className="bg-[#FAF9F6] rounded-[2.5rem] p-6 sm:p-10 border border-slate-200 shadow-md space-y-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              
+              <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+                <div className="text-3xl font-black text-[#002D72]">
+                  {SCORING_WEIGHTS.audience * 100}%
+                </div>
+                <div className="text-xs font-bold text-slate-900">Target Audience</div>
+                <div className="text-[11px] text-slate-500 font-medium">Age, role & buyer mindset</div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+                <div className="text-3xl font-black text-[#0A4694]">
+                  {SCORING_WEIGHTS.goal * 100}%
+                </div>
+                <div className="text-xs font-bold text-slate-900">Core Goal</div>
+                <div className="text-[11px] text-slate-500 font-medium">Leads, sales, reach or community</div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+                <div className="text-3xl font-black text-[#966300]">
+                  {SCORING_WEIGHTS.industry * 100}%
+                </div>
+                <div className="text-xs font-bold text-slate-900">Industry Vertical</div>
+                <div className="text-[11px] text-slate-500 font-medium">B2B, tech, local, e-commerce</div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+                <div className="text-3xl font-black text-purple-700">
+                  {SCORING_WEIGHTS.content * 100}%
+                </div>
+                <div className="text-xs font-bold text-slate-900">Content Strengths</div>
+                <div className="text-[11px] text-slate-500 font-medium">Short video, copy, photo carousels</div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+                <div className="text-3xl font-black text-rose-600">
+                  {SCORING_WEIGHTS.personality * 100}%
+                </div>
+                <div className="text-xs font-bold text-slate-900">Brand Voice</div>
+                <div className="text-[11px] text-slate-500 font-medium">Fun, educational, polished, corporate</div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+                <div className="text-3xl font-black text-emerald-600">
+                  {SCORING_WEIGHTS.time * 100}%
+                </div>
+                <div className="text-xs font-bold text-slate-900">Team Capacity</div>
+                <div className="text-[11px] text-slate-500 font-medium">Sustainable weekly hours limit</div>
+              </div>
+            </div>
+
+            <div className="p-4 bg-white rounded-2xl border border-slate-200 text-xs text-slate-700 space-y-1">
+              <div className="font-bold text-[#002D72] flex items-center gap-1.5">
+                <BarChart2 className="w-4 h-4 text-[#002D72]" />
+                Tie-Breaking Protocol:
+              </div>
+              <p className="leading-relaxed text-slate-600">
+                If two networks tie in overall weighted points, our algorithm prioritizes{" "}
+                <strong className="text-slate-900">Goal Alignment</strong> first, followed by{" "}
+                <strong className="text-slate-900">Audience Density</strong>, ensuring you never invest in a channel where prospects aren&apos;t actively making decisions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          FINAL LINKTREE CALL-TO-ACTION CARD
+          ===================================================================== */}
+      <section className="py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+        <div className="p-10 sm:p-16 rounded-[3rem] bg-[#002D72] text-white shadow-2xl space-y-7 relative overflow-hidden">
+          {/* Linktree Top Accent Strip */}
+          <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-[#FFB81C] via-white to-[#FFB81C]" />
+
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-white border border-white/20 text-xs font-bold uppercase tracking-wider">
+            <Sparkles className="w-3.5 h-3.5 text-[#FFB81C]" />
+            <span>Fast, Free, &amp; Ungated</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight max-w-2xl mx-auto">
+            Ready to find where your brand truly converts?
+          </h2>
+          
+          <p className="text-slate-200 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">
+            Answer 6 simple multiple-choice questions to receive your compatibility report, competitor benchmark, and actionable 30-day roadmap in 180 seconds.
+          </p>
+
+          <div className="pt-3">
+            <Link
+              href="/quiz"
+              className="inline-flex items-center gap-3 px-10 py-4 bg-[#FFB81C] hover:bg-[#E5A417] text-[#001C48] text-base font-black rounded-full shadow-xl transition-all hover:scale-105 active:scale-95"
+            >
+              <Sparkles className="w-5 h-5 text-[#001C48]" />
+              <span>Start 3-Minute Quiz</span>
+              <ArrowRight className="w-5 h-5 text-[#001C48]" />
+            </Link>
+          </div>
         </div>
       </section>
     </div>

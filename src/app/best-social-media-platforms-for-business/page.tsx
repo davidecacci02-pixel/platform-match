@@ -199,7 +199,7 @@ export default function BestSocialMediaPlatformsArticlePage() {
           {/* Institutional Category Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-800">
             <span className="w-2 h-2 rounded-full bg-[#FFB81C]" />
-            <span className="text-[#002D72]">Pace University Marketing Research</span>
+            <span className="text-[#002D72]">Platform Match Research</span>
             <span className="text-slate-300">•</span>
             <span className="text-slate-600">2026 Empirical Guide</span>
           </div>
