@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { GraduationCap, Compass, ShieldCheck, Mail, MapPin, Users } from "lucide-react";
-import { SocialIcon } from "./SocialIcon";
+import { GraduationCap, Compass, ShieldCheck, Mail, MapPin, Users, Instagram, Sparkles, BookOpen, Share2 } from "lucide-react";
 import { ALL_PLATFORM_IDS, PLATFORMS_DATA } from "@/lib/platforms";
 
 export function Footer() {
@@ -12,7 +11,7 @@ export function Footer() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-          {/* Col 1 & 2: Agency Mission & University Affiliation */}
+          {/* Col 1 & 2: Lab Identity, Brand & University Affiliation */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-[#002D72] flex items-center justify-center text-white shadow-md border border-white/20 relative overflow-hidden flex-shrink-0">
@@ -21,17 +20,15 @@ export function Footer() {
               </div>
               <div>
                 <span className="font-extrabold text-white text-lg tracking-tight block">
-                  PACE UNIVERSITY
+                  Pace Digital Marketing Lab
                 </span>
-                <span className="text-[11px] text-[#FFB81C] font-bold tracking-wider uppercase">
-                  Lubin School of Business • Marketing Lab
+                <span className="text-[11px] text-[#FFB81C] font-bold tracking-wider uppercase block">
+                  Lubin School of Business, Pace University, New York, NY
                 </span>
               </div>
             </div>
             <p className="text-slate-300 text-xs leading-relaxed max-w-sm font-normal">
-              A student-led digital marketing and research lab at Pace University dedicated to helping small businesses, startups,
-              and community organizations grow through empirical digital marketing strategies, AI-driven channel diagnostics,
-              and creative execution.
+              A student-led digital marketing and research lab at Pace University helping NYC small businesses grow through empirical digital marketing strategies, channel diagnostics, hands-on student projects, and practical planning tools.
             </p>
             <div className="space-y-2 text-[11px] text-slate-300 pt-1">
               <div className="flex items-center gap-2">
@@ -39,47 +36,58 @@ export function Footer() {
                 <span>One Pace Plaza, Downtown Manhattan, New York, NY 10038</span>
               </div>
               <div className="flex items-center gap-2">
+                <a
+                  href="https://instagram.com/platform_match"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-slate-200 hover:text-[#FFB81C] transition-colors"
+                >
+                  <Instagram className="w-3.5 h-3.5 text-[#FFB81C] flex-shrink-0" />
+                  <span>Instagram: @platform_match</span>
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
-                <span>Opportunitas • Student Innovation &amp; Faculty Mentorship</span>
+                <span>Opportunitas • Student Energy &amp; Faculty-Mentored Rigor</span>
               </div>
             </div>
           </div>
 
-          {/* Col 3: Services */}
+          {/* Col 3: Navigation */}
           <div className="space-y-3">
             <h4 className="font-bold text-white uppercase tracking-wider text-[11px] flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#FFB81C]" />
-              Lab Services
+              Quick Links
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link href="/about#services" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
-                  Social Media Strategy
+                <Link href="/" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                  Home (/)
                 </Link>
               </li>
               <li>
-                <Link href="/about#services" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
-                  Content Creation &amp; Video Reels
+                <Link href="/#services" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                  Services (/#services)
                 </Link>
               </li>
               <li>
-                <Link href="/about#services" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
-                  SEO &amp; AI Search Optimization
+                <Link href="/platform-match" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                  Platform Match (/platform-match)
                 </Link>
               </li>
               <li>
-                <Link href="/about#services" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
-                  Digital Advertising (PPC)
+                <Link href="/best-social-media-platforms-for-business" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                  Resources (/best-social-media-platforms-for-business)
                 </Link>
               </li>
               <li>
-                <Link href="/about#services" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
-                  Marketing Analytics &amp; GA4
+                <Link href="/about" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                  About (/about)
                 </Link>
               </li>
               <li>
-                <Link href="/" className="text-[#FFB81C] hover:underline font-semibold transition-colors">
-                  Platform Match (Lab Engine)
+                <Link href="/#contact" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                  Contact (/#contact)
                 </Link>
               </li>
             </ul>
@@ -89,80 +97,86 @@ export function Footer() {
           <div className="space-y-3">
             <h4 className="font-bold text-white uppercase tracking-wider text-[11px] flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#FFB81C]" />
-              Platform Match
+              Platform Match Tool
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link href="/quiz" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
-                  Take the 3-Minute Quiz
-                </Link>
-              </li>
-              <li>
-                <Link href="/platform-match#methodology" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
-                  6-Factor Diagnostic Matrix
-                </Link>
-              </li>
-              <li>
-                <Link href="/platform-match#platforms" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
-                  Evaluated Social Networks
+                <Link href="/quiz" className="text-[#FFB81C] hover:underline font-bold transition-colors">
+                  Take the 3-Minute Quiz (/quiz)
                 </Link>
               </li>
               <li>
                 <Link href="/platform-match" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
-                  Platform Match Overview
+                  Tool Overview &amp; Features
                 </Link>
               </li>
               <li>
-                <Link href="/best-social-media-platforms-for-business" className="text-slate-300 hover:text-[#FFB81C] transition-colors font-semibold">
-                  Best Platforms Guide (Article)
+                <Link href="/platform-match#methodology" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                  6-Factor Scoring Formula
+                </Link>
+              </li>
+              <li>
+                <Link href="/platform-match#platforms" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                  6 Evaluated Platforms
+                </Link>
+              </li>
+              <li>
+                <Link href="/best-social-media-platforms-for-business" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                  Social Platform Selection Guide
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Col 5: Lab Navigation & Team */}
+          {/* Col 5: Lab & Contact */}
           <div className="space-y-3">
             <h4 className="font-bold text-white uppercase tracking-wider text-[11px] flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#FFB81C]" />
-              Our Lab
+              Connect With Us
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link href="/about#about" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
-                  About Our Mission
-                </Link>
-              </li>
-              <li>
                 <Link href="/about#team" className="text-white hover:text-[#FFB81C] transition-colors font-semibold flex items-center gap-1.5">
                   <Users className="w-3.5 h-3.5 text-[#FFB81C]" />
-                  <span>Meet Our Team</span>
+                  <span>Meet Our 6 Researchers</span>
                 </Link>
               </li>
               <li>
-                <Link href="/about#why-us" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
-                  Why Work With Us
+                <Link href="/about#mission" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                  Lab Mission &amp; Academic Heritage
                 </Link>
               </li>
               <li>
-                <Link href="/about#contact" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
-                  Request Free Consultation
+                <Link href="/#contact" className="text-[#FFB81C] hover:underline transition-colors font-semibold flex items-center gap-1.5">
+                  <Mail className="w-3.5 h-3.5" />
+                  <span>Get a Free Review</span>
                 </Link>
+              </li>
+              <li>
+                <a
+                  href="https://instagram.com/platform_match"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-slate-300 hover:text-[#FFB81C] transition-colors"
+                >
+                  <Instagram className="w-3.5 h-3.5 text-[#FFB81C]" />
+                  <span>Instagram: @platform_match</span>
+                </a>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar & Academic Disclaimer */}
+        {/* Bottom Bar & Clear Academic Student Project Disclaimer */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-400">
           <p>
-            © {new Date().getFullYear()} Pace University • Lubin School of Business • Digital Marketing Lab. All rights reserved.
+            © {new Date().getFullYear()} Pace Digital Marketing Lab • Lubin School of Business, Pace University, New York, NY.
           </p>
           <p className="max-w-xl text-center md:text-right text-slate-400">
-            Student academic project developed for research, education, and community business development in New York City.
+            Student academic project conducted for research, education, and community business development in New York City.
           </p>
         </div>
       </div>
     </footer>
   );
 }
-

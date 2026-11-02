@@ -3,14 +3,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { GraduationCap, Sparkles, ArrowRight, Menu, X, Compass, Users } from "lucide-react";
+import { GraduationCap, ArrowRight, Menu, X, Compass, Users, Sparkles, BookOpen, Layers, Instagram, Mail, Share2 } from "lucide-react";
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-
-  const ctaHref = "/quiz";
-  const ctaLabel = "Try Platform Match";
 
   return (
     <header className="sticky top-0 z-40 w-full transition-all shadow-sm">
@@ -22,23 +19,28 @@ export function Navbar() {
             <span className="text-white/30">•</span>
             <span className="text-slate-200">Lubin School of Business</span>
             <span className="text-white/30">•</span>
-            <span className="text-slate-300">One Pace Plaza, New York, NY 10038</span>
+            <span className="text-slate-300">Pace Digital Marketing Lab</span>
           </div>
           <div className="flex items-center gap-4 text-slate-300 text-[11px]">
-            <span className="text-slate-300 italic font-serif">Opportunitas • Est. 1906</span>
+            <a
+              href="https://instagram.com/platform_match"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-slate-200 hover:text-[#FFB81C] transition-colors"
+            >
+              <Instagram className="w-3.5 h-3.5 text-[#FFB81C]" />
+              <span className="font-semibold">@platform_match</span>
+            </a>
             <span className="text-white/20">|</span>
-            <span className="inline-flex items-center gap-1 text-[#FFB81C] font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FFB81C] animate-pulse" />
-              Student Digital Marketing Lab
-            </span>
+            <span className="text-slate-300 italic font-serif">Opportunitas • Est. 1906</span>
           </div>
         </div>
       </div>
 
       {/* 2. Main Navigation Bar */}
       <div className="w-full bg-white/95 backdrop-blur-md border-b border-slate-200/90 transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-2 flex items-center justify-between">
-          {/* Brand Logo & Wordmark matching pace.edu */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-2.5 flex items-center justify-between">
+          {/* Brand Logo & Wordmark: Pace Digital Marketing Lab linking to / */}
           <Link
             href="/"
             className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#002D72] rounded-xl p-1"
@@ -51,89 +53,83 @@ export function Navbar() {
 
             <div>
               <div className="flex items-baseline gap-1.5">
-                <span className="font-black text-[#002D72] text-xl tracking-tight leading-none font-sans">
-                  PACE
-                </span>
-                <span className="text-[11px] font-bold text-slate-700 tracking-wider uppercase">
-                  Marketing Lab
-                </span>
-                <span className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#FFB81C]/20 text-[#855B00] border border-[#FFB81C]/40">
-                  Lubin NYC
+                <span className="font-black text-[#002D72] text-lg sm:text-xl tracking-tight leading-none font-sans">
+                  Pace Digital Marketing Lab
                 </span>
               </div>
               <p className="text-[10px] font-semibold text-slate-500 tracking-wider uppercase mt-0.5">
-                Digital Marketing &amp; Strategy Lab
+                Lubin School of Business • NYC
               </p>
             </div>
           </Link>
 
-          {/* Desktop Navigation links */}
+          {/* Desktop Navigation Links:
+              Home (/) | Services (/#services) | Platform Match (/platform-match) | Resources (/best-social-media-platforms-for-business) | About (/about)
+          */}
           <nav className="hidden lg:flex items-center gap-6">
             <Link
               href="/"
-              className={`text-xs font-bold transition-colors px-2.5 py-1.5 rounded-lg ${
-                pathname === "/" || pathname === "/platform-match"
-                  ? "bg-[#002D72]/10 text-[#002D72]"
-                  : "text-slate-700 hover:text-[#002D72]"
+              className={`text-xs font-bold transition-colors px-2 py-1 rounded-md ${
+                pathname === "/" ? "text-[#002D72]" : "text-slate-700 hover:text-[#002D72]"
+              }`}
+            >
+              Home
+            </Link>
+            <Link
+              href="/#services"
+              className="text-xs font-semibold text-slate-700 hover:text-[#002D72] transition-colors px-2 py-1"
+            >
+              Services
+            </Link>
+            <Link
+              href="/platform-match"
+              className={`text-xs font-semibold transition-colors px-2 py-1 rounded-md ${
+                pathname === "/platform-match" ? "text-[#002D72] font-bold" : "text-slate-700 hover:text-[#002D72]"
               }`}
             >
               Platform Match
             </Link>
             <Link
-              href="/about"
-              className={`text-xs font-semibold transition-colors ${
-                pathname === "/about" ? "text-[#002D72] font-bold" : "text-slate-700 hover:text-[#002D72]"
-              }`}
-            >
-              About Us
-            </Link>
-            <Link
-              href="/about#services"
-              className="text-xs font-semibold text-slate-700 hover:text-[#002D72] transition-colors"
-            >
-              Services
-            </Link>
-            <Link
-              href="/about#team"
-              className="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 hover:text-[#002D72] transition-colors"
-            >
-              <Users className="w-3.5 h-3.5 text-[#002D72]" />
-              <span>Our Team</span>
-            </Link>
-            <Link
-              href="/about#why-us"
-              className="text-xs font-semibold text-slate-700 hover:text-[#002D72] transition-colors"
-            >
-              Why Pace
-            </Link>
-            <Link
-              href="/about#contact"
-              className="text-xs font-semibold text-slate-700 hover:text-[#002D72] transition-colors"
-            >
-              Contact
-            </Link>
-            <Link
               href="/best-social-media-platforms-for-business"
-              className={`text-xs font-semibold transition-colors ${
+              className={`text-xs font-semibold transition-colors px-2 py-1 rounded-md ${
                 pathname === "/best-social-media-platforms-for-business"
                   ? "text-[#002D72] font-bold"
                   : "text-slate-700 hover:text-[#002D72]"
               }`}
             >
-              Articles
+              Resources
+            </Link>
+            <Link
+              href="/about"
+              className={`text-xs font-semibold transition-colors px-2 py-1 rounded-md ${
+                pathname === "/about" ? "text-[#002D72] font-bold" : "text-slate-700 hover:text-[#002D72]"
+              }`}
+            >
+              About
             </Link>
           </nav>
 
           {/* CTA & Mobile Toggle */}
           <div className="flex items-center gap-3">
-            <Link
-              href="/quiz"
-              prefetch={true}
-              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-[#FFB81C] hover:bg-[#E5A417] text-[#001C48] text-xs sm:text-sm font-extrabold rounded-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#002D72] border border-[#E5A417]"
+            {/* Instagram Link (Mobile/Tablet visible icon) */}
+            <a
+              href="https://instagram.com/platform_match"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow us on Instagram"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 hover:text-[#002D72] text-xs font-bold transition-colors"
             >
-              <Sparkles className="w-3.5 h-3.5 text-[#001C48]" />
-              <span>Try Platform Match</span>
-              <ArrowRight className="w-3.5 h-3.5 hidden sm:inline text-[#001C48]" />
+              <Instagram className="w-3.5 h-3.5 text-[#FFB81C]" />
+              <span className="hidden xl:inline">@platform_match</span>
+            </a>
+
+            {/* Standardized CTA button: "Get a Free Review" linking to /#contact */}
+            <Link
+              href="/#contact"
+              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-[#002D72] hover:bg-[#001C48] text-white text-xs sm:text-sm font-bold rounded-full shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#002D72] border border-[#002D72]"
+            >
+              <Mail className="w-3.5 h-3.5 text-[#FFB81C]" />
+              <span>Get a Free Review</span>
             </Link>
 
             {/* Mobile Menu Button */}
@@ -155,68 +151,73 @@ export function Navbar() {
             <Link
               href="/"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="inline-flex items-center gap-2 text-[#002D72] font-bold py-1"
+              className="inline-flex items-center gap-2 text-slate-800 hover:text-[#002D72] font-bold py-1"
             >
-              <Compass className="w-4 h-4 text-[#002D72]" />
-              <span>Platform Match (Home)</span>
+              <span>Home</span>
             </Link>
             <Link
-              href="/about"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-slate-700 hover:text-[#002D72] transition-colors py-1"
-            >
-              About Us (Agency &amp; Research)
-            </Link>
-            <Link
-              href="/about#services"
+              href="/#services"
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-slate-700 hover:text-[#002D72] transition-colors py-1"
             >
               Services
             </Link>
             <Link
-              href="/about#team"
+              href="/platform-match"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-slate-700 hover:text-[#002D72] transition-colors py-1 font-semibold flex items-center gap-2"
+              className="inline-flex items-center gap-2 text-slate-700 hover:text-[#002D72] transition-colors py-1"
             >
-              <Users className="w-4 h-4 text-[#002D72]" />
-              <span>Our Team &amp; Researchers</span>
-            </Link>
-            <Link
-              href="/about#why-us"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-slate-700 hover:text-[#002D72] transition-colors py-1"
-            >
-              Why Work With Us
+              <Compass className="w-4 h-4 text-[#002D72]" />
+              <span>Platform Match</span>
             </Link>
             <Link
               href="/best-social-media-platforms-for-business"
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-slate-700 hover:text-[#002D72] transition-colors py-1"
             >
-              Articles &amp; 2026 Guide
+              Resources
             </Link>
             <Link
-              href="/about#contact"
+              href="/about"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-slate-700 hover:text-[#002D72] transition-colors py-1"
+              className="inline-flex items-center gap-2 text-slate-700 hover:text-[#002D72] transition-colors py-1"
             >
-              Contact
+              <Users className="w-4 h-4 text-[#002D72]" />
+              <span>About</span>
             </Link>
-            <div className="pt-2">
-              <Link
-                href="/quiz"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#FFB81C] text-[#001C48] font-black text-xs shadow-sm"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-[#001C48]" />
-                <span>Try Platform Match (3-Min Quiz)</span>
-              </Link>
-            </div>
+            <a
+              href="https://instagram.com/platform_match"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="inline-flex items-center gap-2 text-slate-700 hover:text-[#002D72] transition-colors py-1"
+            >
+              <Instagram className="w-4 h-4 text-[#FFB81C]" />
+              <span>Instagram (@platform_match)</span>
+            </a>
+          </div>
+
+          <div className="pt-3 border-t border-slate-100 flex flex-col gap-2.5">
+            <Link
+              href="/#contact"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 bg-[#002D72] text-white font-bold text-xs rounded-full shadow-sm"
+            >
+              <Mail className="w-3.5 h-3.5 text-[#FFB81C]" />
+              <span>Get a Free Review</span>
+            </Link>
+
+            <Link
+              href="/quiz"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-[#FFB81C]/25 text-[#001C48] text-xs font-bold border border-[#FFB81C]/40"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#001C48]" />
+              <span>Try Platform Match Quiz</span>
+            </Link>
           </div>
         </div>
       )}
     </header>
   );
 }
-

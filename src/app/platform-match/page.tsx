@@ -19,64 +19,80 @@ import {
   ChevronRight,
   Eye,
   ArrowLeft,
-  Check,
-  X,
-  Play,
-  Heart,
-  Share2,
+  Instagram,
+  GraduationCap,
   Users,
 } from "lucide-react";
 import { SocialIcon } from "@/components/SocialIcon";
 import { ALL_PLATFORM_IDS, PLATFORMS_DATA } from "@/lib/platforms";
 import { SCORING_WEIGHTS } from "@/lib/scoring-matrix";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Platform Match | Free Social Media Platform Quiz by Pace Digital Marketing Lab",
+  },
+  description:
+    "Free decision tool created by Pace University marketing students to help small businesses identify their top social media channels and build an actionable 30-day strategy.",
+};
+
 export default function PlatformMatchLandingPage() {
   return (
     <div className="flex-1 flex flex-col bg-[#FAF9F6] text-slate-900 selection:bg-[#002D72] selection:text-white relative overflow-hidden">
-      {/* Linktree-Style Organic Ambient Orbs */}
+      {/* Organic Ambient Orbs */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-gradient-to-b from-[#002D72]/[0.06] via-[#FFB81C]/[0.08] to-transparent blur-[140px] rounded-full -z-10 pointer-events-none" />
       <div className="absolute top-96 right-[-100px] w-[500px] h-[400px] bg-gradient-to-br from-emerald-400/[0.07] to-transparent blur-[120px] rounded-full -z-10 pointer-events-none" />
       <div className="absolute top-[1200px] left-[-100px] w-[600px] h-[500px] bg-gradient-to-tr from-[#002D72]/[0.05] via-[#FFB81C]/[0.06] to-transparent blur-[140px] rounded-full -z-10 pointer-events-none" />
 
-      {/* Top Bar with Quick Navigation to Agency About & Article Guide */}
+      {/* Top Bar with Quick Navigation to Lab Home & Resources */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 w-full flex flex-wrap items-center justify-between gap-3">
         <Link
-          href="/about"
+          href="/"
           prefetch={true}
           className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-[#002D72] transition-colors px-4 py-2 rounded-full bg-white border border-slate-200/90 shadow-sm hover:shadow hover:scale-[1.01]"
         >
-          <Users className="w-3.5 h-3.5 text-[#002D72]" />
-          <span>About Pace Marketing Lab &amp; Agency Services →</span>
+          <ArrowLeft className="w-3.5 h-3.5 text-[#002D72]" />
+          <span>Back to Pace Digital Marketing Lab Home</span>
         </Link>
 
-        <Link
-          href="/best-social-media-platforms-for-business"
-          prefetch={true}
-          className="inline-flex items-center gap-2 text-xs font-bold text-[#002D72] hover:text-[#001C48] transition-colors px-4 py-2 rounded-full bg-[#FFB81C]/20 border border-[#FFB81C]/40 shadow-sm hover:shadow hover:scale-[1.01]"
-        >
-          <Sparkles className="w-3.5 h-3.5 text-[#001C48]" />
-          <span>Read our platform selection guide →</span>
-        </Link>
+        <div className="flex items-center gap-3">
+          <a
+            href="https://instagram.com/platform_match"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-[#002D72] transition-colors px-3.5 py-2 rounded-full bg-white border border-slate-200/90 shadow-sm"
+          >
+            <Instagram className="w-3.5 h-3.5 text-[#FFB81C]" />
+            <span>@platform_match</span>
+          </a>
+
+          <Link
+            href="/best-social-media-platforms-for-business"
+            prefetch={true}
+            className="inline-flex items-center gap-2 text-xs font-bold text-[#002D72] hover:text-[#001C48] transition-colors px-4 py-2 rounded-full bg-[#FFB81C]/20 border border-[#FFB81C]/40 shadow-sm hover:shadow hover:scale-[1.01]"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#001C48]" />
+            <span>Read selection guide →</span>
+          </Link>
+        </div>
       </div>
 
       {/* =====================================================================
-          HERO SECTION: Linktree-Style Headline + 3D Floating Phone Mockup
+          HERO SECTION: "Stop Posting in the Void" + 3D Device Mockup
           ===================================================================== */}
-      <section className="relative pt-10 pb-16 md:pt-16 md:pb-24 overflow-hidden">
+      <section className="relative pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             
             {/* Left Column: Bold Copy & Linktree Pills */}
             <div className="lg:col-span-7 space-y-7 text-center lg:text-left">
-              {/* Live Badge */}
+              {/* Mandatory label above H1 per Requirement 1 */}
               <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-800">
                 <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="flex items-center gap-1.5 text-slate-900">
-                  <Sparkles className="w-3.5 h-3.5 text-[#002D72]" />
-                  <span>Platform Match 2.0</span>
+                <span className="text-[#002D72] font-black uppercase tracking-wider">
+                  A free tool by Pace Digital Marketing Lab
                 </span>
-                <span className="text-slate-300">•</span>
-                <span className="text-[#002D72]">Pace Lubin Research Engine</span>
                 <span className="text-slate-300">•</span>
                 <span className="text-[#966300] bg-[#FFB81C]/25 px-2 py-0.5 rounded-full">100% Free</span>
               </div>
@@ -90,12 +106,12 @@ export default function PlatformMatchLandingPage() {
                   </span>
                 </h1>
                 <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-                  Stop burning 15+ hours every week creating content for platforms where your ideal buyers never convert.
-                  Our proprietary algorithm analyzes your audience, goals, and team capacity to reveal your highest-ROI channels and a realistic 30-day playbook.
+                  Stop wasting valuable time every week creating content for platforms where your ideal buyers never convert.
+                  Our decision framework analyzes your audience, goals, and team capacity to reveal your highest-return channels and a realistic 30-day playbook.
                 </p>
               </div>
 
-              {/* Primary Action Buttons (Linktree Tactile Pill Buttons) */}
+              {/* Primary Action Buttons */}
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                 <Link
                   href="/quiz"
@@ -123,37 +139,33 @@ export default function PlatformMatchLandingPage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                  <span>Competitor Gap Diagnosis</span>
+                  <span>Competitor Gap Context</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                  <span>Interactive AI Chat Follow-up</span>
+                  <span>Personalized 30-Day Roadmap</span>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: 3D FLOATING DEVICE MOCKUP (Linktree Signature Visual) */}
+            {/* Right Column: 3D DEVICE MOCKUP */}
             <div className="lg:col-span-5 relative flex items-center justify-center pt-6 lg:pt-0">
-              {/* Backlight Ambient Glow */}
               <div className="absolute inset-0 bg-gradient-to-tr from-[#002D72]/15 via-[#FFB81C]/20 to-emerald-400/10 blur-3xl rounded-[3rem] -z-10" />
 
-              {/* 3D Tilted Perspective Phone Mockup */}
               <div
                 className="w-full max-w-[340px] sm:max-w-[360px] bg-slate-950 rounded-[3rem] p-3.5 shadow-2xl border-4 border-slate-800 ring-1 ring-slate-900/40 transition-transform duration-700 ease-out hover:rotate-0 hover:scale-105"
                 style={{
                   transform: "perspective(1200px) rotateY(-6deg) rotateX(4deg) rotate(-2deg)",
                 }}
               >
-                {/* Dynamic Island / Notch */}
+                {/* Dynamic Notch */}
                 <div className="w-28 h-4 bg-black rounded-full mx-auto mb-3 flex items-center justify-center">
                   <span className="w-2 h-2 rounded-full bg-slate-900 mr-2" />
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/80" />
                 </div>
 
-                {/* Simulated Phone Screen Canvas (Clean Linktree Profile) */}
+                {/* Simulated Phone Screen */}
                 <div className="bg-[#F8F9FA] rounded-[2.5rem] p-5 space-y-4 text-center border border-slate-200/80 overflow-hidden shadow-inner">
-                  
-                  {/* Profile Header */}
                   <div className="space-y-2 pt-1">
                     <div className="relative w-16 h-16 rounded-full mx-auto overflow-hidden border-2 border-[#002D72] shadow-md">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -165,7 +177,7 @@ export default function PlatformMatchLandingPage() {
                     </div>
                     <div>
                       <div className="flex items-center justify-center gap-1.5">
-                        <h3 className="font-black text-slate-950 text-sm">Pace Marketing Lab</h3>
+                        <h3 className="font-black text-slate-950 text-sm">Pace Digital Marketing Lab</h3>
                         <span className="w-4 h-4 rounded-full bg-[#002D72] text-white flex items-center justify-center text-[9px] font-black">
                           ✓
                         </span>
@@ -175,14 +187,12 @@ export default function PlatformMatchLandingPage() {
                       </p>
                     </div>
                     <p className="text-[11px] text-slate-600 font-medium px-2 leading-relaxed">
-                      AI Social Recommendation Engine &amp; 30-Day Growth Diagnostic for Founders.
+                      Social Channel Diagnostics &amp; Strategic Roadmap Engine for Small Businesses.
                     </p>
                   </div>
 
-                  {/* Simulated Linktree-Style Pill Links Stack */}
+                  {/* Simulated Pill Links Stack */}
                   <div className="space-y-2.5 pt-1 text-left">
-                    
-                    {/* Link 1: Instagram (Primary Engine 96%) */}
                     <div className="p-3 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:shadow-md transition-all group">
                       <div className="flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white flex items-center justify-center shadow-sm">
@@ -202,7 +212,6 @@ export default function PlatformMatchLandingPage() {
                       </span>
                     </div>
 
-                    {/* Link 2: TikTok (Synergy 89%) */}
                     <div className="p-3 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:shadow-md transition-all group">
                       <div className="flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-xl bg-black text-white flex items-center justify-center shadow-sm">
@@ -222,7 +231,6 @@ export default function PlatformMatchLandingPage() {
                       </span>
                     </div>
 
-                    {/* Link 3: LinkedIn (B2B Intent 84%) */}
                     <div className="p-3 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:shadow-md transition-all group">
                       <div className="flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-xl bg-[#0A66C2] text-white flex items-center justify-center shadow-sm">
@@ -242,7 +250,6 @@ export default function PlatformMatchLandingPage() {
                       </span>
                     </div>
 
-                    {/* Link 4: Unlock 30-Day Growth Roadmap CTA */}
                     <Link
                       href="/quiz"
                       className="block p-3 rounded-2xl bg-[#FFB81C] hover:bg-[#E5A417] text-[#001C48] shadow-md transition-all text-center font-black text-xs uppercase tracking-wider"
@@ -258,7 +265,7 @@ export default function PlatformMatchLandingPage() {
                 </div>
               </div>
 
-              {/* Floating 3D Pill Top-Left: Competitor Intel */}
+              {/* Floating Pill Top-Left */}
               <div className="hidden sm:flex items-center gap-2.5 p-3 pr-4 rounded-full bg-white/95 border border-slate-200 shadow-xl backdrop-blur-md absolute -top-4 -left-6 animate-float-slow text-xs">
                 <div className="w-7 h-7 rounded-full bg-[#FFB81C]/25 text-[#966300] flex items-center justify-center flex-shrink-0 font-black">
                   <Swords className="w-3.5 h-3.5" />
@@ -267,11 +274,11 @@ export default function PlatformMatchLandingPage() {
                   <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 block">
                     Competitor Intel
                   </span>
-                  <span className="font-bold text-slate-900">Uncover Organic Gaps</span>
+                  <span className="font-bold text-slate-900">Identify Content Gaps</span>
                 </div>
               </div>
 
-              {/* Floating 3D Pill Bottom-Right: 30-Day Roadmap */}
+              {/* Floating Pill Bottom-Right */}
               <div className="hidden sm:flex items-center gap-2.5 p-3 pr-4 rounded-full bg-white/95 border border-slate-200 shadow-xl backdrop-blur-md absolute -bottom-4 -right-6 animate-float-reverse text-xs">
                 <div className="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0 font-black">
                   <Calendar className="w-3.5 h-3.5" />
@@ -290,7 +297,7 @@ export default function PlatformMatchLandingPage() {
       </section>
 
       {/* =====================================================================
-          BENCHMARK NUMBERS BANNER (Linktree Style Pill Metrics)
+          BENCHMARK NUMBERS BANNER
           ===================================================================== */}
       <section className="py-12 bg-white border-y border-slate-200 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -332,7 +339,7 @@ export default function PlatformMatchLandingPage() {
       </section>
 
       {/* =====================================================================
-          HOW IT WORKS (Linktree Stepper in Bento Grid)
+          HOW PLATFORM MATCH OPERATES (#how-it-works)
           ===================================================================== */}
       <section id="how-it-works" className="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full space-y-16">
         <div className="text-center max-w-2xl mx-auto space-y-3">
@@ -349,8 +356,6 @@ export default function PlatformMatchLandingPage() {
 
         {/* 3 Step Bento Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
-          
-          {/* Step 1 */}
           <div className="bg-white rounded-[2.2rem] border border-slate-200/90 shadow-md hover:shadow-2xl transition-all duration-300 p-8 space-y-5 flex flex-col justify-between group hover:-translate-y-1.5">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
@@ -374,7 +379,6 @@ export default function PlatformMatchLandingPage() {
             </div>
           </div>
 
-          {/* Step 2 */}
           <div className="bg-white rounded-[2.2rem] border border-slate-200/90 shadow-md hover:shadow-2xl transition-all duration-300 p-8 space-y-5 flex flex-col justify-between group hover:-translate-y-1.5">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
@@ -398,7 +402,6 @@ export default function PlatformMatchLandingPage() {
             </div>
           </div>
 
-          {/* Step 3 */}
           <div className="bg-white rounded-[2.2rem] border border-slate-200/90 shadow-md hover:shadow-2xl transition-all duration-300 p-8 space-y-5 flex flex-col justify-between group hover:-translate-y-1.5">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
@@ -413,7 +416,7 @@ export default function PlatformMatchLandingPage() {
                 Receive 30-Day Growth Plan
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Walk away with your #1 Primary Channel, #2 Syndication Channel, tailored content pillars, proven video hook concepts, and competitor landscape intelligence ready to execute on Monday.
+                Walk away with your #1 Primary Channel, #2 Syndication Channel, tailored content pillars, proven video hook concepts, and competitor landscape intelligence ready to execute.
               </p>
             </div>
             <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-bold text-emerald-700">
@@ -421,12 +424,11 @@ export default function PlatformMatchLandingPage() {
               <ChevronRight className="w-4 h-4" />
             </div>
           </div>
-
         </div>
       </section>
 
       {/* =====================================================================
-          FEATURE SPOTLIGHT: Real Human Lab Research (With Photo)
+          BUILT BY PACE STUDENT RESEARCHERS (Requirement 2 applied)
           ===================================================================== */}
       <section className="py-16 bg-[#F3F4F6] border-y border-slate-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -437,7 +439,7 @@ export default function PlatformMatchLandingPage() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/pace-hero-collab.jpg"
-                alt="Pace University Digital Marketing & Strategy Lab"
+                alt="Pace Digital Marketing Lab researchers in New York City"
                 className="w-full h-full object-cover object-center"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent flex items-end p-6">
@@ -446,7 +448,7 @@ export default function PlatformMatchLandingPage() {
                     Lubin School of Business NYC
                   </span>
                   <p className="text-sm font-bold">
-                    Pace Marketing Lab Research Headquarters
+                    Pace Digital Marketing Lab
                   </p>
                   <p className="text-xs text-slate-300">
                     One Pace Plaza, Financial District, Manhattan
@@ -455,17 +457,19 @@ export default function PlatformMatchLandingPage() {
               </div>
             </div>
 
-            {/* Right Copy & Research Values */}
+            {/* Right Copy: Requirement 2 Exact Text */}
             <div className="lg:col-span-7 p-8 sm:p-12 space-y-6">
               <div className="space-y-2">
                 <span className="text-xs font-black uppercase tracking-widest text-[#002D72] bg-[#002D72]/10 px-3 py-1 rounded-full border border-[#002D72]/20">
-                  Academic Rigor &bull; Real-World Testing
+                  Academic Rigor &bull; Student Innovation
                 </span>
+                {/* Heading exact per Requirement 2 */}
                 <h3 className="text-2xl sm:text-3xl font-black text-slate-950">
-                  Built by Student Researchers, Grounded in Real Market Data
+                  Built by Pace Student Researchers
                 </h3>
+                {/* Text exact per Requirement 2 */}
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  Unlike generic AI tools that hallucinate advice without context, Platform Match was engineered at Pace University&apos;s Lubin School of Business to solve the real bottleneck facing emerging brands: wasted marketing production time.
+                  Platform Match was created by Pace University marketing students as a free planning tool for small businesses.
                 </p>
               </div>
 
@@ -473,25 +477,25 @@ export default function PlatformMatchLandingPage() {
                 <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-slate-200/90 space-y-1.5">
                   <div className="flex items-center gap-2 text-[#002D72] font-black text-xs">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    <span>Empirical Testing</span>
+                    <span>Structured Decision Matrix</span>
                   </div>
                   <p className="text-xs text-slate-600 leading-relaxed">
-                    Evaluated across actual small business social campaigns in New York City.
+                    Evaluates channels systematically based on business goals and audience fit.
                   </p>
                 </div>
 
                 <div className="p-4 rounded-2xl bg-[#FAF9F6] border border-slate-200/90 space-y-1.5">
                   <div className="flex items-center gap-2 text-[#002D72] font-black text-xs">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    <span>Anti-Burnout Cadence</span>
+                    <span>Realistic Capacity Alignment</span>
                   </div>
                   <p className="text-xs text-slate-600 leading-relaxed">
-                    Recommendations are hard-capped to match your team&apos;s genuine bandwidth.
+                    Recommendations adapt to your team&apos;s genuine bandwidth and resources.
                   </p>
                 </div>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-2 flex flex-wrap items-center gap-3">
                 <Link
                   href="/quiz"
                   className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#002D72] hover:bg-[#001C48] text-white text-xs sm:text-sm font-black shadow-md transition-all hover:scale-[1.02]"
@@ -500,6 +504,16 @@ export default function PlatformMatchLandingPage() {
                   <span>Run Free Diagnostic Now</span>
                   <ArrowRight className="w-4 h-4 text-white" />
                 </Link>
+
+                <a
+                  href="https://instagram.com/platform_match"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 text-xs sm:text-sm font-bold shadow-sm"
+                >
+                  <Instagram className="w-4 h-4 text-[#FFB81C]" />
+                  <span>Follow @platform_match</span>
+                </a>
               </div>
             </div>
 
@@ -508,11 +522,11 @@ export default function PlatformMatchLandingPage() {
       </section>
 
       {/* =====================================================================
-          THE 6 EVALUATED PLATFORMS (Linktree-Style Visual Showcase)
+          THE 6 EVALUATED PLATFORMS
           ===================================================================== */}
-      <section className="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <section id="platforms" className="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-          <span className="text-xs font-black uppercase tracking-widest text-sky-800 bg-sky-100 px-3 py-1 rounded-full border border-sky-200">
+          <span className="text-xs font-black uppercase tracking-widest text-[#002D72] bg-[#002D72]/10 px-3 py-1 rounded-full border border-[#002D72]/20">
             Network Coverage
           </span>
           <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
@@ -531,7 +545,6 @@ export default function PlatformMatchLandingPage() {
                 key={id}
                 className="bg-white rounded-[2rem] p-7 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 relative overflow-hidden"
               >
-                {/* Top Colored Brand Strip */}
                 <div
                   className="absolute inset-x-0 top-0 h-1.5 opacity-80 group-hover:opacity-100 transition-opacity"
                   style={{ backgroundColor: data.brandColor }}
@@ -611,25 +624,24 @@ export default function PlatformMatchLandingPage() {
       </section>
 
       {/* =====================================================================
-          SCORING MATRIX TRANSPARENCY (Deterministic Weights)
+          SCORING FORMULA (#methodology)
           ===================================================================== */}
-      <section className="py-20 border-t border-slate-200 bg-white">
+      <section id="methodology" className="py-20 border-t border-slate-200 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="text-center space-y-3">
-            <span className="text-xs font-black uppercase tracking-widest text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200">
+            <span className="text-xs font-black uppercase tracking-widest text-[#002D72] bg-[#002D72]/10 px-3 py-1 rounded-full border border-[#002D72]/20">
               Deterministic Weights
             </span>
             <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
               Our 6-Factor Scoring Formula
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
-              We never return arbitrary scores. Every match percentage is computed using our agency-tested weighting matrix combining platform demographics with your team&apos;s realistic execution capacity.
+              We never return arbitrary scores. Every match percentage is computed using a weighted decision matrix combining platform demographics with your team&apos;s realistic execution capacity.
             </p>
           </div>
 
           <div className="bg-[#FAF9F6] rounded-[2.5rem] p-6 sm:p-10 border border-slate-200 shadow-md space-y-6">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              
               <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
                 <div className="text-3xl font-black text-[#002D72]">
                   {SCORING_WEIGHTS.audience * 100}%
@@ -695,11 +707,10 @@ export default function PlatformMatchLandingPage() {
       </section>
 
       {/* =====================================================================
-          FINAL LINKTREE CALL-TO-ACTION CARD
+          FINAL QUIZ CALL-TO-ACTION CARD
           ===================================================================== */}
       <section className="py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
         <div className="p-10 sm:p-16 rounded-[3rem] bg-[#002D72] text-white shadow-2xl space-y-7 relative overflow-hidden">
-          {/* Linktree Top Accent Strip */}
           <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-[#FFB81C] via-white to-[#FFB81C]" />
 
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-white border border-white/20 text-xs font-bold uppercase tracking-wider">
@@ -725,6 +736,39 @@ export default function PlatformMatchLandingPage() {
               <ArrowRight className="w-5 h-5 text-[#001C48]" />
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          BUILT BY PACE STUDENT RESEARCHERS SECTION
+          ===================================================================== */}
+      <section className="pb-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <div className="w-14 h-14 rounded-full bg-[#002D72] text-[#FFB81C] flex items-center justify-center font-bold flex-shrink-0 shadow-md">
+              <GraduationCap className="w-7 h-7" />
+            </div>
+            <div className="space-y-1">
+              <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#002D72]/10 text-[#002D72] text-[11px] font-extrabold uppercase tracking-wider">
+                <span>Pace Digital Marketing Lab</span>
+              </div>
+              <h3 className="text-lg font-black text-slate-950">
+                Built by Pace Student Researchers
+              </h3>
+              <p className="text-xs text-slate-600 max-w-lg leading-relaxed">
+                Platform Match was researched, developed, and calibrated by marketing students at Pace University’s Lubin School of Business in Downtown Manhattan.
+              </p>
+            </div>
+          </div>
+
+          <Link
+            href="/about"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-100 hover:bg-[#002D72] text-slate-800 hover:text-white text-xs font-bold transition-all shadow-sm flex-shrink-0 group"
+          >
+            <Users className="w-4 h-4 text-[#002D72] group-hover:text-[#FFB81C] transition-colors" />
+            <span>Meet the Student Team</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
       </section>
     </div>

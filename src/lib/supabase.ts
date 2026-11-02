@@ -131,7 +131,7 @@ export async function saveContactMessage(data: {
 
   if (!client) {
     console.info(
-      "[Pace Marketing Lab] Supabase not configured. Simulated contact submission:",
+      "[Pace Digital Marketing Lab] Supabase not configured. Simulated contact submission:",
       {
         name: data.name,
         email: data.email,
@@ -190,7 +190,7 @@ export async function saveContactMessage(data: {
         }
       }
 
-      console.warn("[Pace Marketing Lab] Database notice, recorded in fallback mode:", error.message);
+      console.warn("[Pace Digital Marketing Lab] Database notice, recorded in fallback mode:", error.message);
       return {
         success: true,
         mode: "demo",
@@ -206,7 +206,7 @@ export async function saveContactMessage(data: {
     };
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Unknown error";
-    console.error("[Pace Marketing Lab] Unexpected error saving contact message:", message);
+    console.error("[Pace Digital Marketing Lab] Unexpected error saving contact message:", message);
     return {
       success: true,
       mode: "demo",

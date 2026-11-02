@@ -12,21 +12,24 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://platform-match.vercel.app"),
-  title: "Pace Marketing Lab | Digital Marketing Agency & Platform Match",
+  title: {
+    default: "Pace Digital Marketing Lab | Digital Marketing Help for NYC Small Businesses",
+    template: "%s | Pace Digital Marketing Lab",
+  },
   description:
     "Student-led Digital Marketing Lab at Pace University in NYC. Helping small businesses and nonprofits grow through research-backed social media strategy, content creation, SEO, digital advertising, and our proprietary Platform Match engine.",
   keywords: [
-    "digital marketing agency",
-    "pace university",
-    "lubin school of business",
+    "Pace Digital Marketing Lab",
+    "Pace University",
+    "Lubin School of Business",
+    "digital marketing lab",
     "social media strategy",
     "platform match",
     "small business marketing",
     "content creation",
     "seo optimization",
-    "digital advertising",
   ],
-  authors: [{ name: "Pace University Digital Marketing Lab" }],
+  authors: [{ name: "Pace Digital Marketing Lab" }],
 };
 
 export default function RootLayout({

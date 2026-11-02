@@ -161,7 +161,7 @@ export default function ResultsPage() {
           <div className="flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#002D72]/10 text-[#002D72] text-xs font-bold">
               <Sparkles className="w-3.5 h-3.5 text-[#002D72]" />
-              Pace Marketing Lab Report
+              Pace Digital Marketing Lab Report
             </span>
             <span className="text-xs font-bold text-slate-400">•</span>
             <span className="text-xs font-bold text-slate-600">{activeIndustryLabel}</span>
