@@ -25,6 +25,14 @@ import {
   AlertTriangle,
   Award,
   Check,
+  X,
+  Bookmark,
+  MessageSquare,
+  MousePointer,
+  Video,
+  Sliders,
+  Flame,
+  Eye,
 } from "lucide-react";
 import confetti from "canvas-confetti";
 import { RecommendationEngineResult } from "@/lib/recommendation-engine";
@@ -458,66 +466,117 @@ export default function ResultsPage() {
       )}
 
       {/* =====================================================================
-          TAB 2: COMPETITOR INTELLIGENCE (Clean, Scannable & Structured!)
+          TAB 2: COMPETITOR INTELLIGENCE & MARKET GAPS (Executive Visual Design)
           ===================================================================== */}
       {activeTab === "competitors" && strategy?.competitorBenchmark && (
         <div className="space-y-6 animate-fade-in">
           
-          {/* Clean Archetype Comparison Cards */}
+          {/* Executive Strategic Positioning Banner */}
+          <section className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#002D72] via-[#001C48] to-[#001530] text-white p-7 sm:p-10 shadow-lg border border-slate-800">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-[#FFB81C]/10 rounded-full blur-3xl pointer-events-none" />
+            
+            <div className="relative z-10 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FFB81C] text-[#002D72] text-xs font-black uppercase tracking-wider shadow-sm">
+                <Award className="w-3.5 h-3.5" />
+                Strategic Market Positioning
+              </div>
+
+              <div className="max-w-3xl space-y-2">
+                <h2 className="text-2xl sm:text-3xl font-black tracking-tight leading-tight">
+                  Where {activeBusinessName} Wins in {activeIndustryLabel}
+                </h2>
+                <p className="text-sm sm:text-base text-slate-200 font-medium leading-relaxed">
+                  Most competitors in your sector rely on repetitive, transactional posting. Here is your actionable whitespace to command brand authority and capture qualified customer attention.
+                </p>
+              </div>
+
+              {/* Key Differentiators Pills */}
+              {strategy.competitorBenchmark.keyDifferentiators && strategy.competitorBenchmark.keyDifferentiators.length > 0 && (
+                <div className="pt-2 flex flex-wrap gap-2.5">
+                  {strategy.competitorBenchmark.keyDifferentiators.map((diff, idx) => (
+                    <div
+                      key={idx}
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/15 text-xs font-semibold text-slate-100"
+                    >
+                      <Check className="w-3.5 h-3.5 text-[#FFB81C]" />
+                      <span>{diff}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* Side-by-Side Archetype Battle Cards */}
           <section className="bg-white rounded-[2.5rem] p-6 sm:p-9 border border-slate-200/90 shadow-sm space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pb-3 border-b border-slate-100">
               <div>
-                <h2 className="text-xl font-black text-slate-950">
-                  Industry Competitor Archetypes
-                </h2>
+                <h3 className="text-xl font-black text-slate-950 flex items-center gap-2">
+                  <Swords className="w-5 h-5 text-[#002D72]" />
+                  Industry Competitor Archetypes & Battle Plan
+                </h3>
                 <p className="text-xs text-slate-500 font-medium">
-                  How competitors typically market in {activeIndustryLabel}, and how {activeBusinessName} wins.
+                  Direct contrast of how competitors behave versus how {activeBusinessName} wins market share.
                 </p>
               </div>
-              <span className="text-xs font-bold text-slate-400">Competitive Benchmark</span>
+              <span className="text-xs font-bold text-slate-400">Battle Strategy</span>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
               {strategy.competitorBenchmark.benchmarkedCompetitors?.map((comp, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#FAF9F6] rounded-[2rem] p-6 border border-slate-200 space-y-4 shadow-sm"
+                  className="bg-[#FAF9F6] rounded-[2rem] p-6 border border-slate-200/90 space-y-5 shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between"
                 >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <span className="text-[10px] font-black uppercase tracking-wider text-[#855B00] px-2.5 py-0.5 rounded-full bg-[#FFB81C]/25">
-                        {comp.type}
+                  <div className="space-y-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-[10px] font-black uppercase tracking-wider text-[#855B00] px-2.5 py-0.5 rounded-full bg-[#FFB81C]/25">
+                            {comp.type}
+                          </span>
+                          <span className="text-[10px] font-bold text-slate-400">
+                            Archetype 0{idx + 1}
+                          </span>
+                        </div>
+                        <h4 className="font-black text-lg text-slate-950">
+                          {comp.name}
+                        </h4>
+                      </div>
+                      <span className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-[10px] font-bold text-slate-600 shadow-2xs">
+                        Focus: {comp.channelFocus}
                       </span>
-                      <h3 className="font-black text-base sm:text-lg text-slate-950 mt-1">
-                        {comp.name}
-                      </h3>
                     </div>
-                    <span className="text-xs font-bold text-slate-400">Archetype 0{idx + 1}</span>
+
+                    <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                      {comp.behaviorSummary || comp.contentStrategy}
+                    </p>
                   </div>
 
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                    {comp.behaviorSummary || comp.contentStrategy}
-                  </p>
-
-                  <div className="space-y-2 pt-2 border-t border-slate-200 text-xs">
-                    {/* Limitation */}
-                    <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl space-y-0.5">
-                      <span className="text-[10px] font-black text-rose-800 uppercase tracking-wider flex items-center gap-1">
-                        <AlertTriangle className="w-3 h-3 text-rose-600" />
-                        Their Blindspot
-                      </span>
-                      <p className="text-rose-950 font-medium leading-relaxed">
+                  {/* High Contrast Battle Panels */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    {/* Competitor Pitfall */}
+                    <div className="p-3.5 bg-rose-50/90 border border-rose-200/80 rounded-2xl space-y-1.5 flex flex-col">
+                      <div className="flex items-center gap-1.5 text-rose-800">
+                        <X className="w-3.5 h-3.5 text-rose-600 flex-shrink-0" />
+                        <span className="text-[10px] font-black uppercase tracking-wider">
+                          Competitor Blindspot
+                        </span>
+                      </div>
+                      <p className="text-xs text-rose-950 font-medium leading-snug">
                         {comp.limitations || comp.primaryFlaw}
                       </p>
                     </div>
 
-                    {/* How We Differentiate */}
-                    <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl space-y-0.5">
-                      <span className="text-[10px] font-black text-emerald-800 uppercase tracking-wider flex items-center gap-1">
-                        <Zap className="w-3 h-3 text-emerald-600" />
-                        Your Unfair Advantage
-                      </span>
-                      <p className="text-emerald-950 font-medium leading-relaxed">
+                    {/* Your Advantage */}
+                    <div className="p-3.5 bg-emerald-50/90 border border-emerald-200/80 rounded-2xl space-y-1.5 flex flex-col">
+                      <div className="flex items-center gap-1.5 text-emerald-800">
+                        <Zap className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+                        <span className="text-[10px] font-black uppercase tracking-wider">
+                          Your Unfair Advantage
+                        </span>
+                      </div>
+                      <p className="text-xs text-emerald-950 font-semibold leading-snug">
                         {comp.differentiation || comp.ourCounterStrategy}
                       </p>
                     </div>
@@ -527,67 +586,120 @@ export default function ResultsPage() {
             </div>
           </section>
 
-          {/* Clean Head-to-Head Comparison Table */}
+          {/* Visual Head-to-Head Dimension Cards (Card-based Showdown) */}
           {strategy.competitorBenchmark.headToHeadComparison && (
-            <section className="bg-white rounded-[2.5rem] p-6 sm:p-9 border border-slate-200/90 shadow-sm space-y-4">
-              <h3 className="text-lg font-black text-slate-950">
-                Head-to-Head Strategic Differences
-              </h3>
+            <section className="bg-white rounded-[2.5rem] p-6 sm:p-9 border border-slate-200/90 shadow-sm space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pb-3 border-b border-slate-100">
+                <div>
+                  <h3 className="text-xl font-black text-slate-950 flex items-center gap-2">
+                    <Sliders className="w-5 h-5 text-[#002D72]" />
+                    Head-to-Head Tactical Showdown
+                  </h3>
+                  <p className="text-xs text-slate-500 font-medium">
+                    Key marketing dimensions and how your playbook intentionally diverges from market standard.
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-slate-400">Playbook Contrast</span>
+              </div>
 
-              <div className="overflow-x-auto rounded-2xl border border-slate-200">
-                <table className="w-full text-left border-collapse text-xs">
-                  <thead>
-                    <tr className="bg-slate-50 border-b border-slate-200 text-[11px] font-black text-slate-600 uppercase">
-                      <th className="py-3 px-4">Dimension</th>
-                      <th className="py-3 px-4 text-rose-700">Typical Competitor Approach</th>
-                      <th className="py-3 px-4 text-[#002D72] bg-[#002D72]/5">Your Recommended Approach</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    {strategy.competitorBenchmark.headToHeadComparison.map((row, idx) => (
-                      <tr key={idx} className="hover:bg-slate-50/50">
-                        <td className="py-3.5 px-4 font-bold text-slate-900 whitespace-nowrap">{row.dimension}</td>
-                        <td className="py-3.5 px-4 text-slate-600 font-medium leading-relaxed">
-                          <span className="text-rose-600 font-bold mr-1.5">✕</span>
-                          {row.competitorsApproach}
-                        </td>
-                        <td className="py-3.5 px-4 text-slate-900 font-bold leading-relaxed bg-[#002D72]/[0.02]">
-                          <span className="text-emerald-600 font-bold mr-1.5">✓</span>
-                          {row.yourAdvantage}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {strategy.competitorBenchmark.headToHeadComparison.map((row, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-[#FAF9F6] border border-slate-200/90 rounded-2xl p-4.5 space-y-3 shadow-2xs hover:shadow-sm transition-all"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-black text-slate-900 uppercase tracking-wide">
+                        {row.dimension}
+                      </span>
+                      <span className="text-[10px] font-bold text-slate-400">
+                        Pillar 0{idx + 1}
+                      </span>
+                    </div>
+
+                    <div className="space-y-2 text-xs">
+                      {/* Competitor trap */}
+                      <div className="p-3 bg-white border border-rose-200/60 rounded-xl flex items-start gap-2.5">
+                        <span className="w-4 h-4 rounded-full bg-rose-100 text-rose-700 font-black text-[10px] flex items-center justify-center flex-shrink-0 mt-0.5">
+                          ✕
+                        </span>
+                        <div>
+                          <span className="block text-[10px] font-bold text-rose-700 uppercase tracking-wider mb-0.5">
+                            Competitor Routine
+                          </span>
+                          <p className="text-slate-600 font-medium leading-relaxed">
+                            {row.competitorsApproach}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Your winning play */}
+                      <div className="p-3 bg-[#002D72]/[0.03] border border-[#002D72]/20 rounded-xl flex items-start gap-2.5">
+                        <span className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 font-black text-[10px] flex items-center justify-center flex-shrink-0 mt-0.5">
+                          ✓
+                        </span>
+                        <div>
+                          <span className="block text-[10px] font-black text-[#002D72] uppercase tracking-wider mb-0.5">
+                            Your Winning Play
+                          </span>
+                          <p className="text-slate-900 font-bold leading-relaxed">
+                            {row.yourAdvantage}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </section>
           )}
 
-          {/* 3 Actionable Market Gaps */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white rounded-2xl p-5 border border-slate-200 space-y-2 shadow-sm">
-              <span className="text-[10px] font-black text-[#855B00] uppercase bg-[#FFB81C]/25 px-2.5 py-0.5 rounded-full">
-                01. Competitor Pattern
+          {/* 3 Actionable Market Opportunity Pillars */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="relative overflow-hidden bg-white rounded-[2rem] p-6 border border-amber-200/80 shadow-sm space-y-3">
+              <span className="absolute -bottom-4 -right-2 text-7xl font-black text-amber-500/5 select-none pointer-events-none">
+                01
               </span>
-              <p className="text-xs text-slate-700 font-medium leading-relaxed">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center gap-1.5 text-[10px] font-black text-[#855B00] uppercase bg-[#FFB81C]/25 px-3 py-1 rounded-full">
+                  <Eye className="w-3 h-3" />
+                  The Industry Pattern
+                </span>
+                <span className="text-xs font-bold text-slate-400">What they do</span>
+              </div>
+              <p className="text-xs text-slate-700 font-medium leading-relaxed relative z-10">
                 {strategy.competitorBenchmark.marketOpportunities?.pattern || strategy.competitorBenchmark.industryLandscape}
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl p-5 border border-slate-200 space-y-2 shadow-sm">
-              <span className="text-[10px] font-black text-sky-800 uppercase bg-sky-100 px-2.5 py-0.5 rounded-full">
-                02. Market Gap
+            <div className="relative overflow-hidden bg-white rounded-[2rem] p-6 border border-sky-200/80 shadow-sm space-y-3">
+              <span className="absolute -bottom-4 -right-2 text-7xl font-black text-sky-500/5 select-none pointer-events-none">
+                02
               </span>
-              <p className="text-xs text-slate-700 font-medium leading-relaxed">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center gap-1.5 text-[10px] font-black text-sky-800 uppercase bg-sky-100 px-3 py-1 rounded-full">
+                  <AlertTriangle className="w-3 h-3" />
+                  The Unmet Need
+                </span>
+                <span className="text-xs font-bold text-slate-400">Market Gap</span>
+              </div>
+              <p className="text-xs text-slate-700 font-medium leading-relaxed relative z-10">
                 {strategy.competitorBenchmark.marketOpportunities?.marketGap || strategy.competitorBenchmark.competitorGap}
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl p-5 border border-slate-200 space-y-2 shadow-sm">
-              <span className="text-[10px] font-black text-emerald-800 uppercase bg-emerald-100 px-2.5 py-0.5 rounded-full">
-                03. Your Whitespace
+            <div className="relative overflow-hidden bg-white rounded-[2rem] p-6 border border-emerald-200/80 shadow-sm space-y-3">
+              <span className="absolute -bottom-4 -right-2 text-7xl font-black text-emerald-500/5 select-none pointer-events-none">
+                03
               </span>
-              <p className="text-xs text-slate-700 font-medium leading-relaxed">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center gap-1.5 text-[10px] font-black text-emerald-800 uppercase bg-emerald-100 px-3 py-1 rounded-full">
+                  <Flame className="w-3 h-3" />
+                  Your Blue Ocean
+                </span>
+                <span className="text-xs font-bold text-slate-400">Your Whitespace</span>
+              </div>
+              <p className="text-xs text-slate-700 font-medium leading-relaxed relative z-10">
                 {strategy.competitorBenchmark.marketOpportunities?.brandOpportunity || strategy.competitorBenchmark.whitespaceAdvantage}
               </p>
             </div>
@@ -596,120 +708,226 @@ export default function ResultsPage() {
       )}
 
       {/* =====================================================================
-          TAB 3: 30-DAY GROWTH PLAYBOOK (Clean Execution Roadmap)
+          TAB 3: 30-DAY GROWTH PLAYBOOK (Visual Stepper & Content Mockups)
           ===================================================================== */}
       {activeTab === "roadmap" && (
         <div className="space-y-6 animate-fade-in">
           
-          {/* 30-Day Execution Milestones (3 Phases) */}
-          <section className="bg-white rounded-[2.5rem] p-6 sm:p-9 border border-slate-200/90 shadow-sm space-y-5">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pb-3 border-b border-slate-100">
+          {/* 30-Day Execution Stepper (3 Connected Phases) */}
+          <section className="bg-white rounded-[2.5rem] p-6 sm:p-9 border border-slate-200/90 shadow-sm space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
               <div>
-                <h2 className="text-xl font-black text-slate-950">
+                <h2 className="text-xl sm:text-2xl font-black text-slate-950 flex items-center gap-2">
+                  <Target className="w-5 h-5 text-[#002D72]" />
                   30-Day Execution Timeline
                 </h2>
-                <p className="text-xs text-slate-500 font-medium">
-                  Step-by-step implementation milestones calibrated to your weekly time budget.
+                <p className="text-xs sm:text-sm text-slate-500 font-medium">
+                  Step-by-step milestones calibrated for high consistency without overwhelm.
                 </p>
               </div>
-              <span className="text-xs font-bold text-slate-400">{results.strategy30Day.weeklyTimeBudget}</span>
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#002D72]/10 text-[#002D72] text-xs font-black">
+                <Clock className="w-3.5 h-3.5" />
+                {results.strategy30Day.weeklyTimeBudget}
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {results.strategy30Day.roadmap.map((phase, idx) => (
-                <div
-                  key={idx}
-                  className="bg-[#FAF9F6] border border-slate-200 rounded-2xl p-5 space-y-3 flex flex-col justify-between shadow-sm"
-                >
-                  <div className="space-y-2.5">
-                    <div className="flex items-center justify-between">
-                      <span className="w-7 h-7 rounded-lg bg-[#002D72] text-white flex items-center justify-center text-xs font-black">
-                        0{idx + 1}
-                      </span>
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white text-slate-700 border border-slate-200">
-                        {phase.timing}
-                      </span>
+            {/* Stepper Timeline Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 relative">
+              {results.strategy30Day.roadmap.map((phase, idx) => {
+                const phaseTimeEstimate = idx === 0 ? "⚡ ~60 min setup" : idx === 1 ? "⏱️ Batch 90 min/wk" : "📈 ~30 min review";
+                return (
+                  <div
+                    key={idx}
+                    className="relative bg-[#FAF9F6] border border-slate-200/90 rounded-[2rem] p-6 space-y-4 flex flex-col justify-between shadow-2xs hover:shadow-sm hover:border-[#002D72]/30 transition-all"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="w-8 h-8 rounded-xl bg-[#002D72] text-white flex items-center justify-center text-xs font-black shadow-xs">
+                            0{idx + 1}
+                          </span>
+                          <span className="text-[11px] font-black uppercase tracking-wider text-[#002D72]">
+                            Phase {idx + 1}
+                          </span>
+                        </div>
+                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white text-slate-700 border border-slate-200 shadow-2xs">
+                          {phase.timing}
+                        </span>
+                      </div>
+
+                      <div>
+                        <h3 className="font-black text-base text-slate-950 mb-1">{phase.phase}</h3>
+                        <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                          {phase.focus}
+                        </p>
+                      </div>
                     </div>
 
-                    <h3 className="font-black text-sm text-slate-950">{phase.phase}</h3>
-                    <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                      {phase.focus}
-                    </p>
-                  </div>
-
-                  <div className="pt-3 border-t border-slate-200 space-y-1.5 text-xs text-slate-700">
-                    {phase.actions.slice(0, 2).map((act, aIdx) => (
-                      <div key={aIdx} className="flex items-start gap-2">
-                        <Check className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                        <span className="font-medium text-[11px]">{act}</span>
+                    <div className="space-y-3 pt-3 border-t border-slate-200/80">
+                      <div className="space-y-2 text-xs text-slate-700">
+                        {phase.actions.slice(0, 2).map((act, aIdx) => (
+                          <div key={aIdx} className="flex items-start gap-2 bg-white p-2.5 rounded-xl border border-slate-200/60">
+                            <Check className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                            <span className="font-semibold text-[11px] text-slate-800 leading-snug">{act}</span>
+                          </div>
+                        ))}
                       </div>
-                    ))}
+
+                      <div className="flex items-center justify-between text-[10px] font-bold text-slate-400 pt-1">
+                        <span>Commitment:</span>
+                        <span className="text-slate-600 font-semibold">{phaseTimeEstimate}</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
 
-          {/* 3 Ready-to-Use Content Concepts */}
-          <section className="bg-white rounded-[2.5rem] p-6 sm:p-9 border border-slate-200/90 shadow-sm space-y-5">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+          {/* Ready-to-Use Content Concepts (Rendered as Social Post Mockup Cards) */}
+          <section className="bg-white rounded-[2.5rem] p-6 sm:p-9 border border-slate-200/90 shadow-sm space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
               <div>
-                <h3 className="text-lg font-black text-slate-950">
+                <h3 className="text-xl font-black text-slate-950 flex items-center gap-2">
+                  <Video className="w-5 h-5 text-[#002D72]" />
                   Ready-to-Execute Content Concepts
                 </h3>
                 <p className="text-xs text-slate-500 font-medium">
-                  High-converting hooks and formats engineered for your top platform.
+                  High-converting hooks and formats engineered specifically for your primary channel.
                 </p>
               </div>
               <button
                 onClick={() => setIsAllIdeasExpanded(!isAllIdeasExpanded)}
-                className="text-xs font-bold text-[#002D72] hover:text-[#001C48]"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-[#002D72] bg-[#002D72]/5 hover:bg-[#002D72]/10 transition-colors w-fit"
               >
-                {isAllIdeasExpanded ? "Top 3" : "View All"}
+                {isAllIdeasExpanded ? "Show Top 3 Concepts" : "View All Concepts (6)"}
               </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {(isAllIdeasExpanded && strategy?.contentIdeas
                 ? strategy.contentIdeas
                 : results.strategy30Day.personalizedIdeas
               ).slice(0, isAllIdeasExpanded ? 6 : 3).map((idea, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#FAF9F6] rounded-2xl p-5 border border-slate-200 space-y-3 flex flex-col justify-between shadow-sm"
+                  className="bg-[#FAF9F6] rounded-[2rem] border border-slate-200/90 p-5 space-y-4 flex flex-col justify-between shadow-2xs hover:shadow-md transition-all group"
                 >
-                  <div className="space-y-1.5">
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-[#002D72]/10 text-[#002D72]">
-                      Concept 0{idx + 1}
-                    </span>
-                    <h4 className="font-black text-sm text-slate-950">{idea.title}</h4>
-                    <p className="text-xs text-slate-600 italic font-medium leading-relaxed">
-                      &ldquo;{idea.hook}&rdquo;
-                    </p>
+                  <div className="space-y-3.5">
+                    {/* Mockup Header */}
+                    <div className="flex items-center justify-between text-xs">
+                      <div className="flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-lg bg-[#FFB81C]/20 text-[#855B00] flex items-center justify-center text-[10px] font-black">
+                          #{idx + 1}
+                        </span>
+                        <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md bg-white border border-slate-200 text-slate-700">
+                          {idea.format}
+                        </span>
+                      </div>
+                      <Bookmark className="w-4 h-4 text-slate-400 group-hover:text-[#002D72] transition-colors" />
+                    </div>
+
+                    {/* Title */}
+                    <h4 className="font-black text-sm text-slate-950 line-clamp-2">
+                      {idea.title}
+                    </h4>
+
+                    {/* Viral Hook Speech Bubble */}
+                    <div className="p-3.5 bg-white border border-slate-200/90 rounded-2xl shadow-2xs space-y-1 relative">
+                      <span className="text-[9px] font-black uppercase tracking-wider text-slate-400 block">
+                        Opening Hook (First 3 Seconds)
+                      </span>
+                      <p className="text-xs text-slate-900 font-bold italic leading-relaxed">
+                        &ldquo;{idea.hook}&rdquo;
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="pt-2.5 border-t border-slate-200 flex items-center justify-between text-[11px] text-slate-500 font-semibold">
-                    <span>Format:</span>
-                    <span className="text-slate-900 font-bold truncate max-w-[170px]">{idea.format}</span>
+                  {/* Objective & Execution details */}
+                  <div className="pt-3 border-t border-slate-200/80 space-y-2 text-xs">
+                    {'keyMessage' in idea && idea.keyMessage ? (
+                      <div className="space-y-0.5">
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Core Message:</span>
+                        <p className="text-[11px] text-slate-700 font-medium leading-snug">{idea.keyMessage}</p>
+                      </div>
+                    ) : 'objective' in idea && idea.objective ? (
+                      <div className="space-y-0.5">
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Goal:</span>
+                        <p className="text-[11px] text-slate-700 font-medium leading-snug">{idea.objective}</p>
+                      </div>
+                    ) : null}
+
+                    {'cta' in idea && idea.cta && (
+                      <div className="flex items-center justify-between pt-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200/60">
+                        <span className="text-[10px] uppercase font-black">CTA:</span>
+                        <span className="truncate max-w-[170px]">{idea.cta}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
             </div>
           </section>
 
-          {/* Key Validation Metrics (KPIs) */}
+          {/* Key Validation Metrics (Executive KPI Dashboard) */}
           {strategy?.successMetrics && strategy.successMetrics.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-              {strategy.successMetrics.map((metric, idx) => (
-                <div key={idx} className="bg-white rounded-2xl p-4 border border-slate-200 space-y-1.5 shadow-sm">
-                  <span className="text-[10px] font-black text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full uppercase">
-                    {metric.frequency}
-                  </span>
-                  <h4 className="font-black text-xs text-slate-950">{metric.kpi}</h4>
-                  <p className="text-[11px] text-slate-500 font-medium leading-relaxed">{metric.whyItMatters}</p>
+            <section className="bg-white rounded-[2.5rem] p-6 sm:p-9 border border-slate-200/90 shadow-sm space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pb-2 border-b border-slate-100">
+                <div>
+                  <h3 className="text-xl font-black text-slate-950 flex items-center gap-2">
+                    <TrendingUp className="w-5 h-5 text-[#002D72]" />
+                    Key Validation Metrics & ROI Benchmarks
+                  </h3>
+                  <p className="text-xs text-slate-500 font-medium">
+                    What to measure weekly to verify brand momentum and lead generation.
+                  </p>
                 </div>
-              ))}
-            </div>
+                <span className="text-xs font-bold text-slate-400">Executive Scorecard</span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {strategy.successMetrics.map((metric, idx) => {
+                  const kpiLower = metric.kpi.toLowerCase();
+                  const MetricIcon = kpiLower.includes("lead") || kpiLower.includes("sale") || kpiLower.includes("client") || kpiLower.includes("conversion")
+                    ? Zap
+                    : kpiLower.includes("click") || kpiLower.includes("traffic") || kpiLower.includes("visit")
+                    ? MousePointer
+                    : kpiLower.includes("comment") || kpiLower.includes("share") || kpiLower.includes("engage") || kpiLower.includes("save")
+                    ? MessageSquare
+                    : Eye;
+
+                  return (
+                    <div
+                      key={idx}
+                      className="bg-[#FAF9F6] rounded-2xl p-4.5 border border-slate-200/90 space-y-3 shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between"
+                    >
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="w-8 h-8 rounded-xl bg-[#002D72]/10 text-[#002D72] flex items-center justify-center shadow-2xs">
+                            <MetricIcon className="w-4 h-4" />
+                          </span>
+                          <span className="text-[10px] font-black text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                            {metric.frequency}
+                          </span>
+                        </div>
+                        <h4 className="font-black text-sm text-slate-950 leading-tight">
+                          {metric.kpi}
+                        </h4>
+                      </div>
+
+                      <div className="pt-2 border-t border-slate-200/80">
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">
+                          Why It Drives Growth:
+                        </span>
+                        <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
+                          {metric.whyItMatters}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
           )}
         </div>
       )}
