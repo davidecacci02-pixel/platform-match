@@ -173,21 +173,32 @@ export default function BestSocialMediaPlatformsArticlePage() {
       {/* Breadcrumb Bar */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 w-full">
         <div className="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-slate-200/80">
-          <Link
-            href="/about"
-            prefetch={true}
-            className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-[#002D72] transition-colors px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm hover:shadow"
-          >
-            <ArrowLeft className="w-3.5 h-3.5 text-[#002D72]" />
-            <span>About Us</span>
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/"
+              prefetch={true}
+              className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-[#002D72] transition-colors px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm hover:shadow"
+            >
+              <ArrowLeft className="w-3.5 h-3.5 text-[#002D72]" />
+              <span>Back to Lab Home</span>
+            </Link>
+
+            <Link
+              href="/platform-match"
+              prefetch={true}
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-[#002D72] transition-colors px-3.5 py-2 rounded-full bg-white border border-slate-200 shadow-sm hover:shadow"
+            >
+              <Compass className="w-3.5 h-3.5 text-[#002D72]" />
+              <span>Platform Match Tool</span>
+            </Link>
+          </div>
 
           <div className="flex items-center gap-2 text-xs font-semibold text-slate-500">
             <Link href="/" className="hover:text-[#002D72]">
-              Platform Match
+              Home
             </Link>
             <span>/</span>
-            <span className="text-[#002D72] font-bold">Articles &amp; Guides</span>
+            <span className="text-[#002D72] font-bold">Resources &amp; Selection Guide</span>
           </div>
         </div>
       </div>
