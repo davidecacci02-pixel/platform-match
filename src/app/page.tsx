@@ -118,11 +118,11 @@ export default function LabHomePage() {
       title: "Platform Match (Lab Tool)",
       tagline: "Interactive 3-Minute Strategic Channel Fit",
       description:
-        "Our lab's signature diagnostic tool. Complete a 3-minute assessment to discover your top-ranked social platform fit, competitor benchmarks, and an actionable 30-day posting roadmap.",
+        "Our lab's signature diagnostic tool. Complete a 3-minute assessment to discover your top-ranked social platform fit, competitor category benchmarks, and actionable strategic positioning.",
       deliverables: [
         "Multi-factor compatibility scores",
         "Competitor category benchmarks",
-        "Customized 30-day posting roadmap",
+        "Competitor gap & whitespace analysis",
       ],
       badge: "Signature Tool",
       isFlagship: true,
@@ -560,7 +560,7 @@ export default function LabHomePage() {
                   <div className="p-3.5 rounded-2xl bg-[#002D72]/5 border border-[#002D72]/15 text-[11px] text-slate-700 space-y-1">
                     <div className="font-extrabold text-[#002D72]">What You Receive:</div>
                     <p className="text-slate-600 leading-relaxed text-[11px]">
-                      A 30-day realistic posting playbook, competitor gap analysis, and content themes customized to your available team capacity.
+                      Comprehensive 6-platform compatibility scores, competitor category benchmarks, and strategic brand positioning customized to your available team capacity.
                     </p>
                   </div>
 

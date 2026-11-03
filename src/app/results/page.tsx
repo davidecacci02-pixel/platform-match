@@ -7,7 +7,6 @@ import {
   Sparkles,
   RotateCcw,
   CheckCircle2,
-  Calendar,
   Layers,
   ArrowRight,
   ChevronDown,
@@ -20,16 +19,11 @@ import {
   Building2,
   Bot,
   Zap,
-  TrendingUp,
   Swords,
   AlertTriangle,
   Award,
   Check,
   X,
-  Bookmark,
-  MessageSquare,
-  MousePointer,
-  Video,
   Sliders,
   Flame,
   Eye,
@@ -57,7 +51,7 @@ import {
   clearQuizSession,
 } from "@/lib/session";
 
-type ResultsTab = "channels" | "competitors" | "roadmap";
+type ResultsTab = "channels" | "competitors";
 
 export default function ResultsPage() {
   const router = useRouter();
@@ -71,7 +65,6 @@ export default function ResultsPage() {
   const [activeTab, setActiveTab] = useState<ResultsTab>("channels");
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [expandedPlatform, setExpandedPlatform] = useState<string | null>(null);
-  const [isAllIdeasExpanded, setIsAllIdeasExpanded] = useState(false);
   const [isClientLoaded, setIsClientLoaded] = useState(false);
 
   useEffect(() => {
@@ -291,7 +284,7 @@ export default function ResultsPage() {
           2. LINKTREE-STYLE SECTION SWITCHER (Tabs eliminate chaotic scrolling!)
           ===================================================================== */}
       <div className="flex items-center justify-center">
-        <div className="p-1.5 bg-white rounded-full border border-slate-200 shadow-sm flex items-center gap-1 max-w-xl w-full">
+        <div className="p-1.5 bg-white rounded-full border border-slate-200 shadow-sm flex items-center gap-1 max-w-md w-full">
           <button
             onClick={() => setActiveTab("channels")}
             className={`flex-1 py-3 px-4 rounded-full text-xs sm:text-sm font-black transition-all flex items-center justify-center gap-2 ${
@@ -314,18 +307,6 @@ export default function ResultsPage() {
           >
             <Swords className="w-4 h-4" />
             <span>Competitor Gaps</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("roadmap")}
-            className={`flex-1 py-3 px-4 rounded-full text-xs sm:text-sm font-black transition-all flex items-center justify-center gap-2 ${
-              activeTab === "roadmap"
-                ? "bg-[#002D72] text-white shadow-md"
-                : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-            }`}
-          >
-            <Calendar className="w-4 h-4" />
-            <span>30-Day Playbook</span>
           </button>
         </div>
       </div>
@@ -707,230 +688,7 @@ export default function ResultsPage() {
         </div>
       )}
 
-      {/* =====================================================================
-          TAB 3: 30-DAY GROWTH PLAYBOOK (Visual Stepper & Content Mockups)
-          ===================================================================== */}
-      {activeTab === "roadmap" && (
-        <div className="space-y-6 animate-fade-in">
-          
-          {/* 30-Day Execution Stepper (3 Connected Phases) */}
-          <section className="bg-white rounded-[2.5rem] p-6 sm:p-9 border border-slate-200/90 shadow-sm space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
-              <div>
-                <h2 className="text-xl sm:text-2xl font-black text-slate-950 flex items-center gap-2">
-                  <Target className="w-5 h-5 text-[#002D72]" />
-                  30-Day Execution Timeline
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-500 font-medium">
-                  Step-by-step milestones calibrated for high consistency without overwhelm.
-                </p>
-              </div>
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#002D72]/10 text-[#002D72] text-xs font-black">
-                <Clock className="w-3.5 h-3.5" />
-                {results.strategy30Day.weeklyTimeBudget}
-              </div>
-            </div>
 
-            {/* Stepper Timeline Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 relative">
-              {results.strategy30Day.roadmap.map((phase, idx) => {
-                const phaseTimeEstimate = idx === 0 ? "⚡ ~60 min setup" : idx === 1 ? "⏱️ Batch 90 min/wk" : "📈 ~30 min review";
-                return (
-                  <div
-                    key={idx}
-                    className="relative bg-[#FAF9F6] border border-slate-200/90 rounded-[2rem] p-6 space-y-4 flex flex-col justify-between shadow-2xs hover:shadow-sm hover:border-[#002D72]/30 transition-all"
-                  >
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <span className="w-8 h-8 rounded-xl bg-[#002D72] text-white flex items-center justify-center text-xs font-black shadow-xs">
-                            0{idx + 1}
-                          </span>
-                          <span className="text-[11px] font-black uppercase tracking-wider text-[#002D72]">
-                            Phase {idx + 1}
-                          </span>
-                        </div>
-                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white text-slate-700 border border-slate-200 shadow-2xs">
-                          {phase.timing}
-                        </span>
-                      </div>
-
-                      <div>
-                        <h3 className="font-black text-base text-slate-950 mb-1">{phase.phase}</h3>
-                        <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                          {phase.focus}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-3 pt-3 border-t border-slate-200/80">
-                      <div className="space-y-2 text-xs text-slate-700">
-                        {phase.actions.slice(0, 2).map((act, aIdx) => (
-                          <div key={aIdx} className="flex items-start gap-2 bg-white p-2.5 rounded-xl border border-slate-200/60">
-                            <Check className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                            <span className="font-semibold text-[11px] text-slate-800 leading-snug">{act}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="flex items-center justify-between text-[10px] font-bold text-slate-400 pt-1">
-                        <span>Commitment:</span>
-                        <span className="text-slate-600 font-semibold">{phaseTimeEstimate}</span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-
-          {/* Ready-to-Use Content Concepts (Rendered as Social Post Mockup Cards) */}
-          <section className="bg-white rounded-[2.5rem] p-6 sm:p-9 border border-slate-200/90 shadow-sm space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
-              <div>
-                <h3 className="text-xl font-black text-slate-950 flex items-center gap-2">
-                  <Video className="w-5 h-5 text-[#002D72]" />
-                  Ready-to-Execute Content Concepts
-                </h3>
-                <p className="text-xs text-slate-500 font-medium">
-                  High-converting hooks and formats engineered specifically for your primary channel.
-                </p>
-              </div>
-              <button
-                onClick={() => setIsAllIdeasExpanded(!isAllIdeasExpanded)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-[#002D72] bg-[#002D72]/5 hover:bg-[#002D72]/10 transition-colors w-fit"
-              >
-                {isAllIdeasExpanded ? "Show Top 3 Concepts" : "View All Concepts (6)"}
-              </button>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {(isAllIdeasExpanded && strategy?.contentIdeas
-                ? strategy.contentIdeas
-                : results.strategy30Day.personalizedIdeas
-              ).slice(0, isAllIdeasExpanded ? 6 : 3).map((idea, idx) => (
-                <div
-                  key={idx}
-                  className="bg-[#FAF9F6] rounded-[2rem] border border-slate-200/90 p-5 space-y-4 flex flex-col justify-between shadow-2xs hover:shadow-md transition-all group"
-                >
-                  <div className="space-y-3.5">
-                    {/* Mockup Header */}
-                    <div className="flex items-center justify-between text-xs">
-                      <div className="flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-lg bg-[#FFB81C]/20 text-[#855B00] flex items-center justify-center text-[10px] font-black">
-                          #{idx + 1}
-                        </span>
-                        <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md bg-white border border-slate-200 text-slate-700">
-                          {idea.format}
-                        </span>
-                      </div>
-                      <Bookmark className="w-4 h-4 text-slate-400 group-hover:text-[#002D72] transition-colors" />
-                    </div>
-
-                    {/* Title */}
-                    <h4 className="font-black text-sm text-slate-950 line-clamp-2">
-                      {idea.title}
-                    </h4>
-
-                    {/* Viral Hook Speech Bubble */}
-                    <div className="p-3.5 bg-white border border-slate-200/90 rounded-2xl shadow-2xs space-y-1 relative">
-                      <span className="text-[9px] font-black uppercase tracking-wider text-slate-400 block">
-                        Opening Hook (First 3 Seconds)
-                      </span>
-                      <p className="text-xs text-slate-900 font-bold italic leading-relaxed">
-                        &ldquo;{idea.hook}&rdquo;
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Objective & Execution details */}
-                  <div className="pt-3 border-t border-slate-200/80 space-y-2 text-xs">
-                    {'keyMessage' in idea && idea.keyMessage ? (
-                      <div className="space-y-0.5">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Core Message:</span>
-                        <p className="text-[11px] text-slate-700 font-medium leading-snug">{idea.keyMessage}</p>
-                      </div>
-                    ) : 'objective' in idea && idea.objective ? (
-                      <div className="space-y-0.5">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Goal:</span>
-                        <p className="text-[11px] text-slate-700 font-medium leading-snug">{idea.objective}</p>
-                      </div>
-                    ) : null}
-
-                    {'cta' in idea && idea.cta && (
-                      <div className="flex items-center justify-between pt-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200/60">
-                        <span className="text-[10px] uppercase font-black">CTA:</span>
-                        <span className="truncate max-w-[170px]">{idea.cta}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Key Validation Metrics (Executive KPI Dashboard) */}
-          {strategy?.successMetrics && strategy.successMetrics.length > 0 && (
-            <section className="bg-white rounded-[2.5rem] p-6 sm:p-9 border border-slate-200/90 shadow-sm space-y-5">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pb-2 border-b border-slate-100">
-                <div>
-                  <h3 className="text-xl font-black text-slate-950 flex items-center gap-2">
-                    <TrendingUp className="w-5 h-5 text-[#002D72]" />
-                    Key Validation Metrics & ROI Benchmarks
-                  </h3>
-                  <p className="text-xs text-slate-500 font-medium">
-                    What to measure weekly to verify brand momentum and lead generation.
-                  </p>
-                </div>
-                <span className="text-xs font-bold text-slate-400">Executive Scorecard</span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {strategy.successMetrics.map((metric, idx) => {
-                  const kpiLower = metric.kpi.toLowerCase();
-                  const MetricIcon = kpiLower.includes("lead") || kpiLower.includes("sale") || kpiLower.includes("client") || kpiLower.includes("conversion")
-                    ? Zap
-                    : kpiLower.includes("click") || kpiLower.includes("traffic") || kpiLower.includes("visit")
-                    ? MousePointer
-                    : kpiLower.includes("comment") || kpiLower.includes("share") || kpiLower.includes("engage") || kpiLower.includes("save")
-                    ? MessageSquare
-                    : Eye;
-
-                  return (
-                    <div
-                      key={idx}
-                      className="bg-[#FAF9F6] rounded-2xl p-4.5 border border-slate-200/90 space-y-3 shadow-2xs hover:shadow-sm transition-all flex flex-col justify-between"
-                    >
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <span className="w-8 h-8 rounded-xl bg-[#002D72]/10 text-[#002D72] flex items-center justify-center shadow-2xs">
-                            <MetricIcon className="w-4 h-4" />
-                          </span>
-                          <span className="text-[10px] font-black text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full uppercase tracking-wider">
-                            {metric.frequency}
-                          </span>
-                        </div>
-                        <h4 className="font-black text-sm text-slate-950 leading-tight">
-                          {metric.kpi}
-                        </h4>
-                      </div>
-
-                      <div className="pt-2 border-t border-slate-200/80">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">
-                          Why It Drives Growth:
-                        </span>
-                        <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
-                          {metric.whyItMatters}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </section>
-          )}
-        </div>
-      )}
 
       {/* =====================================================================
           3. INTERACTIVE AI CONSULTANT (Clean & Non-Intrusive)
