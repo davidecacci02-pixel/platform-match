@@ -26,6 +26,7 @@ import {
 import { SocialIcon } from "@/components/SocialIcon";
 import { ALL_PLATFORM_IDS, PLATFORMS_DATA } from "@/lib/platforms";
 import { SCORING_WEIGHTS } from "@/lib/scoring-matrix";
+import { PlatformMatchFAQ } from "@/components/PlatformMatchFAQ";
 
 import type { Metadata } from "next";
 
@@ -68,12 +69,12 @@ export default function PlatformMatchLandingPage() {
           </a>
 
           <Link
-            href="/best-social-media-platforms-for-business"
+            href="/blog"
             prefetch={true}
             className="inline-flex items-center gap-2 text-xs font-bold text-[#002D72] hover:text-[#001C48] transition-colors px-4 py-2 rounded-full bg-[#FFB81C]/20 border border-[#FFB81C]/40 shadow-sm hover:shadow hover:scale-[1.01]"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#001C48]" />
-            <span>Read selection guide →</span>
+            <span>Read Lab Blog &amp; Guides →</span>
           </Link>
         </div>
       </div>
@@ -705,6 +706,11 @@ export default function PlatformMatchLandingPage() {
           </div>
         </div>
       </section>
+
+      {/* =====================================================================
+          FREQUENTLY ASKED QUESTIONS SECTION (Interactive Accordion)
+          ===================================================================== */}
+      <PlatformMatchFAQ />
 
       {/* =====================================================================
           FINAL QUIZ CALL-TO-ACTION CARD

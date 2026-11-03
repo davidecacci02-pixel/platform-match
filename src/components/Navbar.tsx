@@ -90,14 +90,14 @@ export function Navbar() {
               Platform Match
             </Link>
             <Link
-              href="/best-social-media-platforms-for-business"
+              href="/blog"
               className={`text-xs font-semibold transition-colors px-2 py-1 rounded-md ${
-                pathname === "/best-social-media-platforms-for-business"
+                pathname === "/blog" || pathname.startsWith("/blog") || pathname === "/best-social-media-platforms-for-business"
                   ? "text-[#002D72] font-bold"
                   : "text-slate-700 hover:text-[#002D72]"
               }`}
             >
-              Resources
+              Blog
             </Link>
             <Link
               href="/about"
@@ -171,11 +171,12 @@ export function Navbar() {
               <span>Platform Match</span>
             </Link>
             <Link
-              href="/best-social-media-platforms-for-business"
+              href="/blog"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-slate-700 hover:text-[#002D72] transition-colors py-1"
+              className="inline-flex items-center gap-2 text-slate-700 hover:text-[#002D72] transition-colors py-1"
             >
-              Resources
+              <BookOpen className="w-4 h-4 text-[#002D72]" />
+              <span>Blog</span>
             </Link>
             <Link
               href="/about"

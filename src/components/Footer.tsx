@@ -76,8 +76,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/best-social-media-platforms-for-business" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
-                  Resources (/best-social-media-platforms-for-business)
+                <Link href="/blog" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                  Blog (/blog)
                 </Link>
               </li>
               <li>
@@ -121,8 +121,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/best-social-media-platforms-for-business" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
-                  Social Platform Selection Guide
+                <Link href="/blog" className="text-slate-300 hover:text-[#FFB81C] transition-colors">
+                  Blog &amp; Selection Guides
                 </Link>
               </li>
             </ul>
