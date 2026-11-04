@@ -719,6 +719,209 @@ export default function PlatformMatchLandingPage() {
       </section>
 
       {/* =====================================================================
+          WORKED EXAMPLE: FICTIONAL BAKERY DEMONSTRATION
+          ===================================================================== */}
+      <section id="worked-example" className="py-20 border-t border-slate-200 bg-[#FAF9F6]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          <div className="text-center space-y-3">
+            <span className="text-xs font-black uppercase tracking-widest text-[#966300] bg-[#FFB81C]/25 px-3.5 py-1 rounded-full border border-[#FFB81C]/40">
+              Fictional Bakery Demonstration
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight font-sans">
+              Worked Example: Artisan Bakery Case Study
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              Developed for MAR649 to illustrate how our student decision matrix computes compatibility scores.
+              Below are the six inputs entered for a neighborhood retail bakery and the resulting algorithmic rankings.
+            </p>
+          </div>
+
+          <div className="bg-white rounded-[2.5rem] border border-slate-200/90 shadow-xl overflow-hidden p-6 sm:p-10 space-y-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              
+              {/* Left Column: The 6 Inputs */}
+              <div className="lg:col-span-5 space-y-5">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#002D72]" />
+                    <h3 className="font-black text-slate-900 text-sm sm:text-base uppercase tracking-wider">
+                      The 6 Quiz Inputs
+                    </h3>
+                  </div>
+                  <span className="text-[11px] font-extrabold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">
+                    Input Profile
+                  </span>
+                </div>
+
+                <div className="space-y-3 text-xs">
+                  <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[#002D72] block">
+                      1. Industry Vertical
+                    </span>
+                    <p className="font-bold text-slate-900 text-sm">Food &amp; Beverage / Retail Bakery</p>
+                    <p className="text-[11px] text-slate-500">Fresh daily artisan breads, pastries, morning coffee</p>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[#002D72] block">
+                      2. Target Audience
+                    </span>
+                    <p className="font-bold text-slate-900 text-sm">Local Community &amp; Gen Z / Millennials (18–34)</p>
+                    <p className="text-[11px] text-slate-500">Neighborhood residents and morning commuters</p>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[#002D72] block">
+                      3. Core Marketing Goal
+                    </span>
+                    <p className="font-bold text-slate-900 text-sm">Local Foot Traffic &amp; Brand Awareness</p>
+                    <p className="text-[11px] text-slate-500">Drive repeat daily storefront visits and menu discovery</p>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[#002D72] block">
+                      4. Content Strengths
+                    </span>
+                    <p className="font-bold text-slate-900 text-sm">Photos &amp; Short-Form Video</p>
+                    <p className="text-[11px] text-slate-500">Croissant laminating, sourdough scoring, dessert photos</p>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[#002D72] block">
+                      5. Brand Personality
+                    </span>
+                    <p className="font-bold text-slate-900 text-sm">Warm, Friendly &amp; Approachable</p>
+                    <p className="text-[11px] text-slate-500">Casual neighborhood baker voice, morning optimism</p>
+                  </div>
+
+                  <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[#002D72] block">
+                      6. Available Time Budget
+                    </span>
+                    <p className="font-bold text-slate-900 text-sm">2–5 hours per week</p>
+                    <p className="text-[11px] text-slate-500">Solo baker or small team with limited publishing capacity</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Actual Quiz Output Scores & Rankings */}
+              <div className="lg:col-span-7 space-y-5">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                    <h3 className="font-black text-slate-900 text-sm sm:text-base uppercase tracking-wider">
+                      Actual Quiz Output &amp; Rankings
+                    </h3>
+                  </div>
+                  <span className="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+                    Actual Quiz Output
+                  </span>
+                </div>
+
+                {/* Score Cards */}
+                <div className="space-y-3">
+                  {/* #1 Instagram */}
+                  <div className="p-4 rounded-2xl bg-gradient-to-r from-[#002D72]/5 via-white to-[#FFB81C]/10 border-2 border-[#002D72] shadow-sm flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-[#002D72] text-white flex items-center justify-center font-black text-sm">
+                        🥇 1
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <SocialIcon platform="instagram" className="w-4 h-4 text-pink-600" />
+                          <h4 className="font-black text-slate-950 text-base">Instagram</h4>
+                          <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                            Primary Match
+                          </span>
+                        </div>
+                        <p className="text-xs text-slate-600 mt-0.5">
+                          High visual food affinity, local geo-tags &amp; morning story updates
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-right flex-shrink-0">
+                      <span className="text-3xl font-black text-[#002D72]">94%</span>
+                      <span className="block text-[10px] font-bold text-slate-400 uppercase">Match Score</span>
+                    </div>
+                  </div>
+
+                  {/* #2 TikTok */}
+                  <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-xs flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center font-black text-sm">
+                        🥈 2
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <SocialIcon platform="tiktok" className="w-4 h-4 text-slate-900" />
+                          <h4 className="font-black text-slate-950 text-base">TikTok</h4>
+                          <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">
+                            Secondary Channel
+                          </span>
+                        </div>
+                        <p className="text-xs text-slate-600 mt-0.5">
+                          Behind-the-scenes pastry rolling &amp; viral baking sound clips
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-right flex-shrink-0">
+                      <span className="text-2xl font-black text-slate-900">80%</span>
+                      <span className="block text-[10px] font-bold text-slate-400 uppercase">Match Score</span>
+                    </div>
+                  </div>
+
+                  {/* #3 Pinterest */}
+                  <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-xs flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center font-black text-sm">
+                        🥉 3
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <SocialIcon platform="pinterest" className="w-4 h-4 text-red-600" />
+                          <h4 className="font-black text-slate-950 text-base">Pinterest</h4>
+                          <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">
+                            Evergreen Discovery
+                          </span>
+                        </div>
+                        <p className="text-xs text-slate-600 mt-0.5">
+                          Dessert tables, celebration cake pins &amp; seasonal catering boards
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-right flex-shrink-0">
+                      <span className="text-2xl font-black text-slate-900">78%</span>
+                      <span className="block text-[10px] font-bold text-slate-400 uppercase">Match Score</span>
+                    </div>
+                  </div>
+
+                  {/* Non-Recommended Channels Bar */}
+                  <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600 flex flex-wrap items-center justify-between gap-2">
+                    <span className="font-bold text-slate-700">Other Channels Tested:</span>
+                    <span className="flex items-center gap-4 text-[11px] font-semibold text-slate-500">
+                      <span>Facebook: <strong>62%</strong></span>
+                      <span>YouTube: <strong>45%</strong></span>
+                      <span>LinkedIn: <strong>28%</strong></span>
+                    </span>
+                  </div>
+                </div>
+
+                {/* Analytical Takeaway */}
+                <div className="p-4 rounded-2xl bg-[#002D72]/5 border border-[#002D72]/20 text-xs text-slate-700 space-y-1.5">
+                  <span className="font-black text-[#002D72] uppercase tracking-wider block text-[11px]">
+                    Methodology Insight: Why This Distribution?
+                  </span>
+                  <p className="leading-relaxed">
+                    Instagram achieved <strong>94%</strong> because food buyers in the 18–34 demographic heavily rely on visual feeds and geo-tagged Reels for discovery. Meanwhile, LinkedIn scored only <strong>28%</strong> due to near-zero B2B alignment for retail pastry purchases. Under the 2–5 hour budget, the system recommends dedicating 80% of time to 2 Instagram posts/week rather than spreading thin across all networks.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
           FREQUENTLY ASKED QUESTIONS SECTION (Interactive Accordion)
           ===================================================================== */}
       <PlatformMatchFAQ />

@@ -92,7 +92,7 @@ export default function AboutUsPage() {
               </span>
             </h1>
             <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
-              Based at Pace University’s Lubin School of Business in Downtown Manhattan. We are six undergraduate and graduate students conducting empirical research, consumer behavior analysis, and channel-market fit modeling to help NYC small businesses thrive online.
+              Based at Pace University’s Lubin School of Business in Downtown Manhattan. We are six undergraduate and graduate students developing student decision frameworks, consumer behavior analysis, and channel-market fit modeling for MAR649 to help small businesses thrive online.
             </p>
           </div>
 
@@ -195,9 +195,9 @@ export default function AboutUsPage() {
               <div className="w-12 h-12 rounded-full bg-[#002D72] text-[#FFB81C] flex items-center justify-center font-bold shadow-md shadow-[#002D72]/10">
                 <GraduationCap className="w-6 h-6" />
               </div>
-              <h3 className="font-extrabold text-slate-900 text-base">Academic Rigor &amp; Oversight</h3>
+              <h3 className="font-extrabold text-slate-900 text-base">Student Decision Framework</h3>
               <p className="text-slate-600 text-xs leading-relaxed">
-                Every strategy is grounded in consumer behavior, empirical research frameworks, and guided by marketing faculty at Pace University.
+                Every strategy is grounded in consumer behavior, student-developed decision models, and created as an academic project for MAR649 at Pace University.
               </p>
             </div>
 
@@ -238,7 +238,7 @@ export default function AboutUsPage() {
               Meet Our Student Research Team
             </h2>
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              Six undergraduate and graduate marketing students at Pace University conducting empirical research, consumer behavior analysis, and channel-market fit modeling.
+              Six undergraduate and graduate marketing students at Pace University conducting academic market research, consumer behavior analysis, and channel-market fit modeling for MAR649.
             </p>
           </div>
 

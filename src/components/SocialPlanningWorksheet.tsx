@@ -60,7 +60,7 @@ export function SocialPlanningWorksheet() {
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#002D72]/10 text-[#002D72] text-xs font-extrabold uppercase tracking-wider">
             <FileText className="w-3.5 h-3.5" />
-            <span>Skyscraper Planning Tool</span>
+            <span>Planning Worksheet</span>
           </div>
           <h3 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
             Small Business Social Media Strategy Worksheet

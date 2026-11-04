@@ -269,7 +269,7 @@ export default function LabHomePage() {
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-bold text-slate-700">
               <div className="flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-200 shadow-sm">
                 <CheckCircle2 className="w-4 h-4 text-[#002D72] flex-shrink-0" />
-                <span>Research-Backed Empirical Frameworks</span>
+                <span>Student-Developed Decision Frameworks</span>
               </div>
               <div className="flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-200 shadow-sm">
                 <CheckCircle2 className="w-4 h-4 text-[#002D72] flex-shrink-0" />
@@ -277,7 +277,7 @@ export default function LabHomePage() {
               </div>
               <div className="flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-200 shadow-sm">
                 <CheckCircle2 className="w-4 h-4 text-[#002D72] flex-shrink-0" />
-                <span>Student Energy, Faculty-Mentored Rigor</span>
+                <span>Student Perspectives, MAR649 Course Concept</span>
               </div>
             </div>
           </div>
@@ -295,10 +295,10 @@ export default function LabHomePage() {
               <span>Lab Mission</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-950 tracking-tight font-sans">
-              Bridging Academic Rigor with Real-World Growth
+              Bridging Academic Marketing with Real-World Growth
             </h2>
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              Based at Pace University’s Lubin School of Business in Downtown Manhattan, the <strong className="text-slate-900 font-semibold">Pace Digital Marketing Lab</strong> was created with a clear mission: to empower local small businesses and non-profit organizations with creative, data-backed marketing strategies and practical planning tools.
+              Based at Pace University’s Lubin School of Business in Downtown Manhattan, the <strong className="text-slate-900 font-semibold">Pace Digital Marketing Lab</strong> is a student concept created for MAR649: to explore how local small businesses and non-profit organizations can prioritize social channels using practical, data-backed frameworks.
             </p>
           </div>
 
@@ -318,9 +318,9 @@ export default function LabHomePage() {
               <div className="w-12 h-12 rounded-full bg-[#002D72] text-[#FFB81C] flex items-center justify-center font-bold shadow-md shadow-[#002D72]/10">
                 <GraduationCap className="w-6 h-6" />
               </div>
-              <h3 className="font-extrabold text-slate-900 text-base">Academic Rigor &amp; Oversight</h3>
+              <h3 className="font-extrabold text-slate-900 text-base">Student Decision Framework</h3>
               <p className="text-slate-600 text-xs leading-relaxed">
-                Every strategy is grounded in consumer behavior, empirical research frameworks, and guided by marketing faculty at Pace University.
+                Every strategy is grounded in consumer behavior, student-developed decision frameworks, and created as an academic concept for MAR649.
               </p>
             </div>
 

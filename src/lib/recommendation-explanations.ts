@@ -41,22 +41,22 @@ export function generatePlatformExplanation(
   const getDynamicFrequency = (platform: PlatformId): string => {
     switch (answers.time) {
       case "under_2_hours":
-        if (platform === "linkedin") return "1–2 high-impact thought leadership posts per week (batch 60 mins on Monday) + 10 mins weekly comments";
-        if (platform === "facebook") return "1–2 community updates or photo posts weekly (easily batched in 45 mins)";
-        if (platform === "pinterest") return "5–8 scheduled visual pins weekly (batch created in 45 mins via Canva templates)";
-        if (platform === "instagram") return "1–2 curated feed posts or carousels per week (prioritize batch-scheduling over daily stories)";
-        if (platform === "tiktok") return "2 quick unpolished smartphone clips weekly (record in one 40-min session with minimal editing)";
-        if (platform === "youtube") return "1 focused YouTube Short weekly (keep long-form production on hold until bandwidth expands)";
-        return "1 core post per week";
+        if (platform === "linkedin") return "1 high-impact post per week (batch 45 mins) + 15 mins weekly responses";
+        if (platform === "facebook") return "1 community update weekly (easily batched in 30 mins)";
+        if (platform === "pinterest") return "3–5 scheduled visual pins weekly (batch created in 30 mins via Canva)";
+        if (platform === "instagram") return "1 curated post or carousel per week (focus effort here; keep secondary platforms on hold)";
+        if (platform === "tiktok") return "1 quick unedited smartphone clip weekly (or repurpose from Instagram Reel)";
+        if (platform === "youtube") return "1 focused YouTube Short every 10–14 days";
+        return "1 core post per week on your primary channel";
 
       case "two_to_five_hours":
-        if (platform === "linkedin") return "2–3 structured posts per week + active participation in top industry discussion threads";
-        if (platform === "instagram") return "2 Reels + 1 save-worthy Carousel per week with casual story updates";
-        if (platform === "facebook") return "2–3 discussion posts weekly + active Facebook Group interactions";
-        if (platform === "tiktok") return "3–4 short native videos per week to build algorithmic momentum";
-        if (platform === "youtube") return "1 structured pillar video every 10–14 days + 2 complementary Shorts";
-        if (platform === "pinterest") return "10–15 fresh pins weekly across 3–4 keyword-optimized boards";
-        return "2–3 posts per week";
+        if (platform === "linkedin") return "2 structured posts per week (batch in one 60-min session)";
+        if (platform === "instagram") return "2 posts per week (e.g., 1 Reel + 1 Carousel; prioritize this channel)";
+        if (platform === "facebook") return "2 community updates weekly";
+        if (platform === "tiktok") return "2 short videos per week (or cross-post your Instagram Reel to avoid extra filming)";
+        if (platform === "youtube") return "1 Short weekly or 1 focused video every 2 weeks";
+        if (platform === "pinterest") return "6–8 scheduled visual pins weekly (batch created in 45 mins)";
+        return "2–3 posts per week total across your channels";
 
       case "five_to_ten_hours":
         if (platform === "linkedin") return "3–4 polished thought leadership posts + weekly newsletter + direct message outreach";

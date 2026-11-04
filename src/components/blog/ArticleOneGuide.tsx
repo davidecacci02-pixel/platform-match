@@ -34,7 +34,7 @@ export function ArticleOneGuide() {
             <span className="w-2 h-2 rounded-full bg-[#FFB81C]" />
             <span className="text-[#002D72]">Platform Match Research</span>
             <span className="text-slate-300">•</span>
-            <span className="text-slate-600">2026 Empirical Guide</span>
+            <span className="text-slate-600">Student Decision Guide</span>
           </div>
 
           {/* Primary H1 Tag containing targeted keyword */}
@@ -44,7 +44,7 @@ export function ArticleOneGuide() {
 
           {/* Meta Subhead */}
           <p className="text-lg sm:text-xl text-slate-600 leading-relaxed font-normal">
-            A practical, research-backed decision framework to evaluate Instagram, TikTok, LinkedIn, Facebook, YouTube, and Pinterest based on your true audience and operational capacity.
+            A student-developed decision framework to evaluate Instagram, TikTok, LinkedIn, Facebook, YouTube, and Pinterest based on your true audience and operational capacity.
           </p>
 
           {/* Author & Academic Bylines */}
@@ -61,7 +61,7 @@ export function ArticleOneGuide() {
               <Clock className="w-3.5 h-3.5 text-slate-400" />
               <span>7 min read</span>
               <span className="text-slate-400">•</span>
-              <span>Updated for 2026 Algorithms</span>
+              <span>Student Decision Framework • MAR649</span>
             </div>
           </div>
         </header>
@@ -312,6 +312,74 @@ export function ArticleOneGuide() {
             <span className="font-bold block">💡 Validation Recommendation:</span>
             <p>
               Ask new customers which channels brought them to your business and what content helped them decide. Revisit your platform priorities if inquiry sources show a gap between where you publish content and where your audience pays attention.
+            </p>
+          </div>
+
+          {/* Fictional Bakery Demonstration Worked Example */}
+          <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm space-y-5">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <span className="text-[11px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-[#FFB81C]/25 text-[#7A5200] border border-[#FFB81C]/40">
+                Fictional Bakery Demonstration
+              </span>
+              <span className="text-xs font-bold text-slate-500">MAR649 Worked Example</span>
+            </div>
+
+            <div className="space-y-1">
+              <h4 className="text-xl font-black text-slate-950 font-sans">
+                Real Quiz Simulation: Retail Artisan Bakery
+              </h4>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                To test our 6-factor decision matrix against a concrete local scenario, we submitted the profile of a neighborhood artisan bakery with a lean 2–5 hour weekly schedule.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+              <div className="space-y-2 text-xs">
+                <span className="font-bold text-[#002D72] uppercase tracking-wider block text-[11px]">
+                  Submitted Profile Inputs:
+                </span>
+                <ul className="space-y-1.5 text-slate-700">
+                  <li>• <strong>Industry:</strong> Food &amp; Beverage / Retail Bakery</li>
+                  <li>• <strong>Target Audience:</strong> Gen Z &amp; Millennials (18–34) / Local Community</li>
+                  <li>• <strong>Primary Goal:</strong> Local Foot Traffic &amp; Brand Awareness</li>
+                  <li>• <strong>Content Strengths:</strong> Visual Photography &amp; Short Videos</li>
+                  <li>• <strong>Brand Voice:</strong> Warm, Friendly &amp; Approachable</li>
+                  <li>• <strong>Time Budget:</strong> 2–5 hours per week</li>
+                </ul>
+              </div>
+
+              <div className="space-y-2 text-xs">
+                <span className="font-bold text-[#002D72] uppercase tracking-wider block text-[11px]">
+                  Actual Output Rankings:
+                </span>
+                <div className="space-y-2">
+                  <div className="p-2.5 rounded-xl bg-white border border-slate-200 flex items-center justify-between">
+                    <span className="font-bold text-slate-900 flex items-center gap-2">
+                      <SocialIcon platform="instagram" className="w-3.5 h-3.5 text-pink-600" />
+                      1. Instagram (Primary Match)
+                    </span>
+                    <span className="font-black text-[#002D72]">94%</span>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white border border-slate-200 flex items-center justify-between">
+                    <span className="font-bold text-slate-900 flex items-center gap-2">
+                      <SocialIcon platform="tiktok" className="w-3.5 h-3.5 text-slate-900" />
+                      2. TikTok (Secondary Match)
+                    </span>
+                    <span className="font-black text-slate-800">80%</span>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white border border-slate-200 flex items-center justify-between">
+                    <span className="font-bold text-slate-900 flex items-center gap-2">
+                      <SocialIcon platform="pinterest" className="w-3.5 h-3.5 text-rose-600" />
+                      3. Pinterest (Visual Evergreen)
+                    </span>
+                    <span className="font-black text-slate-800">78%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p className="text-xs text-slate-600 italic border-t border-slate-200/80 pt-3">
+              Strategic takeaway: The bakery concentrates 80% of its available time on 2 Instagram posts per week, cross-posting the top video to TikTok to capture secondary discovery without exceeding the 2–5 hour limit.
             </p>
           </div>
         </section>
@@ -731,7 +799,7 @@ export function ArticleOneGuide() {
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#002D72]/10 text-[#002D72] text-xs font-bold uppercase tracking-wider">
               <HelpCircle className="w-3.5 h-3.5" />
-              <span>AEO &amp; SERP Answers</span>
+              <span>Frequently Asked Questions</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
               Frequently Asked Questions About Platform Match

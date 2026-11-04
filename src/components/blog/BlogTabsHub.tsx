@@ -16,6 +16,8 @@ import {
   CheckCircle2,
   Share2,
   ChevronRight,
+  Copy,
+  Check,
 } from "lucide-react";
 import { ArticleOneGuide } from "./ArticleOneGuide";
 import { ArticleTwoGoals } from "./ArticleTwoGoals";
@@ -23,8 +25,30 @@ import { ArticleThreeTime } from "./ArticleThreeTime";
 
 export type BlogTab = "article-1" | "article-2" | "article-3";
 
+export const SLUG_TO_TAB: Record<string, BlogTab> = {
+  "find-the-best-social-media-platform": "article-1",
+  "guide": "article-1",
+  "best-platforms": "article-1",
+  "article-1": "article-1",
+  "how-goals-help-you-choose-the-best-platform": "article-2",
+  "goals": "article-2",
+  "goals-strategy": "article-2",
+  "article-2": "article-2",
+  "social-media-platform-with-limited-time": "article-3",
+  "limited-time": "article-3",
+  "time": "article-3",
+  "article-3": "article-3",
+};
+
+export const TAB_TO_SLUG: Record<BlogTab, string> = {
+  "article-1": "find-the-best-social-media-platform",
+  "article-2": "how-goals-help-you-choose-the-best-platform",
+  "article-3": "social-media-platform-with-limited-time",
+};
+
 interface ArticleMeta {
   id: BlogTab;
+  slug: string;
   number: string;
   badge: string;
   category: string;
@@ -38,18 +62,20 @@ interface ArticleMeta {
 const ARTICLES: ArticleMeta[] = [
   {
     id: "article-1",
+    slug: "find-the-best-social-media-platform",
     number: "01",
     badge: "Article 1 • Master Guide",
     category: "Platform Selection",
     title: "Find the Best Social Media Platform for Your Business",
     description:
-      "A practical, research-backed decision framework evaluating Instagram, TikTok, LinkedIn, Facebook, YouTube, and Pinterest with a 6-factor matrix and worked examples.",
+      "A student-developed decision framework evaluating Instagram, TikTok, LinkedIn, Facebook, YouTube, and Pinterest with a 6-factor matrix and worked examples.",
     readTime: "7 min read",
-    tags: ["6 Major Networks", "Empirical Matrix", "Interactive Worksheet"],
+    tags: ["6 Major Networks", "6-Factor Matrix", "Interactive Worksheet"],
     icon: Layers,
   },
   {
     id: "article-2",
+    slug: "how-goals-help-you-choose-the-best-platform",
     number: "02",
     badge: "Article 2 • Goal Strategy",
     category: "Strategic Alignment",
@@ -62,6 +88,7 @@ const ARTICLES: ArticleMeta[] = [
   },
   {
     id: "article-3",
+    slug: "social-media-platform-with-limited-time",
     number: "03",
     badge: "Article 3 • Capacity & Workflow",
     category: "Time Management",
@@ -74,30 +101,49 @@ const ARTICLES: ArticleMeta[] = [
   },
 ];
 
-export function BlogTabsHub() {
+export function BlogTabsHub({ initialTab }: { initialTab?: BlogTab }) {
   const searchParams = useSearchParams();
-  const [activeTab, setActiveTab] = useState<BlogTab>("article-1");
+  const [activeTab, setActiveTab] = useState<BlogTab>(initialTab || "article-1");
+  const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
 
-  // Read query params on mount (e.g. ?article=2 or ?tab=goals)
+  // Read query params on mount (e.g. ?article=2 or ?tab=goals) if initialTab not explicitly provided
   useEffect(() => {
+    if (initialTab) {
+      setActiveTab(initialTab);
+      return;
+    }
     const tabParam = searchParams.get("tab") || searchParams.get("article");
-    if (tabParam === "2" || tabParam === "goals" || tabParam === "article-2") {
+    if (tabParam && SLUG_TO_TAB[tabParam]) {
+      setActiveTab(SLUG_TO_TAB[tabParam]);
+    } else if (tabParam === "2") {
       setActiveTab("article-2");
-    } else if (tabParam === "3" || tabParam === "time" || tabParam === "article-3") {
+    } else if (tabParam === "3") {
       setActiveTab("article-3");
-    } else if (tabParam === "1" || tabParam === "guide" || tabParam === "article-1") {
+    } else if (tabParam === "1") {
       setActiveTab("article-1");
     }
-  }, [searchParams]);
+  }, [searchParams, initialTab]);
 
   const selectTab = (id: BlogTab) => {
     setActiveTab(id);
-    // Smooth scroll down to reader view
     if (typeof window !== "undefined") {
+      const slug = TAB_TO_SLUG[id];
+      window.history.pushState(null, "", `/blog/${slug}`);
       const readerEl = document.getElementById("reader");
       if (readerEl) {
         readerEl.scrollIntoView({ behavior: "smooth", block: "start" });
       }
+    }
+  };
+
+  const handleCopyLink = (slug: string, e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (typeof window !== "undefined") {
+      const url = `${window.location.origin}/blog/${slug}`;
+      navigator.clipboard.writeText(url).then(() => {
+        setCopiedSlug(slug);
+        setTimeout(() => setCopiedSlug(null), 2500);
+      });
     }
   };
 
@@ -156,7 +202,7 @@ export function BlogTabsHub() {
         </h1>
 
         <p className="text-base sm:text-lg text-slate-600 max-w-3xl leading-relaxed font-normal">
-          Empirical research, platform decision frameworks, and actionable playbooks developed by Pace University marketing students to help small businesses make clear, data-driven social media choices.
+          Student-developed decision frameworks, platform comparison benchmarks, and actionable playbooks developed by Pace University marketing students for MAR649 to help small businesses make clear, realistic social media choices.
         </p>
 
         {/* =====================================================================
@@ -247,16 +293,36 @@ export function BlogTabsHub() {
                       <span>{art.readTime}</span>
                     </span>
 
-                    <span
-                      className={`inline-flex items-center gap-1 font-bold transition-all ${
-                        isSelected
-                          ? "text-[#002D72]"
-                          : "text-slate-600 group-hover:text-[#002D72] group-hover:translate-x-0.5"
-                      }`}
-                    >
-                      <span>{isSelected ? "Active View" : "Read Article"}</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={(e) => handleCopyLink(art.slug, e)}
+                        title="Copy direct article URL for outreach"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-100 hover:bg-slate-200 text-[11px] font-bold text-slate-700 transition-colors"
+                      >
+                        {copiedSlug === art.slug ? (
+                          <>
+                            <Check className="w-3 h-3 text-emerald-600" />
+                            <span className="text-emerald-700">Copied!</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3 h-3 text-slate-500" />
+                            <span>Copy URL</span>
+                          </>
+                        )}
+                      </button>
+
+                      <span
+                        className={`inline-flex items-center gap-1 font-bold transition-all ${
+                          isSelected
+                            ? "text-[#002D72]"
+                            : "text-slate-600 group-hover:text-[#002D72] group-hover:translate-x-0.5"
+                        }`}
+                      >
+                        <span>{isSelected ? "Reading" : "Read"}</span>
+                        <ChevronRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
                   </div>
                 </div>
               );
