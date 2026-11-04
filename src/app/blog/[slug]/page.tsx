@@ -1,43 +1,21 @@
 import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { BlogTabsHub, SLUG_TO_TAB, BlogTab } from "@/components/blog/BlogTabsHub";
+import { BlogTabsHub } from "@/components/blog/BlogTabsHub";
+import { SLUG_TO_TAB, ARTICLES_METADATA } from "@/lib/blog-data";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-const ARTICLES_METADATA: Record<
-  BlogTab,
-  {
-    title: string;
-    description: string;
-    canonicalSlug: string;
-  }
-> = {
-  "article-1": {
-    title: "Find the Best Social Media Platform for Your Business | Pace Marketing Lab",
-    description:
-      "A student-developed decision framework evaluating Instagram, TikTok, LinkedIn, Facebook, YouTube, and Pinterest with a 6-factor matrix and worked examples.",
-    canonicalSlug: "find-the-best-social-media-platform",
-  },
-  "article-2": {
-    title: "How Your Goals Help You Choose the Best Social Media Platform | Pace Marketing Lab",
-    description:
-      "Connect your primary business goals—awareness, website traffic, inquiries, sales, and community—to practical audience actions and observable tracking measures.",
-    canonicalSlug: "how-goals-help-you-choose-the-best-platform",
-  },
-  "article-3": {
-    title: "Choosing the Best Social Media Platform for Business With Limited Time | Pace Marketing Lab",
-    description:
-      "Choose a workload your team can actually manage. A step-by-step 3-hour weekly routine for planning, creating, publishing, responding, and reviewing results.",
-    canonicalSlug: "social-media-platform-with-limited-time",
-  },
-};
+export function generateStaticParams() {
+  return Object.keys(SLUG_TO_TAB).map((slug) => ({ slug }));
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const tabId = SLUG_TO_TAB[slug];
+  const resolved = await params;
+  const slug = resolved?.slug;
+  const tabId = slug ? SLUG_TO_TAB[slug] : undefined;
 
   if (!tabId) {
     return {
@@ -65,8 +43,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ArticlePage({ params }: PageProps) {
-  const { slug } = await params;
-  const tabId = SLUG_TO_TAB[slug];
+  const resolved = await params;
+  const slug = resolved?.slug;
+  const tabId = slug ? SLUG_TO_TAB[slug] : undefined;
 
   if (!tabId) {
     notFound();

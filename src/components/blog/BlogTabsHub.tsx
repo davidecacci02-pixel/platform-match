@@ -22,29 +22,10 @@ import {
 import { ArticleOneGuide } from "./ArticleOneGuide";
 import { ArticleTwoGoals } from "./ArticleTwoGoals";
 import { ArticleThreeTime } from "./ArticleThreeTime";
+import { BlogTab, SLUG_TO_TAB, TAB_TO_SLUG } from "@/lib/blog-data";
 
-export type BlogTab = "article-1" | "article-2" | "article-3";
-
-export const SLUG_TO_TAB: Record<string, BlogTab> = {
-  "find-the-best-social-media-platform": "article-1",
-  "guide": "article-1",
-  "best-platforms": "article-1",
-  "article-1": "article-1",
-  "how-goals-help-you-choose-the-best-platform": "article-2",
-  "goals": "article-2",
-  "goals-strategy": "article-2",
-  "article-2": "article-2",
-  "social-media-platform-with-limited-time": "article-3",
-  "limited-time": "article-3",
-  "time": "article-3",
-  "article-3": "article-3",
-};
-
-export const TAB_TO_SLUG: Record<BlogTab, string> = {
-  "article-1": "find-the-best-social-media-platform",
-  "article-2": "how-goals-help-you-choose-the-best-platform",
-  "article-3": "social-media-platform-with-limited-time",
-};
+export type { BlogTab };
+export { SLUG_TO_TAB, TAB_TO_SLUG };
 
 interface ArticleMeta {
   id: BlogTab;
