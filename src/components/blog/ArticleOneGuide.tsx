@@ -75,6 +75,37 @@ export function ArticleOneGuide() {
           </p>
         </div>
 
+        {/* Quick Navigation Anchor Bar */}
+        <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/90 shadow-xs flex flex-wrap items-center gap-2 text-xs">
+          <span className="font-black text-[#002D72] uppercase tracking-wider text-[11px] mr-1">
+            Jump to section:
+          </span>
+          <a
+            href="#bakery-demonstration"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FFB81C]/25 hover:bg-[#FFB81C]/40 text-[#7A5200] font-black border border-[#FFB81C]/50 transition-all hover:scale-105"
+          >
+            <span>🥐 Bakery Worked Example</span>
+          </a>
+          <a
+            href="#factors"
+            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 text-slate-700 font-bold border border-slate-200 transition-colors"
+          >
+            <span>6-Factor Matrix</span>
+          </a>
+          <a
+            href="#platforms-breakdown"
+            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 text-slate-700 font-bold border border-slate-200 transition-colors"
+          >
+            <span>Platform Profiles</span>
+          </a>
+          <a
+            href="#faq"
+            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white hover:bg-slate-100 text-slate-700 font-bold border border-slate-200 transition-colors"
+          >
+            <span>FAQ</span>
+          </a>
+        </div>
+
         {/* =====================================================================
             3. SECTION 1: HOW DO YOU CHOOSE? (H2 + 6 Decision Factors)
             ===================================================================== */}
@@ -316,7 +347,7 @@ export function ArticleOneGuide() {
           </div>
 
           {/* Fictional Bakery Demonstration Worked Example */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm space-y-5">
+          <div id="bakery-demonstration" className="scroll-mt-24 p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm space-y-5">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="text-[11px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-[#FFB81C]/25 text-[#7A5200] border border-[#FFB81C]/40">
                 Fictional Bakery Demonstration

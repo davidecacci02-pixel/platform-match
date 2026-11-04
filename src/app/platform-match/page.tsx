@@ -60,6 +60,13 @@ export default function PlatformMatchLandingPage() {
           </Link>
 
           <a
+            href="#worked-example"
+            className="inline-flex items-center gap-1.5 text-xs font-black text-[#001C48] bg-[#FFB81C]/25 hover:bg-[#FFB81C]/40 border border-[#FFB81C]/60 transition-all px-3.5 py-2 rounded-full shadow-sm hover:scale-[1.02]"
+          >
+            <span>🥐 Bakery Worked Example</span>
+          </a>
+
+          <a
             href="#faq"
             className="inline-flex items-center gap-2 text-xs font-bold text-[#002D72] hover:text-[#001C48] transition-all px-4 py-2 rounded-full bg-white hover:bg-slate-50 border border-slate-200/90 shadow-sm hover:shadow hover:scale-[1.01]"
           >
@@ -124,10 +131,10 @@ export default function PlatformMatchLandingPage() {
               </div>
 
               {/* Primary Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
                 <Link
                   href="/quiz"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#002D72] hover:bg-[#001C48] text-white text-base font-black rounded-full shadow-xl shadow-[#002D72]/20 hover:scale-[1.03] active:scale-[0.98] transition-all border border-[#002D72]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-7 py-4 bg-[#002D72] hover:bg-[#001C48] text-white text-base font-black rounded-full shadow-xl shadow-[#002D72]/20 hover:scale-[1.03] active:scale-[0.98] transition-all border border-[#002D72]"
                 >
                   <Sparkles className="w-5 h-5 text-[#FFB81C]" />
                   <span>Start 3-Minute Quiz</span>
@@ -135,11 +142,19 @@ export default function PlatformMatchLandingPage() {
                 </Link>
 
                 <a
+                  href="#worked-example"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-[#FFB81C]/25 hover:bg-[#FFB81C]/40 border-2 border-[#FFB81C]/70 text-[#001C48] text-sm font-black shadow-sm transition-all hover:scale-[1.02]"
+                >
+                  <span>🥐 See Bakery Case Study</span>
+                  <ArrowRight className="w-4 h-4 text-[#001C48]" />
+                </a>
+
+                <a
                   href="#how-it-works"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 text-sm font-bold shadow-sm transition-all hover:scale-[1.02]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-4 rounded-full bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 text-sm font-bold shadow-sm transition-all hover:scale-[1.02]"
                 >
                   <Eye className="w-4 h-4 text-[#002D72]" />
-                  <span>See How It Works</span>
+                  <span>How It Works</span>
                 </a>
               </div>
 
