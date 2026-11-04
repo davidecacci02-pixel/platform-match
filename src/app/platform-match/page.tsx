@@ -22,6 +22,7 @@ import {
   Instagram,
   GraduationCap,
   Users,
+  HelpCircle,
 } from "lucide-react";
 import { SocialIcon } from "@/components/SocialIcon";
 import { ALL_PLATFORM_IDS, PLATFORMS_DATA } from "@/lib/platforms";
@@ -46,16 +47,26 @@ export default function PlatformMatchLandingPage() {
       <div className="absolute top-96 right-[-100px] w-[500px] h-[400px] bg-gradient-to-br from-emerald-400/[0.07] to-transparent blur-[120px] rounded-full -z-10 pointer-events-none" />
       <div className="absolute top-[1200px] left-[-100px] w-[600px] h-[500px] bg-gradient-to-tr from-[#002D72]/[0.05] via-[#FFB81C]/[0.06] to-transparent blur-[140px] rounded-full -z-10 pointer-events-none" />
 
-      {/* Top Bar with Quick Navigation to Lab Home & Resources */}
+      {/* Top Bar with Quick Navigation to Lab Home, FAQ & Resources */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 w-full flex flex-wrap items-center justify-between gap-3">
-        <Link
-          href="/"
-          prefetch={true}
-          className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-[#002D72] transition-colors px-4 py-2 rounded-full bg-white border border-slate-200/90 shadow-sm hover:shadow hover:scale-[1.01]"
-        >
-          <ArrowLeft className="w-3.5 h-3.5 text-[#002D72]" />
-          <span>Back to Pace Digital Marketing Lab Home</span>
-        </Link>
+        <div className="flex flex-wrap items-center gap-3">
+          <Link
+            href="/"
+            prefetch={true}
+            className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-[#002D72] transition-colors px-4 py-2 rounded-full bg-white border border-slate-200/90 shadow-sm hover:shadow hover:scale-[1.01]"
+          >
+            <ArrowLeft className="w-3.5 h-3.5 text-[#002D72]" />
+            <span>Back to Pace Digital Marketing Lab Home</span>
+          </Link>
+
+          <a
+            href="#faq"
+            className="inline-flex items-center gap-2 text-xs font-bold text-[#002D72] hover:text-[#001C48] transition-all px-4 py-2 rounded-full bg-white hover:bg-slate-50 border border-slate-200/90 shadow-sm hover:shadow hover:scale-[1.01]"
+          >
+            <HelpCircle className="w-3.5 h-3.5 text-[#FFB81C]" />
+            <span>Frequently Asked Questions (FAQ)</span>
+          </a>
+        </div>
 
         <div className="flex items-center gap-3">
           <a

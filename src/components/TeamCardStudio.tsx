@@ -13,6 +13,10 @@ import {
   Camera,
   ChevronRight,
   Sparkles,
+  Pencil,
+  Check,
+  X,
+  Upload,
 } from "lucide-react";
 
 export interface TeamMemberCard {
@@ -120,11 +124,54 @@ const DEFAULT_MEMBERS: TeamMemberCard[] = [
   },
 ];
 
+/**
+ * Compresses an uploaded image file into a client-safe base64 data URL
+ * so localStorage quotas are respected while keeping photos crisp.
+ */
+function compressImage(file: File, maxWidth = 800, maxHeight = 800, quality = 0.85): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new window.Image();
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+        if (width > height) {
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width = Math.round((width * maxHeight) / height);
+            height = maxHeight;
+          }
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+          resolve(e.target?.result as string);
+          return;
+        }
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL("image/jpeg", quality));
+      };
+      img.onerror = () => resolve(e.target?.result as string);
+      img.src = e.target?.result as string;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 export function TeamCardStudio() {
   const [members, setMembers] = useState<TeamMemberCard[]>(DEFAULT_MEMBERS);
   const [showCreator, setShowCreator] = useState(false);
+  const [editingMemberId, setEditingMemberId] = useState<string | null>(null);
 
-  // Form State for creating a new custom card
+  // Form State for creating or editing a card
   const [formName, setFormName] = useState("");
   const [formRole, setFormRole] = useState("");
   const [formAffiliation, setFormAffiliation] = useState("Pace University • Lubin School of Business");
@@ -137,18 +184,28 @@ export function TeamCardStudio() {
   const [formCustomLink, setFormCustomLink] = useState("");
   const [formCustomLabel, setFormCustomLabel] = useState("Portfolio");
 
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  // Notifications
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Load persisted custom members from localStorage
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const directFileInputRef = useRef<HTMLInputElement>(null);
+  const directTargetIdRef = useRef<string | null>(null);
+  const studioRef = useRef<HTMLDivElement>(null);
+
+  const showNotification = (msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => setToastMessage(null), 3500);
+  };
+
+  // Load persisted roster from localStorage on client mount
   useEffect(() => {
     try {
-      const saved = localStorage.getItem("pace_dml_custom_team_v2");
+      const saved = localStorage.getItem("pace_dml_roster_v4");
       if (saved) {
         const parsed = JSON.parse(saved) as TeamMemberCard[];
         if (Array.isArray(parsed) && parsed.length > 0) {
-          const defaultIds = new Set(DEFAULT_MEMBERS.map((m) => m.id));
-          const filteredCustom = parsed.filter((m) => !defaultIds.has(m.id));
-          setMembers([...DEFAULT_MEMBERS, ...filteredCustom]);
+          setMembers(parsed);
+          return;
         }
       }
     } catch {
@@ -156,18 +213,95 @@ export function TeamCardStudio() {
     }
   }, []);
 
-  // Save custom members to localStorage
+  // Save current members to localStorage
   const saveToStorage = (updatedMembers: TeamMemberCard[]) => {
     try {
-      const customOnes = updatedMembers.filter((m) => m.isCustom);
-      localStorage.setItem("pace_dml_custom_team_v2", JSON.stringify(customOnes));
-    } catch {
-      // ignore storage errors
+      localStorage.setItem("pace_dml_roster_v4", JSON.stringify(updatedMembers));
+    } catch (err) {
+      console.warn("Storage save error (image may be too large):", err);
     }
   };
 
-  // Handle local image file upload
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const resetForm = () => {
+    setFormName("");
+    setFormRole("");
+    setFormAffiliation("Pace University • Lubin School of Business");
+    setFormBio("");
+    setFormSkills("Digital Marketing, Social Strategy, Pace Lubin");
+    setFormImage("/images/davide-cacciuottolo.jpg");
+    setFormTheme("pace-blue");
+    setFormLinkedin("");
+    setFormEmail("");
+    setFormCustomLink("");
+    setFormCustomLabel("Portfolio");
+    setEditingMemberId(null);
+  };
+
+  // Start editing an existing member
+  const handleStartEdit = (member: TeamMemberCard) => {
+    setEditingMemberId(member.id);
+    setFormName(member.name);
+    setFormRole(member.role);
+    setFormAffiliation(member.affiliation || "Pace University • Lubin School of Business");
+    setFormBio(member.bio || "");
+    setFormSkills(member.skills?.join(", ") || "");
+    setFormImage(member.image || "/images/davide-cacciuottolo.jpg");
+    setFormTheme(member.themeColor || "pace-blue");
+
+    const linkedin = member.links?.find((l) => l.type === "linkedin");
+    setFormLinkedin(linkedin ? linkedin.url : "");
+
+    const email = member.links?.find((l) => l.type === "email");
+    setFormEmail(email ? email.url.replace("mailto:", "") : "");
+
+    const custom = member.links?.find((l) => l.type !== "linkedin" && l.type !== "email");
+    if (custom) {
+      setFormCustomLabel(custom.label);
+      setFormCustomLink(custom.url);
+    } else {
+      setFormCustomLabel("Portfolio");
+      setFormCustomLink("");
+    }
+
+    setShowCreator(true);
+    setTimeout(() => {
+      studioRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+  };
+
+  // Direct photo replacement for a specific card in the grid
+  const handleTriggerDirectPhoto = (memberId: string) => {
+    directTargetIdRef.current = memberId;
+    directFileInputRef.current?.click();
+  };
+
+  const handleDirectFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    const memberId = directTargetIdRef.current;
+    if (!file || !memberId) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("Please upload a valid image file (JPG, PNG, WebP).");
+      return;
+    }
+
+    try {
+      const compressed = await compressImage(file);
+      const updated = members.map((m) =>
+        m.id === memberId ? { ...m, image: compressed, isCustom: true } : m
+      );
+      setMembers(updated);
+      saveToStorage(updated);
+      showNotification("Real profile photo updated successfully!");
+    } catch {
+      alert("Failed to process photo.");
+    } finally {
+      e.target.value = "";
+    }
+  };
+
+  // Studio form image file upload
+  const handleFormFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -176,21 +310,19 @@ export function TeamCardStudio() {
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const result = event.target?.result as string;
-      if (result) {
-        setFormImage(result);
-      }
-    };
-    reader.readAsDataURL(file);
+    try {
+      const compressed = await compressImage(file);
+      setFormImage(compressed);
+    } catch {
+      alert("Failed to process photo.");
+    }
   };
 
-  // Submit and create new card
-  const handleCreateCard = (e: React.FormEvent) => {
+  // Submit and create or update card
+  const handleSaveCard = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formName.trim() || !formRole.trim()) {
-      alert("Please enter both Name and Role to create your card.");
+      alert("Please enter both Name and Role to save your card.");
       return;
     }
 
@@ -224,48 +356,80 @@ export function TeamCardStudio() {
       });
     }
 
-    const newMember: TeamMemberCard = {
-      id: `custom-${Date.now()}`,
-      name: formName.trim(),
-      role: formRole.trim(),
-      affiliation: formAffiliation.trim() || "Pace University • Lubin School of Business",
-      image: formImage || "/images/davide-cacciuottolo.jpg",
-      bio: formBio.trim() || "Student strategist and researcher at Pace University Digital Marketing Lab.",
-      skills: formSkills
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean),
-      themeColor: formTheme,
-      links,
-      isCustom: true,
-    };
+    if (editingMemberId) {
+      // UPDATE EXISTING MEMBER
+      const updated = members.map((m) => {
+        if (m.id === editingMemberId) {
+          return {
+            ...m,
+            name: formName.trim(),
+            role: formRole.trim(),
+            affiliation: formAffiliation.trim() || "Pace University • Lubin School of Business",
+            image: formImage || m.image,
+            bio: formBio.trim() || m.bio,
+            skills: formSkills
+              .split(",")
+              .map((s) => s.trim())
+              .filter(Boolean),
+            themeColor: formTheme,
+            links,
+            isCustom: true,
+          };
+        }
+        return m;
+      });
+      setMembers(updated);
+      saveToStorage(updated);
+      showNotification(`Updated profile for ${formName.trim()}!`);
+    } else {
+      // CREATE NEW MEMBER
+      const newMember: TeamMemberCard = {
+        id: `custom-${Date.now()}`,
+        name: formName.trim(),
+        role: formRole.trim(),
+        affiliation: formAffiliation.trim() || "Pace University • Lubin School of Business",
+        image: formImage || "/images/davide-cacciuottolo.jpg",
+        bio: formBio.trim() || "Student strategist and researcher at Pace University Digital Marketing Lab.",
+        skills: formSkills
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean),
+        themeColor: formTheme,
+        links,
+        isCustom: true,
+      };
+      const updated = [...members, newMember];
+      setMembers(updated);
+      saveToStorage(updated);
+      showNotification(`Added ${formName.trim()} to team roster!`);
+    }
 
-    const updated = [...members, newMember];
-    setMembers(updated);
-    saveToStorage(updated);
-
-    // Reset form fields
-    setFormName("");
-    setFormRole("");
-    setFormBio("");
-    setFormLinkedin("");
-    setFormEmail("");
-    setFormCustomLink("");
+    resetForm();
     setShowCreator(false);
   };
 
-  // Delete a card
-  const handleDeleteCard = (id: string) => {
-    const updated = members.filter((m) => m.id !== id);
-    setMembers(updated);
-    saveToStorage(updated);
+  // Delete a card with confirmation
+  const handleDeleteCard = (id: string, name: string) => {
+    if (window.confirm(`Are you sure you want to remove ${name} from the team roster?`)) {
+      const updated = members.filter((m) => m.id !== id);
+      setMembers(updated);
+      saveToStorage(updated);
+      if (editingMemberId === id) {
+        resetForm();
+        setShowCreator(false);
+      }
+      showNotification(`${name} was removed from the team roster.`);
+    }
   };
 
-  // Reset to default roster
+  // Reset to original default roster
   const handleResetTeam = () => {
-    if (confirm("Reset roster to the 6 default researchers?")) {
+    if (window.confirm("Reset roster to the original 6 default Pace researchers?")) {
       setMembers(DEFAULT_MEMBERS);
-      localStorage.removeItem("pace_dml_custom_team_v2");
+      localStorage.removeItem("pace_dml_roster_v4");
+      resetForm();
+      setShowCreator(false);
+      showNotification("Team roster reset to default 6 researchers.");
     }
   };
 
@@ -313,80 +477,114 @@ export function TeamCardStudio() {
 
   return (
     <div className="space-y-12">
-      {/* Top Controls: Linktree-style Pill Tabs and Actions */}
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 z-50 bg-[#002D72] text-white px-5 py-3 rounded-2xl shadow-2xl border border-[#FFB81C]/40 flex items-center gap-3 animate-fade-in text-xs font-bold">
+          <Check className="w-4 h-4 text-[#FFB81C]" />
+          <span>{toastMessage}</span>
+        </div>
+      )}
+
+      {/* Hidden single file input for direct photo changes on any card */}
+      <input
+        ref={directFileInputRef}
+        type="file"
+        accept="image/*"
+        onChange={handleDirectFileChange}
+        className="hidden"
+      />
+
+      {/* Top Controls: Tabs and Actions */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-2 bg-white rounded-full border border-slate-200 shadow-sm max-w-2xl mx-auto">
         <div className="flex items-center gap-2 w-full sm:w-auto">
           <button
-            onClick={() => setShowCreator(false)}
+            onClick={() => {
+              setShowCreator(false);
+              setEditingMemberId(null);
+            }}
             className={`flex-1 sm:flex-none px-6 py-2.5 rounded-full text-xs font-bold transition-all ${
               !showCreator
                 ? "bg-[#002D72] text-white shadow-sm"
                 : "text-slate-600 hover:text-slate-900"
             }`}
           >
-            All 6 Lab Researchers ({members.length})
+            All Lab Researchers ({members.length})
           </button>
           <button
-            onClick={() => setShowCreator(true)}
+            onClick={() => {
+              resetForm();
+              setEditingMemberId(null);
+              setShowCreator(true);
+              setTimeout(() => {
+                studioRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }, 100);
+            }}
             className={`flex-1 sm:flex-none px-5 py-2.5 rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
-              showCreator
+              showCreator && !editingMemberId
                 ? "bg-[#FFB81C] text-[#001C48] shadow-sm font-extrabold"
                 : "text-slate-600 hover:text-slate-900"
             }`}
           >
             <Plus className="w-3.5 h-3.5" />
-            <span>Customize Card</span>
+            <span>+ Add Member</span>
           </button>
         </div>
 
-        {members.length > 6 && (
-          <button
-            onClick={handleResetTeam}
-            className="text-[11px] font-semibold text-slate-400 hover:text-rose-600 px-4 py-1 transition-colors flex items-center gap-1"
-          >
-            <RefreshCw className="w-3 h-3" />
-            <span>Reset to 6</span>
-          </button>
-        )}
+        <button
+          onClick={handleResetTeam}
+          title="Restore default 6 Pace researchers"
+          className="text-[11px] font-semibold text-slate-400 hover:text-rose-600 px-4 py-1 transition-colors flex items-center gap-1"
+        >
+          <RefreshCw className="w-3 h-3" />
+          <span>Reset to Default 6</span>
+        </button>
       </div>
 
       {/* =====================================================================
-          CARD CREATOR DRAWER / FORM (Manual Photo Upload & Customizer)
+          CARD CREATOR & EDITOR DRAWER / FORM (Manual Photo Upload & Customizer)
           ===================================================================== */}
       {showCreator && (
-        <div className="bg-white rounded-[2.5rem] border-2 border-[#002D72]/20 shadow-2xl p-6 sm:p-10 max-w-4xl mx-auto space-y-8 animate-fade-in relative overflow-hidden">
-          {/* Linktree Top Accent Bar */}
+        <div
+          ref={studioRef}
+          className="bg-white rounded-[2.5rem] border-2 border-[#002D72]/20 shadow-2xl p-6 sm:p-10 max-w-4xl mx-auto space-y-8 animate-fade-in relative overflow-hidden"
+        >
+          {/* Top Accent Bar */}
           <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#002D72] via-[#FFB81C] to-[#001C48]" />
 
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
             <div>
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFB81C]/20 border border-[#FFB81C]/40 text-[#855B00] text-xs font-bold uppercase tracking-wider mb-2">
                 <Sparkles className="w-3.5 h-3.5 text-[#002D72]" />
-                <span>Linktree-Style Team Studio</span>
+                <span>
+                  {editingMemberId ? "Editing Profile Card" : "Add Team Member Card"}
+                </span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-black text-slate-950">
-                Customize &amp; Add Your Team Card
+                {editingMemberId ? `Modify ${formName || "Member Profile"}` : "Create & Add Your Profile"}
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                Upload your photo directly from your computer, fill in your details, and configure your personalized Linktree-style links.
+                Upload your real photo from your computer, edit your title, bio, and configure your personalized Linktree-style profile links.
               </p>
             </div>
 
             <button
-              onClick={() => setShowCreator(false)}
+              onClick={() => {
+                setShowCreator(false);
+                setEditingMemberId(null);
+              }}
               className="px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-bold transition-colors self-start sm:self-auto"
             >
-              Close Studio
+              Close Editor
             </button>
           </div>
 
-          <form onSubmit={handleCreateCard} className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <form onSubmit={handleSaveCard} className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Left Column: Form Fields */}
             <div className="lg:col-span-7 space-y-5">
               {/* 1. Photo Upload Button */}
               <div className="space-y-2">
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Profile Photo (Upload from computer) <span className="text-[#002D72]">*</span>
+                  Profile Photo (Upload from computer or enter URL) <span className="text-[#002D72]">*</span>
                 </label>
                 <div className="flex items-center gap-4">
                   <div className="relative w-20 h-20 rounded-2xl overflow-hidden bg-slate-100 border-2 border-[#002D72]/30 flex-shrink-0 shadow-sm">
@@ -398,12 +596,12 @@ export function TeamCardStudio() {
                     />
                   </div>
 
-                  <div className="space-y-1.5 flex-1">
+                  <div className="space-y-2 flex-1">
                     <input
                       ref={fileInputRef}
                       type="file"
                       accept="image/*"
-                      onChange={handleFileUpload}
+                      onChange={handleFormFileUpload}
                       className="hidden"
                       id="card-photo-input"
                     />
@@ -413,11 +611,15 @@ export function TeamCardStudio() {
                       className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#002D72] hover:bg-[#001C48] text-white text-xs font-bold shadow-sm transition-all hover:scale-[1.02]"
                     >
                       <Camera className="w-4 h-4 text-[#FFB81C]" />
-                      <span>Choose Photo from Computer</span>
+                      <span>Choose Real Photo from Computer</span>
                     </button>
-                    <p className="text-[11px] text-slate-500">
-                      Supports high-resolution JPG, PNG, and WebP files.
-                    </p>
+                    <input
+                      type="text"
+                      value={formImage}
+                      onChange={(e) => setFormImage(e.target.value)}
+                      placeholder="Or paste an image URL (/images/... or https://)"
+                      className="w-full px-3 py-1.5 rounded-full bg-slate-50 border border-slate-200 text-slate-700 text-xs focus:outline-none focus:border-[#002D72]"
+                    />
                   </div>
                 </div>
               </div>
@@ -449,7 +651,7 @@ export function TeamCardStudio() {
                     required
                     value={formRole}
                     onChange={(e) => setFormRole(e.target.value)}
-                    placeholder="e.g. Lead Researcher & Strategy"
+                    placeholder="e.g. Lead Student Researcher & Strategy"
                     className="w-full px-4 py-2.5 rounded-full bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:outline-none focus:border-[#002D72] focus:bg-white transition-colors"
                   />
                 </div>
@@ -488,14 +690,14 @@ export function TeamCardStudio() {
               {/* 5. Skills */}
               <div className="space-y-1.5">
                 <label htmlFor="card-skills" className="block text-xs font-bold text-slate-700">
-                  Skills (comma-separated)
+                  Skills (comma-separated tags)
                 </label>
                 <input
                   id="card-skills"
                   type="text"
                   value={formSkills}
                   onChange={(e) => setFormSkills(e.target.value)}
-                  placeholder="Social Strategy, Paid Ads, Analytics, SEO"
+                  placeholder="Digital Strategy, Quantitative Research, SEO, Analytics"
                   className="w-full px-4 py-2.5 rounded-full bg-slate-50 border border-slate-200 text-slate-900 text-xs sm:text-sm focus:outline-none focus:border-[#002D72] focus:bg-white transition-colors"
                 />
               </div>
@@ -503,7 +705,7 @@ export function TeamCardStudio() {
               {/* 6. Theme Accent Color */}
               <div className="space-y-1.5">
                 <label className="block text-xs font-bold text-slate-700">
-                  Linktree Theme Accent
+                  Card Theme Accent
                 </label>
                 <div className="flex flex-wrap items-center gap-3">
                   {[
@@ -533,7 +735,7 @@ export function TeamCardStudio() {
               {/* 7. Links Section */}
               <div className="space-y-3 pt-2 border-t border-slate-100">
                 <h4 className="text-xs font-black uppercase tracking-wider text-slate-500">
-                  Linktree Pill Links
+                  Profile Links
                 </h4>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -565,14 +767,28 @@ export function TeamCardStudio() {
                 </div>
               </div>
 
-              {/* Submit Button */}
-              <div className="pt-4">
+              {/* Submit & Cancel Buttons */}
+              <div className="pt-4 flex items-center gap-3">
                 <button
                   type="submit"
-                  className="w-full py-4 px-6 rounded-full bg-[#002D72] hover:bg-[#001C48] text-white text-sm font-extrabold shadow-lg shadow-[#002D72]/20 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2"
+                  className="flex-1 py-4 px-6 rounded-full bg-[#002D72] hover:bg-[#001C48] text-white text-sm font-extrabold shadow-lg shadow-[#002D72]/20 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2"
                 >
                   <Sparkles className="w-4 h-4 text-[#FFB81C]" />
-                  <span>Create &amp; Publish Linktree Card</span>
+                  <span>
+                    {editingMemberId
+                      ? `Save Changes to ${formName || "Profile"}`
+                      : "Create & Add Team Member"}
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    resetForm();
+                    setShowCreator(false);
+                  }}
+                  className="py-4 px-6 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-bold transition-all"
+                >
+                  Cancel
                 </button>
               </div>
             </div>
@@ -641,13 +857,13 @@ export function TeamCardStudio() {
                     <ChevronRight className="w-4 h-4 opacity-70" />
                   </div>
 
-                  <div className="w-full py-3 px-4 rounded-full text-xs font-bold text-center bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors flex items-center justify-between">
+                  <div className="w-full py-3 px-4 rounded-full text-xs font-bold text-center bg-slate-100 text-slate-800 transition-colors flex items-center justify-between">
                     <span className="w-4" />
                     <span>{formCustomLabel.trim() || "Portfolio & Research"}</span>
                     <ChevronRight className="w-4 h-4 opacity-70" />
                   </div>
 
-                  <div className="w-full py-2.5 px-4 rounded-full text-xs font-semibold text-center bg-white border border-slate-200 text-slate-600 hover:text-slate-900 transition-colors flex items-center justify-between">
+                  <div className="w-full py-2.5 px-4 rounded-full text-xs font-semibold text-center bg-white border border-slate-200 text-slate-600 transition-colors flex items-center justify-between">
                     <span className="w-4" />
                     <span>Send Direct Email</span>
                     <Mail className="w-3.5 h-3.5 text-slate-400" />
@@ -660,7 +876,7 @@ export function TeamCardStudio() {
       )}
 
       {/* =====================================================================
-          TEAM ROSTER CARDS (All 6 Members with Equal Dignity & Equal Cards)
+          TEAM ROSTER CARDS (Fully Editable, Deletable, Real Photos)
           ===================================================================== */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
         {members.map((member) => {
@@ -671,29 +887,63 @@ export function TeamCardStudio() {
               key={member.id}
               className="bg-white rounded-[2.2rem] border border-slate-200 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1.5 relative"
             >
-              {member.isCustom && (
-                <button
-                  onClick={() => handleDeleteCard(member.id)}
-                  title="Remove this card"
-                  className="absolute top-3 left-3 z-20 w-8 h-8 rounded-full bg-white/90 hover:bg-rose-50 text-slate-400 hover:text-rose-600 border border-slate-200 flex items-center justify-center shadow-sm transition-all"
-                >
-                  <Trash2 className="w-3.5 h-3.5" />
-                </button>
-              )}
+              {/* Card Controls Overlay (Top Bar on Image) */}
+              <div className="absolute top-3 left-3 right-3 z-20 flex items-center justify-between gap-2 pointer-events-none">
+                {/* Left Action Buttons: Edit, Change Photo, Delete */}
+                <div className="flex items-center gap-1.5 pointer-events-auto">
+                  <button
+                    onClick={() => handleStartEdit(member)}
+                    title="Edit profile & details"
+                    className="h-8 px-2.5 rounded-full bg-white/95 hover:bg-white text-slate-700 hover:text-[#002D72] border border-slate-200/90 flex items-center gap-1 shadow-sm transition-all hover:scale-105 text-[11px] font-bold"
+                  >
+                    <Pencil className="w-3 h-3 text-[#002D72]" />
+                    <span>Edit</span>
+                  </button>
+
+                  <button
+                    onClick={() => handleTriggerDirectPhoto(member.id)}
+                    title="Upload real photo from computer"
+                    className="h-8 px-2.5 rounded-full bg-white/95 hover:bg-white text-slate-700 hover:text-[#002D72] border border-slate-200/90 flex items-center gap-1 shadow-sm transition-all hover:scale-105 text-[11px] font-bold"
+                  >
+                    <Camera className="w-3 h-3 text-[#FFB81C]" />
+                    <span className="hidden sm:inline">Photo</span>
+                  </button>
+
+                  <button
+                    onClick={() => handleDeleteCard(member.id, member.name)}
+                    title={`Delete ${member.name} from team`}
+                    className="w-8 h-8 rounded-full bg-white/95 hover:bg-rose-50 text-slate-400 hover:text-rose-600 border border-slate-200/90 flex items-center justify-center shadow-sm transition-all hover:scale-105"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                {/* Right Badge: Pace Researcher status */}
+                <span className="pointer-events-auto inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-[10px] font-extrabold text-[#002D72] shadow-sm border border-slate-200">
+                  <span className={`w-2 h-2 rounded-full ${theme.dotColor}`} />
+                  <span>{member.isCustom ? "Customized" : "Pace Researcher"}</span>
+                </span>
+              </div>
 
               <div>
-                {/* Image Section with Status Badge */}
-                <div className="relative aspect-square w-full overflow-hidden bg-slate-100">
+                {/* Image Section with interactive camera upload hint */}
+                <div
+                  onClick={() => handleTriggerDirectPhoto(member.id)}
+                  title="Click to change photo"
+                  className="relative aspect-square w-full overflow-hidden bg-slate-100 cursor-pointer"
+                >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={member.image}
                     alt={member.name}
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-3 right-3 z-10">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-extrabold text-[#002D72] shadow-sm border border-slate-200">
-                      <span className={`w-2 h-2 rounded-full ${theme.dotColor}`} />
-                      <span>{member.isCustom ? "Custom Card" : "Pace Researcher"}</span>
+
+                  {/* Hover prompt to upload real photo */}
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white gap-1 z-10">
+                    <Camera className="w-6 h-6 text-[#FFB81C]" />
+                    <span className="text-xs font-bold bg-black/60 px-3 py-1 rounded-full">
+                      Click to upload real photo
                     </span>
                   </div>
                 </div>
@@ -718,7 +968,7 @@ export function TeamCardStudio() {
 
                   {/* Skill Badges */}
                   <div className="flex flex-wrap gap-1.5 pt-1">
-                    {member.skills.map((skill, sIdx) => (
+                    {member.skills?.map((skill, sIdx) => (
                       <span
                         key={sIdx}
                         className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[10px] font-bold border border-slate-200"
@@ -730,9 +980,9 @@ export function TeamCardStudio() {
                 </div>
               </div>
 
-              {/* Linktree-Style Pill Action Links Stack */}
+              {/* Linktree-Style Action Links */}
               <div className="p-6 pt-0 space-y-2">
-                {member.links.map((link, lIdx) => {
+                {member.links?.map((link, lIdx) => {
                   const isPrimary = lIdx === 0;
 
                   return (

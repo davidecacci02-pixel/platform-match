@@ -242,6 +242,45 @@ export default function AboutUsPage() {
             </p>
           </div>
 
+          {/* About Us & Project Concept Overview (MAR649) */}
+          <div className="max-w-4xl mx-auto bg-slate-50 border border-slate-200/90 rounded-[2rem] p-6 sm:p-9 shadow-sm space-y-6">
+            <div className="space-y-3">
+              <h3 className="text-lg sm:text-xl font-black text-[#002D72] flex items-center gap-2 font-sans">
+                <Sparkles className="w-5 h-5 text-[#FFB81C]" />
+                <span>About Us</span>
+              </h3>
+              <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+                Pace Marketing Lab is a student-created digital marketing concept developed for MAR649. Through our Platform Match tool, we explore how small businesses and nonprofits can make clearer decisions about their social media priorities.
+              </p>
+              <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+                We created Platform Match to help visitors compare six social media platforms using their audience, marketing goals, industry, content strengths, brand voice, and available time.
+              </p>
+              <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+                Our approach combines a public decision framework with practical educational content, including guides, FAQs, and worked examples. Visitors can explore the methodology and try the free quiz to understand how their inputs influence the recommendations.
+              </p>
+            </div>
+
+            <div className="pt-5 border-t border-slate-200 space-y-2">
+              <h4 className="text-sm font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                <Users className="w-4 h-4 text-[#002D72]" />
+                <span>Meet the Project Team</span>
+              </h4>
+              <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+                Our team brings together students working on keyword research, website development, content, off-site SEO, and answer engine optimization.
+              </p>
+            </div>
+
+            <div className="pt-5 border-t border-slate-200 space-y-2">
+              <h4 className="text-sm font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                <GraduationCap className="w-4 h-4 text-[#002D72]" />
+                <span>About This Project</span>
+              </h4>
+              <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
+                Pace Marketing Lab and Platform Match are academic project concepts. Business scenarios are illustrative unless explicitly identified as real research. Recommendations provide a starting point for planning and testing; they do not represent proven client outcomes.
+              </p>
+            </div>
+          </div>
+
           {/* Interactive Team Card Studio (Displays all 6 members with equal cards) */}
           <TeamCardStudio />
         </div>

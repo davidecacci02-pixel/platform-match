@@ -11,6 +11,10 @@
     --pace-gold: #FFB81C;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-white text-slate-900 antialiased font-sans selection:bg-[#002D72] selection:text-white min-h-screen flex flex-col;
   }
