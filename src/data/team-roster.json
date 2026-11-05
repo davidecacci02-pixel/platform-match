@@ -1,0 +1,87 @@
+[
+  {
+    "id": "davide-cacciuottolo",
+    "name": "Davide Cacciuottolo",
+    "role": "Lead Student Researcher & Strategy",
+    "affiliation": "Pace University • Lubin School of Business",
+    "image": "/images/davide-cacciuottolo.jpg",
+    "bio": "Leads quantitative research on multi-platform algorithmic fit, channel prioritization frameworks, and practical marketing roadmaps for small businesses.",
+    "skills": ["Platform Match Architect", "Digital Strategy", "Quantitative Research", "Growth Analytics"],
+    "themeColor": "pace-blue",
+    "links": [
+      { "label": "LinkedIn Profile", "url": "https://www.linkedin.com/in/davide-cacciuottolo", "type": "linkedin" },
+      { "label": "Platform Match Quiz", "url": "/quiz", "type": "portfolio" },
+      { "label": "Email Researcher", "url": "mailto:dcacciuottolo@pace.edu", "type": "email" }
+    ]
+  },
+  {
+    "id": "lily-lin",
+    "name": "Lily Lin",
+    "role": "Student Researcher & Audience Analytics",
+    "affiliation": "Pace University • Lubin School of Business",
+    "image": "/images/team-member-2.jpg",
+    "bio": "Specializes in audience demographic diagnostics, consumer segmentation models, and conversion funnel optimization for local business growth.",
+    "skills": ["Audience Research", "Consumer Insights", "Funnel Analytics", "Campaign Strategy"],
+    "themeColor": "pace-gold",
+    "links": [
+      { "label": "Pace Digital Marketing Lab", "url": "/#services", "type": "portfolio" },
+      { "label": "Consultation Request", "url": "/#contact", "type": "email" }
+    ]
+  },
+  {
+    "id": "melina-kaelin",
+    "name": "Melina Kaelin",
+    "role": "Student Researcher & Content Creation",
+    "affiliation": "Pace University • Lubin School of Business",
+    "image": "/images/team-member-3.jpg",
+    "bio": "Focuses on short-form video hooks, visual storytelling architectures, and organic brand narrative development across modern social channels.",
+    "skills": ["Content Architecture", "Short-Form Video", "Brand Storytelling", "Visual Strategy"],
+    "themeColor": "emerald",
+    "links": [
+      { "label": "Pace Digital Marketing Lab", "url": "/#services", "type": "portfolio" },
+      { "label": "Consultation Request", "url": "/#contact", "type": "email" }
+    ]
+  },
+  {
+    "id": "puntharee-manakul",
+    "name": "Puntharee Manakul",
+    "role": "Student Researcher & Digital Media",
+    "affiliation": "Pace University • Lubin School of Business",
+    "image": "/images/team-member-4.jpg",
+    "bio": "Analyzes cross-platform media engagement metrics, community growth dynamics, and visual communication frameworks for emerging brands.",
+    "skills": ["Digital Media Strategy", "Community Growth", "Engagement Metrics", "Visual Communication"],
+    "themeColor": "indigo",
+    "links": [
+      { "label": "Pace Digital Marketing Lab", "url": "/#services", "type": "portfolio" },
+      { "label": "Consultation Request", "url": "/#contact", "type": "email" }
+    ]
+  },
+  {
+    "id": "solveig-ervik",
+    "name": "Solveig Ervik",
+    "role": "Student Researcher & Social Strategy",
+    "affiliation": "Pace University • Lubin School of Business",
+    "image": "/images/team-member-5.jpg",
+    "bio": "Researches organic channel distribution models, editorial calendar cadence, and sustainable social media execution for lean small business teams.",
+    "skills": ["Channel Distribution", "Editorial Strategy", "Posting Systems", "Capacity Planning"],
+    "themeColor": "rose",
+    "links": [
+      { "label": "Pace Digital Marketing Lab", "url": "/#services", "type": "portfolio" },
+      { "label": "Consultation Request", "url": "/#contact", "type": "email" }
+    ]
+  },
+  {
+    "id": "bui-xuan-phat",
+    "name": "Bui Xuan Phat",
+    "role": "Student Researcher & Technical Specialist",
+    "affiliation": "Pace University • Lubin School of Business",
+    "image": "/images/team-member-6.jpg",
+    "bio": "Investigates search engine visibility, answer engine optimization (AEO), and technical performance models for small business digital properties.",
+    "skills": ["SEO & AEO Analysis", "Diagnostic Weighting", "Technical Research", "Data Models"],
+    "themeColor": "pace-blue",
+    "links": [
+      { "label": "Pace Digital Marketing Lab", "url": "/#services", "type": "portfolio" },
+      { "label": "Consultation Request", "url": "/#contact", "type": "email" }
+    ]
+  }
+]

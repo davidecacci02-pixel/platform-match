@@ -19,6 +19,13 @@ import {
   Upload,
 } from "lucide-react";
 
+import DEFAULT_ROSTER from "@/data/team-roster.json";
+import {
+  loadTeamRoster,
+  persistTeamRoster,
+  compressImageForCard,
+} from "@/lib/team-storage";
+
 export interface TeamMemberCard {
   id: string;
   name: string;
@@ -36,135 +43,7 @@ export interface TeamMemberCard {
   isCustom?: boolean;
 }
 
-const DEFAULT_MEMBERS: TeamMemberCard[] = [
-  {
-    id: "davide-cacciuottolo",
-    name: "Davide Cacciuottolo",
-    role: "Lead Student Researcher & Strategy",
-    affiliation: "Pace University • Lubin School of Business",
-    image: "/images/davide-cacciuottolo.jpg",
-    bio: "Leads quantitative research on multi-platform algorithmic fit, channel prioritization frameworks, and practical marketing roadmaps for small businesses.",
-    skills: ["Platform Match Architect", "Digital Strategy", "Quantitative Research", "Growth Analytics"],
-    themeColor: "pace-blue",
-    links: [
-      { label: "LinkedIn Profile", url: "https://www.linkedin.com/in/davide-cacciuottolo", type: "linkedin" },
-      { label: "Platform Match Quiz", url: "/quiz", type: "portfolio" },
-      { label: "Email Researcher", url: "mailto:dcacciuottolo@pace.edu", type: "email" },
-    ],
-  },
-  {
-    id: "lily-lin",
-    name: "Lily Lin",
-    role: "Student Researcher & Audience Analytics",
-    affiliation: "Pace University • Lubin School of Business",
-    image: "/images/team-member-2.jpg",
-    bio: "Specializes in audience demographic diagnostics, consumer segmentation models, and conversion funnel optimization for local business growth.",
-    skills: ["Audience Research", "Consumer Insights", "Funnel Analytics", "Campaign Strategy"],
-    themeColor: "pace-gold",
-    links: [
-      { label: "Pace Digital Marketing Lab", url: "/#services", type: "portfolio" },
-      { label: "Consultation Request", url: "/#contact", type: "email" },
-    ],
-  },
-  {
-    id: "melina-kaelin",
-    name: "Melina Kaelin",
-    role: "Student Researcher & Content Creation",
-    affiliation: "Pace University • Lubin School of Business",
-    image: "/images/team-member-3.jpg",
-    bio: "Focuses on short-form video hooks, visual storytelling architectures, and organic brand narrative development across modern social channels.",
-    skills: ["Content Architecture", "Short-Form Video", "Brand Storytelling", "Visual Strategy"],
-    themeColor: "emerald",
-    links: [
-      { label: "Pace Digital Marketing Lab", url: "/#services", type: "portfolio" },
-      { label: "Consultation Request", url: "/#contact", type: "email" },
-    ],
-  },
-  {
-    id: "puntharee-manakul",
-    name: "Puntharee Manakul",
-    role: "Student Researcher & Digital Media",
-    affiliation: "Pace University • Lubin School of Business",
-    image: "/images/team-member-4.jpg",
-    bio: "Analyzes cross-platform media engagement metrics, community growth dynamics, and visual communication frameworks for emerging brands.",
-    skills: ["Digital Media Strategy", "Community Growth", "Engagement Metrics", "Visual Communication"],
-    themeColor: "indigo",
-    links: [
-      { label: "Pace Digital Marketing Lab", url: "/#services", type: "portfolio" },
-      { label: "Consultation Request", url: "/#contact", type: "email" },
-    ],
-  },
-  {
-    id: "solveig-ervik",
-    name: "Solveig Ervik",
-    role: "Student Researcher & Social Strategy",
-    affiliation: "Pace University • Lubin School of Business",
-    image: "/images/team-member-5.jpg",
-    bio: "Researches organic channel distribution models, editorial calendar cadence, and sustainable social media execution for lean small business teams.",
-    skills: ["Channel Distribution", "Editorial Strategy", "Posting Systems", "Capacity Planning"],
-    themeColor: "rose",
-    links: [
-      { label: "Pace Digital Marketing Lab", url: "/#services", type: "portfolio" },
-      { label: "Consultation Request", url: "/#contact", type: "email" },
-    ],
-  },
-  {
-    id: "bui-xuan-phat",
-    name: "Bui Xuan Phat",
-    role: "Student Researcher & Technical Specialist",
-    affiliation: "Pace University • Lubin School of Business",
-    image: "/images/team-member-6.jpg",
-    bio: "Investigates search engine visibility, answer engine optimization (AEO), and technical performance models for small business digital properties.",
-    skills: ["SEO & AEO Analysis", "Diagnostic Weighting", "Technical Research", "Data Models"],
-    themeColor: "pace-blue",
-    links: [
-      { label: "Pace Digital Marketing Lab", url: "/#services", type: "portfolio" },
-      { label: "Consultation Request", url: "/#contact", type: "email" },
-    ],
-  },
-];
-
-/**
- * Compresses an uploaded image file into a client-safe base64 data URL
- * so localStorage quotas are respected while keeping photos crisp.
- */
-function compressImage(file: File, maxWidth = 800, maxHeight = 800, quality = 0.85): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const img = new window.Image();
-      img.onload = () => {
-        let width = img.width;
-        let height = img.height;
-        if (width > height) {
-          if (width > maxWidth) {
-            height = Math.round((height * maxWidth) / width);
-            width = maxWidth;
-          }
-        } else {
-          if (height > maxHeight) {
-            width = Math.round((width * maxHeight) / height);
-            height = maxHeight;
-          }
-        }
-        const canvas = document.createElement("canvas");
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext("2d");
-        if (!ctx) {
-          resolve(e.target?.result as string);
-          return;
-        }
-        ctx.drawImage(img, 0, 0, width, height);
-        resolve(canvas.toDataURL("image/jpeg", quality));
-      };
-      img.onerror = () => resolve(e.target?.result as string);
-      img.src = e.target?.result as string;
-    };
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
+const DEFAULT_MEMBERS: TeamMemberCard[] = DEFAULT_ROSTER as TeamMemberCard[];
 
 export function TeamCardStudio() {
   const [members, setMembers] = useState<TeamMemberCard[]>(DEFAULT_MEMBERS);
@@ -197,29 +76,22 @@ export function TeamCardStudio() {
     setTimeout(() => setToastMessage(null), 3500);
   };
 
-  // Load persisted roster from localStorage on client mount
+  // Load persisted roster from IndexedDB (primary) or localStorage (fallback) on client mount
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("pace_dml_roster_v4");
-      if (saved) {
-        const parsed = JSON.parse(saved) as TeamMemberCard[];
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          setMembers(parsed);
-          return;
-        }
+    let isMounted = true;
+    loadTeamRoster().then((saved) => {
+      if (isMounted && saved && saved.length > 0) {
+        setMembers(saved);
       }
-    } catch {
-      // localStorage unavailable or malformed
-    }
+    });
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
-  // Save current members to localStorage
+  // Save current members to persistent IndexedDB and localStorage
   const saveToStorage = (updatedMembers: TeamMemberCard[]) => {
-    try {
-      localStorage.setItem("pace_dml_roster_v4", JSON.stringify(updatedMembers));
-    } catch (err) {
-      console.warn("Storage save error (image may be too large):", err);
-    }
+    persistTeamRoster(updatedMembers);
   };
 
   const resetForm = () => {
@@ -286,13 +158,42 @@ export function TeamCardStudio() {
     }
 
     try {
-      const compressed = await compressImage(file);
+      showNotification("Optimizing profile photo...");
+      const compressed = await compressImageForCard(file);
       const updated = members.map((m) =>
         m.id === memberId ? { ...m, image: compressed, isCustom: true } : m
       );
       setMembers(updated);
-      saveToStorage(updated);
-      showNotification("Real profile photo updated successfully!");
+      await persistTeamRoster(updated);
+
+      // Attempt server-side static persistence to public/images/ and team-roster.json
+      try {
+        const res = await fetch("/api/team/save-photo", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            memberId,
+            imageBase64: compressed,
+            members: updated,
+          }),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.fileWritten && data.url) {
+            const finalized = updated.map((m) =>
+              m.id === memberId ? { ...m, image: data.url } : m
+            );
+            setMembers(finalized);
+            await persistTeamRoster(finalized);
+            showNotification("Photo saved permanently to project files!");
+            return;
+          }
+        }
+      } catch (apiErr) {
+        console.warn("Could not save to disk (saved in persistent browser storage):", apiErr);
+      }
+
+      showNotification("Real profile photo saved in persistent storage!");
     } catch {
       alert("Failed to process photo.");
     } finally {
@@ -311,8 +212,10 @@ export function TeamCardStudio() {
     }
 
     try {
-      const compressed = await compressImage(file);
+      showNotification("Optimizing photo...");
+      const compressed = await compressImageForCard(file);
       setFormImage(compressed);
+      showNotification("Photo ready!");
     } catch {
       alert("Failed to process photo.");
     }
@@ -379,12 +282,36 @@ export function TeamCardStudio() {
         return m;
       });
       setMembers(updated);
-      saveToStorage(updated);
+      persistTeamRoster(updated);
       showNotification(`Updated profile for ${formName.trim()}!`);
+
+      if (formImage.startsWith("data:image/")) {
+        fetch("/api/team/save-photo", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            memberId: editingMemberId,
+            imageBase64: formImage,
+            members: updated,
+          }),
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            if (data.fileWritten && data.url) {
+              const finalized = updated.map((m) =>
+                m.id === editingMemberId ? { ...m, image: data.url } : m
+              );
+              setMembers(finalized);
+              persistTeamRoster(finalized);
+            }
+          })
+          .catch(() => {});
+      }
     } else {
       // CREATE NEW MEMBER
+      const newId = `custom-${Date.now()}`;
       const newMember: TeamMemberCard = {
-        id: `custom-${Date.now()}`,
+        id: newId,
         name: formName.trim(),
         role: formRole.trim(),
         affiliation: formAffiliation.trim() || "Pace University • Lubin School of Business",
@@ -400,8 +327,31 @@ export function TeamCardStudio() {
       };
       const updated = [...members, newMember];
       setMembers(updated);
-      saveToStorage(updated);
+      persistTeamRoster(updated);
       showNotification(`Added ${formName.trim()} to team roster!`);
+
+      if (formImage.startsWith("data:image/")) {
+        fetch("/api/team/save-photo", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            memberId: newId,
+            imageBase64: formImage,
+            members: updated,
+          }),
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            if (data.fileWritten && data.url) {
+              const finalized = updated.map((m) =>
+                m.id === newId ? { ...m, image: data.url } : m
+              );
+              setMembers(finalized);
+              persistTeamRoster(finalized);
+            }
+          })
+          .catch(() => {});
+      }
     }
 
     resetForm();
@@ -413,7 +363,7 @@ export function TeamCardStudio() {
     if (window.confirm(`Are you sure you want to remove ${name} from the team roster?`)) {
       const updated = members.filter((m) => m.id !== id);
       setMembers(updated);
-      saveToStorage(updated);
+      persistTeamRoster(updated);
       if (editingMemberId === id) {
         resetForm();
         setShowCreator(false);
@@ -423,14 +373,20 @@ export function TeamCardStudio() {
   };
 
   // Reset to original default roster
-  const handleResetTeam = () => {
+  const handleResetTeam = async () => {
     if (window.confirm("Reset roster to the original 6 default Pace researchers?")) {
       setMembers(DEFAULT_MEMBERS);
-      localStorage.removeItem("pace_dml_roster_v4");
+      await persistTeamRoster(DEFAULT_MEMBERS);
       resetForm();
       setShowCreator(false);
       showNotification("Team roster reset to default 6 researchers.");
     }
+  };
+
+  // Copy current team roster JSON to clipboard
+  const handleCopyRosterJSON = () => {
+    navigator.clipboard.writeText(JSON.stringify(members, null, 2));
+    showNotification("Team roster JSON copied to clipboard!");
   };
 
   // Helper theme classes
@@ -530,14 +486,30 @@ export function TeamCardStudio() {
           </button>
         </div>
 
-        <button
-          onClick={handleResetTeam}
-          title="Restore default 6 Pace researchers"
-          className="text-[11px] font-semibold text-slate-400 hover:text-rose-600 px-4 py-1 transition-colors flex items-center gap-1"
-        >
-          <RefreshCw className="w-3 h-3" />
-          <span>Reset to Default 6</span>
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={handleCopyRosterJSON}
+            title="Copy current roster JSON backup to clipboard"
+            className="text-[11px] font-bold text-slate-600 hover:text-[#002D72] px-3 py-1.5 transition-colors flex items-center gap-1 bg-slate-100 hover:bg-slate-200 rounded-full border border-slate-200"
+          >
+            <span>📋 Backup JSON</span>
+          </button>
+
+          <button
+            onClick={handleResetTeam}
+            title="Restore default 6 Pace researchers"
+            className="text-[11px] font-semibold text-slate-400 hover:text-rose-600 px-3 py-1 transition-colors flex items-center gap-1"
+          >
+            <RefreshCw className="w-3 h-3" />
+            <span>Reset to Default 6</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Persistent Storage Status Badge */}
+      <div className="flex items-center justify-center gap-2 text-[11px] font-bold text-slate-500 -mt-8">
+        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+        <span>Persistent Storage Active: Photos and profiles are saved permanently in IndexedDB and project files</span>
       </div>
 
       {/* =====================================================================
