@@ -285,28 +285,26 @@ export function TeamCardStudio() {
       persistTeamRoster(updated);
       showNotification(`Updated profile for ${formName.trim()}!`);
 
-      if (formImage.startsWith("data:image/")) {
-        fetch("/api/team/save-photo", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            memberId: editingMemberId,
-            imageBase64: formImage,
-            members: updated,
-          }),
+      fetch("/api/team/save-photo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          memberId: editingMemberId,
+          imageBase64: formImage.startsWith("data:image/") ? formImage : undefined,
+          members: updated,
+        }),
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.fileWritten && data.url) {
+            const finalized = updated.map((m) =>
+              m.id === editingMemberId ? { ...m, image: data.url } : m
+            );
+            setMembers(finalized);
+            persistTeamRoster(finalized);
+          }
         })
-          .then((r) => r.json())
-          .then((data) => {
-            if (data.fileWritten && data.url) {
-              const finalized = updated.map((m) =>
-                m.id === editingMemberId ? { ...m, image: data.url } : m
-              );
-              setMembers(finalized);
-              persistTeamRoster(finalized);
-            }
-          })
-          .catch(() => {});
-      }
+        .catch(() => {});
     } else {
       // CREATE NEW MEMBER
       const newId = `custom-${Date.now()}`;
@@ -330,28 +328,26 @@ export function TeamCardStudio() {
       persistTeamRoster(updated);
       showNotification(`Added ${formName.trim()} to team roster!`);
 
-      if (formImage.startsWith("data:image/")) {
-        fetch("/api/team/save-photo", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            memberId: newId,
-            imageBase64: formImage,
-            members: updated,
-          }),
+      fetch("/api/team/save-photo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          memberId: newId,
+          imageBase64: formImage.startsWith("data:image/") ? formImage : undefined,
+          members: updated,
+        }),
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.fileWritten && data.url) {
+            const finalized = updated.map((m) =>
+              m.id === newId ? { ...m, image: data.url } : m
+            );
+            setMembers(finalized);
+            persistTeamRoster(finalized);
+          }
         })
-          .then((r) => r.json())
-          .then((data) => {
-            if (data.fileWritten && data.url) {
-              const finalized = updated.map((m) =>
-                m.id === newId ? { ...m, image: data.url } : m
-              );
-              setMembers(finalized);
-              persistTeamRoster(finalized);
-            }
-          })
-          .catch(() => {});
-      }
+        .catch(() => {});
     }
 
     resetForm();
@@ -364,6 +360,12 @@ export function TeamCardStudio() {
       const updated = members.filter((m) => m.id !== id);
       setMembers(updated);
       persistTeamRoster(updated);
+      fetch("/api/team/save-photo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ members: updated }),
+      }).catch(() => {});
+
       if (editingMemberId === id) {
         resetForm();
         setShowCreator(false);
