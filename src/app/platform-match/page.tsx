@@ -47,52 +47,46 @@ export default function PlatformMatchLandingPage() {
       <div className="absolute top-96 right-[-100px] w-[500px] h-[400px] bg-gradient-to-br from-emerald-400/[0.07] to-transparent blur-[120px] rounded-full -z-10 pointer-events-none" />
       <div className="absolute top-[1200px] left-[-100px] w-[600px] h-[500px] bg-gradient-to-tr from-[#002D72]/[0.05] via-[#FFB81C]/[0.06] to-transparent blur-[140px] rounded-full -z-10 pointer-events-none" />
 
-      {/* Top Bar with Quick Navigation to Lab Home, FAQ & Resources */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 w-full flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap items-center gap-3">
+      {/* Top Bar with Quick Navigation to Lab Home, Worked Example, FAQ & Guides */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 w-full">
+        <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 p-1.5 sm:p-2 rounded-2xl sm:rounded-full bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-sm">
+          {/* Back to Home */}
           <Link
             href="/"
             prefetch={true}
-            className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-[#002D72] transition-colors px-4 py-2 rounded-full bg-white border border-slate-200/90 shadow-sm hover:shadow hover:scale-[1.01]"
+            className="group inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-[#002D72] transition-all px-3.5 sm:px-4 py-2 rounded-full bg-slate-50 hover:bg-[#002D72]/5 border border-slate-200/70 hover:border-[#002D72]/30 shadow-xs hover:scale-[1.02] active:scale-[0.98]"
           >
-            <ArrowLeft className="w-3.5 h-3.5 text-[#002D72]" />
-            <span>Back to Pace Digital Marketing Lab Home</span>
+            <ArrowLeft className="w-3.5 h-3.5 text-[#002D72] group-hover:-translate-x-0.5 transition-transform" />
+            <span>Back to Lab Home</span>
           </Link>
 
+          {/* Bakery Worked Example */}
           <a
             href="#worked-example"
-            className="inline-flex items-center gap-1.5 text-xs font-black text-[#001C48] bg-[#FFB81C]/25 hover:bg-[#FFB81C]/40 border border-[#FFB81C]/60 transition-all px-3.5 py-2 rounded-full shadow-sm hover:scale-[1.02]"
+            className="inline-flex items-center gap-2 text-xs font-black text-[#001C48] bg-gradient-to-r from-[#FFB81C]/25 to-[#FFB81C]/15 hover:from-[#FFB81C]/40 hover:to-[#FFB81C]/25 border border-[#FFB81C]/70 hover:border-[#FFB81C] transition-all px-3.5 sm:px-4 py-2 rounded-full shadow-xs hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]"
           >
-            <span>🥐 Bakery Worked Example</span>
+            <span className="text-sm">🥐</span>
+            <span>Bakery Worked Example</span>
           </a>
 
+          {/* Frequently Asked Questions (FAQ) */}
           <a
             href="#faq"
-            className="inline-flex items-center gap-2 text-xs font-bold text-[#002D72] hover:text-[#001C48] transition-all px-4 py-2 rounded-full bg-white hover:bg-slate-50 border border-slate-200/90 shadow-sm hover:shadow hover:scale-[1.01]"
+            className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-[#002D72] transition-all px-3.5 sm:px-4 py-2 rounded-full bg-white hover:bg-slate-50 border border-slate-200/90 hover:border-[#002D72]/30 shadow-xs hover:shadow-sm hover:scale-[1.02] active:scale-[0.98]"
           >
             <HelpCircle className="w-3.5 h-3.5 text-[#FFB81C]" />
             <span>Frequently Asked Questions (FAQ)</span>
           </a>
-        </div>
 
-        <div className="flex items-center gap-3">
-          <a
-            href="https://instagram.com/platform_match"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-[#002D72] transition-colors px-3.5 py-2 rounded-full bg-white border border-slate-200/90 shadow-sm"
-          >
-            <Instagram className="w-3.5 h-3.5 text-[#FFB81C]" />
-            <span>@platform_match</span>
-          </a>
-
+          {/* Read Lab Blog & Guides right alongside FAQ */}
           <Link
             href="/blog"
             prefetch={true}
-            className="inline-flex items-center gap-2 text-xs font-bold text-[#002D72] hover:text-[#001C48] transition-colors px-4 py-2 rounded-full bg-[#FFB81C]/20 border border-[#FFB81C]/40 shadow-sm hover:shadow hover:scale-[1.01]"
+            className="group inline-flex items-center gap-2 text-xs font-black text-[#002D72] hover:text-[#001C48] transition-all px-4 py-2 rounded-full bg-gradient-to-r from-[#002D72]/10 via-[#002D72]/5 to-[#FFB81C]/15 hover:from-[#002D72]/15 hover:to-[#FFB81C]/25 border border-[#002D72]/25 hover:border-[#002D72]/40 shadow-xs hover:shadow-sm hover:scale-[1.02] active:scale-[0.98] sm:ml-auto"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#001C48]" />
-            <span>Read Lab Blog &amp; Guides →</span>
+            <Sparkles className="w-3.5 h-3.5 text-[#FFB81C] group-hover:rotate-12 transition-transform" />
+            <span>Read Lab Blog &amp; Guides</span>
+            <ArrowRight className="w-3.5 h-3.5 text-[#002D72] group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>
       </div>
